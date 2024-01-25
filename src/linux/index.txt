@@ -12,5 +12,33 @@ domains, from embedded systems to supercomputers. It is known for its
 stability, security, and flexibility, making it a preferred choice for
 developers, especially in server environments.
 
+.. rubric:: What is operating system?
+
+.. rubric:: Linux pros
+
+-   Linux is free
+-   Linux is portable
+-   Linux was made to keep on running
+-   Linux is secure and versatile
+-   Linux is scalable
+-   The Linux OS and most Linux applications have very short debug-times
+
+.. rubric:: Linux cons
+
+-   There are far too many different distributions
+-   Linux is not very friendly and confusing for beginners
+
+.. rubric:: Linux -- the Kernel
+
+Strictly speaking, the name **"Linux"** only applies to the operating system
+kernel, which performs the actual operating system tasks. It takes care of
+elementary functions like memory and process management and hardware control.
+Application programs must call upon the kernel to, e.g. access files on disk.
+
 .. toctree::
     :name: linux
+    :caption: Contents
+
+    utils
+    filesys
+    users
