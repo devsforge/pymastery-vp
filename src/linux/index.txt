@@ -3,17 +3,14 @@
     :author: Serhii Horodilov
     :keywords: linux, basics, index
 
-.. todo
-
-.. attention:: Page is under construction
-
-    .. figure:: /../assets/img/construction.svg
-        :figwidth: 250
-        :align: center
-
 ###############################################################################
                              Linux Basics
 ###############################################################################
+
+Linux is a powerful, open-source operating system widely used in various
+domains, from embedded systems to supercomputers. It is known for its
+stability, security, and flexibility, making it a preferred choice for
+developers, especially in server environments.
 
 .. toctree::
     :name: linux
