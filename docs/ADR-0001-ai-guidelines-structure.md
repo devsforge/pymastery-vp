@@ -3,6 +3,9 @@
 [//]: # (@formatter:off)
 <!-- document status badges -->
 [draft]: https://img.shields.io/badge/document_status-draft-orange.svg
+[accepted]: https://img.shields.io/badge/document_status-accepted-green.svg
+[deprecated]: https://img.shields.io/badge/document_status-deprecated-lightgrey.svg
+[rejected]: https://img.shields.io/badge/document_status-rejected-red.svg
 [final]: https://img.shields.io/badge/document_status-final-blue.svg
 [//]: # (@formatter:on)
 ![status][draft]
@@ -12,16 +15,19 @@
 
 [//]: # (order by version number descending)
 
-| ver. | Date       | Author                              | Changes description                |
-|------|------------|-------------------------------------|------------------------------------|
-| 0.2  | 2026-01-23 | Claude <claude@anthropic.noreply>   | Adopt Option 4 with AGENTS.md      |
-| 0.1  | 2026-01-23 | Claude <claude@anthropic.noreply>   | Initial draft                      |
+| ver. | Date       | Author                            | Changes description                |
+|------|------------|-----------------------------------|------------------------------------|
+| 0.3  | 2026-01-23 | Serhii Horodilov                  | Fix typos and make minor formating |
+| 0.2  | 2026-01-23 | Claude <claude@anthropic.noreply> | Adopt Option 4 with AGENTS.md      |
+| 0.1  | 2026-01-23 | Claude <claude@anthropic.noreply> | Initial draft                      |
 
 </details>
 
 ## Context
 
-This project requires AI agents to operate within defined boundaries — protecting human-authored course content while enabling autonomous work on infrastructure, documentation, and tooling. We need a structure for storing and organizing AI guidelines that is:
+This project requires AI agents to operate within defined boundaries — protecting human-authored course content while
+enabling autonomous work on infrastructure, documentation, and tooling. We need a structure for storing and organizing
+AI guidelines that is:
 
 - Discoverable by AI agents
 - Maintainable by humans
@@ -40,7 +46,7 @@ This project requires AI agents to operate within defined boundaries — protect
 
 ### Option 1: Single AGENTS.md File
 
-**Description**: All AI guidelines in one Markdown file at repository root.
+**Description**: All AI guidelines in one Markdown file at the repository root.
 
 **Pros**:
 
@@ -57,7 +63,7 @@ This project requires AI agents to operate within defined boundaries — protect
 
 ### Option 2: YAML Config Only
 
-**Description**: All guidelines encoded in a single YAML configuration file.
+**Description**: All guidelines are encoded in a single YAML configuration file.
 
 **Pros**:
 
@@ -91,7 +97,8 @@ This project requires AI agents to operate within defined boundaries — protect
 
 ### Option 4: Hybrid with Entry Point
 
-**Description**: Add AGENTS.md at repo root as human-readable entry point, pointing to `.ai/config.yaml` for full structure.
+**Description**: Add AGENTS.md at repo root as human-readable entry point,
+pointing to `.ai/config.yaml` for full structure.
 
 **Pros**:
 
@@ -119,14 +126,15 @@ The chosen option is **Option 4: Hybrid with Entry Point**.
 
 **Additional decisions**:
 
-- CI/CD ruleset (`04-cicd-pipelines.md`) is **deferred** from active rulesets until CI/CD implementation becomes a priority. The file may be retained for reference but is not listed in `config.yaml`.
+- CI/CD ruleset (`04-cicd-pipelines.md`) is **deferred** from active rulesets until CI/CD implementation
+  becomes a priority. The file may be retained for reference but is not listed in `config.yaml`.
 - A `version` field is added to `config.yaml` for tracking ruleset iterations.
 
 ## Consequences
 
 ### Positive
 
-- Discoverable entry point at repository root
+- Discoverable entry point at the repository root
 - Clear organization of AI guidelines by domain
 - Independent evolution of each ruleset
 - Machine-readable index enables future tooling
@@ -154,10 +162,12 @@ The chosen option is **Option 4: Hybrid with Entry Point**.
 
 ## Related
 
-- `AGENTS.md` — AI agent entry point
-- `.ai/config.yaml` — Configuration index
-- `.ai/rulesets/00-terms-and-conventions.md` — Role definitions
-- `.ai/rulesets/01-general-guidelines.md` — Core principles
-- `.ai/rulesets/02-grammar-and-style.md` — Writing standards
-- `.ai/rulesets/03-documentation.md` — Documentation standards
-- `templates/ADR.md` — ADR template
+| File                                       | Purpose                 |
+|--------------------------------------------|-------------------------|
+| `AGENTS.md`                                | AI agent entry point    |
+| `.ai/config.yaml`                          | Configuration index     |
+| `.ai/rulesets/00-terms-and-conventions.md` | Role definitions        |
+| `.ai/rulesets/01-general-guidelines.md`    | Core principles         |
+| `.ai/rulesets/02-grammar-and-style.md`     | Writing standards       |
+| `.ai/rulesets/03-documentation.md`         | Documentation standards |
+| `templates/ADR.md`                         | ADR template            |
