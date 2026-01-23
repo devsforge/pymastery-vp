@@ -10,7 +10,7 @@ A simple description of the UNIX system, also applicable to Linux, is this:
     "On a UNIX system, everything is a file; if something is not a file,
     it is a process"
 
-This statement is true because there are special files that are more that just
+This statement is true because there are special files that are more than just
 files (named pipes and sockets for instance), but to keep things simple, saying
 that everything is a file is an acceptable generalization. A Linux system, just
 like UNIX, makes no difference between a file and a directory, since
@@ -42,9 +42,9 @@ generally all devices, are considered to be files, according to the system.
 
 :named pipes:
     act more or less like sockets and form a way for processes to communicate
-    with each other, without using network socket semantic.
+    with each other, without using network socket semantics.
 
-The ``-l`` option to ``ls`` display the file type, using the first character
+The ``-l`` option to ``ls`` displays the file type, using the first character
 of each input line:
 
 +--------+--------------+

@@ -20,7 +20,7 @@ current directory, and a final character:
 Command structure
 =================
 
-A command is essentially a sequence of characters which is ends with a press
+A command is essentially a sequence of characters which ends with a press
 of the **enter** key and is subsequently evaluated by the shell. Many commands
 are vaguely inspired by the English language and form part of a dedicated
 "command language". Commands in this language must follow certain rules,
