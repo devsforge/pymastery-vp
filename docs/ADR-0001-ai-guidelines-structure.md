@@ -15,11 +15,11 @@
 
 [//]: # (order by version number descending)
 
-| ver. | Date       | Author                            | Changes description                |
-|------|------------|-----------------------------------|------------------------------------|
-| 0.3  | 2026-01-23 | Serhii Horodilov                  | Fix typos and make minor formating |
-| 0.2  | 2026-01-23 | Claude Opus 4.5 <noreply@anthropic.com> | Adopt Option 4 with AGENTS.md      |
-| 0.1  | 2026-01-23 | Claude Opus 4.5 <noreply@anthropic.com> | Initial draft                      |
+| ver. | Date       | Author                                  | Changes description                 |
+|------|------------|-----------------------------------------|-------------------------------------|
+| 0.3  | 2026-01-23 | Serhii Horodilov                        | Fix typos and make minor formatting |
+| 0.2  | 2026-01-23 | Claude Opus 4.5 <noreply@anthropic.com> | Adopt Option 4 with AGENTS.md       |
+| 0.1  | 2026-01-23 | Claude Opus 4.5 <noreply@anthropic.com> | Initial draft                       |
 
 </details>
 

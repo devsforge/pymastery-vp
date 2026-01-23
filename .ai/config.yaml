@@ -58,10 +58,10 @@ git_identities:
 
 # Project roles for AI agents
 roles:
-  - name: "course-administrator"
-    definition: ".ai/rulesets/00-terms-and-conventions.md#course-administrator"
-  - name: "course-editor"
-    definition: ".ai/rulesets/00-terms-and-conventions.md#course-editor"
+  - name: "project-administrator"
+    definition: ".ai/rulesets/00-terms-and-conventions.md#project-administrator"
+  - name: "content-editor"
+    definition: ".ai/rulesets/00-terms-and-conventions.md#content-editor"
   - name: "devops"
     definition: ".ai/rulesets/00-terms-and-conventions.md#devops"
 

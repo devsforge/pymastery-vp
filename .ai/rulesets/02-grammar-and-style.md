@@ -25,7 +25,7 @@
 - **Quotation Marks**: Use double quotes for direct speech and single quotes for indirect speech
   (e.g., "She said, 'Hello,' and I replied, 'Hi.'").
 - **Periods**: Inside quotations (e.g., "This is a sentence.").
-- **Colons**: Lowercase after unless the full sentence follows (e.g., "She said: 'Hello.'").
+- **Colons**: Lowercase after a colon unless a full sentence follows (e.g., "She said: 'Hello.'").
 
 ### Capitalization
 
@@ -45,7 +45,7 @@
 ### Voice
 
 - **Preferred**: Active voice
-- **Acceptable**: Passive voice appropriate for the technical writing context
+- **Acceptable**: Passive voice when appropriate for the technical writing context
 - **Avoid**: First-person singular ("I")
 
 ### Tone

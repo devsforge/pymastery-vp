@@ -40,7 +40,7 @@
 
 ### Template
 
-Located at: `templates/adr.md`
+Located at: `templates/ADR.md`
 
 ## AI Rules Documentation
 
