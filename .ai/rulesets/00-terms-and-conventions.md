@@ -1,3 +1,5 @@
+[//]: # (.ai/rulesets/00-terms-and-conventions.md)
+
 # Terms and Conventions
 
 ## Project Identity
@@ -14,40 +16,16 @@ Repositories
 
 ## Roles
 
-### Project Administrator
+| Role                    | Identifier               | Primary Scope                  |
+|-------------------------|--------------------------|--------------------------------|
+| Project Owner           | `project-owner`          | Strategic oversight            |
+| Project Manager         | `project-manager`        | Planning & coordination        |
+| Project Administrator   | `project-administrator`  | Infrastructure & tooling       |
+| Content Editor          | `content-editor`         | Pre-release content validation |
+| DevOps Engineer         | `devops-engineer`        | CI/CD & deployment automation  |
 
-Identifier: `project-administrator`
-
-Responsible for:
-
-- Repository structure and organization
-- CI/CD pipelines configuration
-- Static site generator setup and maintenance
-- Access control documentation
-- ADR documentation
-
-### Content Editor
-
-Identifier: `content-editor`
-
-Responsible for:
-
-- Grammar and spelling corrections
-- Formatting consistency
-- Documentation updates and accuracy
-- Metadata validation
-
-### DevOps
-
-Identifier: `devops`
-
-Responsible for:
-
-- CI/CD pipeline implementation and maintenance
-- Build automation and optimization
-- Deployment workflows
-- Infrastructure-as-code configurations
-- Monitoring and alerting setup
+For comprehensive role definitions, boundaries, responsibilities, and escalation paths,
+see [`docs/ROLES.md`](../../docs/ROLES.md).
 
 ## Scopes
 
@@ -88,6 +66,6 @@ Responsible for:
 | Group   | Format               | Example                     | Description                                       |
 |---------|----------------------|-----------------------------|---------------------------------------------------|
 | Ruleset | `xx-ruleset-name.md` | 00-terms-and-conventions.md | Two-digit ordering, lowercase, hyphen-separated   |
-| ADR     | `ADR-xxx-slug.md`    | ADR-0001-example-name.md    | Three-digit ordering, lowercase, hyphen-separated |
+| ADR     | `ADR-xxx-slug.md`    | ADR-001-example-name.md     | Three-digit ordering, lowercase, hyphen-separated |
 | Content | `xx-title-slug.md`   | 01-basics.md                | Two-digit ordering, lowercase, hyphen-separated   |
 | Partial | `_*`                 | _changelog.md               | Leading underscore, lowercase, hyphen-separated   |

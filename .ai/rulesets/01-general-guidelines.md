@@ -1,3 +1,5 @@
+[//]: # (.ai/rulesets/01-general-guidelines.md)
+
 # General Guidelines
 
 ## Core principles

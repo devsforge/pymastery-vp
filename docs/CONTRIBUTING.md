@@ -1,3 +1,5 @@
+[//]: # (docs/CONTRIBUTING.md)
+
 # CONTRIBUTING GUIDES
 
 Welcome and thank you for considering contributing to our project! Here
@@ -73,9 +75,9 @@ Make sure submodules are pulled from the `devel` branch.
 
 The documentation build system supports:
 
--   [reStructuredText](https://docutils.sourceforge.io/rst.html)
--   [MarkDown](https://daringfireball.net/projects/markdown/)
--   [mermaid](https://mermaid.js.org/)
+- [reStructuredText](https://docutils.sourceforge.io/rst.html)
+- [Markdown](https://daringfireball.net/projects/markdown/)
+- [mermaid](https://mermaid.js.org/)
 
 The main documentation syntax is \"reST\", since it provides more
 flexibility while working with docs.
@@ -119,16 +121,16 @@ extension.
 There are two main approaches to include mermaid diagrams to the
 documentation:
 
--   integrate a file containing the diagram
+- integrate a file containing the diagram
 
-        .. mermaid:: /../assets/mermaid/<path>/<file.mmd>
+      .. mermaid:: /../assets/mermaid/<path>/<file.mmd>
 
--   integrate the mermaid block itself
+- integrate the mermaid block itself
 
-        .. mermaid::
+      .. mermaid::
 
-            flowchart LR
-                id
+          flowchart LR
+              id
 
 ### MarkDown
 

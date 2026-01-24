@@ -1,4 +1,6 @@
-# ADR-0001: AI Guidelines Structure
+[//]: # (docs/ADR-001-ai-guidelines-structure.md)
+
+# ADR-001: AI Guidelines Structure
 
 [//]: # (@formatter:off)
 <!-- document status badges -->
