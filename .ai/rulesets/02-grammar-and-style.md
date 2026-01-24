@@ -1,3 +1,5 @@
+[//]: # (.ai/rulesets/02-grammar-and-style.md)
+
 # Grammar and Style
 
 ## Language Standard
@@ -25,7 +27,8 @@
 - **Quotation Marks**: Use double quotes for direct speech. For nested quotes, use single quotes inside double quotes
   (e.g., "She said, 'Hello,' and I replied, 'Hi.'").
 - **Periods**: Inside quotations (e.g., "This is a sentence.").
-- **Colons**: Lowercase after a colon unless a full sentence follows (e.g., "Remember this rule: always capitalize proper nouns." vs. "Remember this: Always capitalize proper nouns.").
+- **Colons**: Lowercase after a colon unless a full sentence follows (e.g., "Remember this rule: always capitalize
+  proper nouns." vs. "Remember this: Always capitalize proper nouns.").
 
 ### Capitalization
 
@@ -77,6 +80,7 @@ When performing grammar checks:
 ## Exceptions
 
 Grammar corrections **DO NOT** apply to:
+
 - Code within code blocks
 - Quoted material (preserve original)
 - Proper nouns and trademarks

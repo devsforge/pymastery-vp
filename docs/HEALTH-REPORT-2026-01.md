@@ -1,3 +1,5 @@
+[//]: # (docs/HEALTH-REPORT-2026-01.md)
+
 # Repository Health Report
 
 **Repository:** pymastery-vp
@@ -70,7 +72,8 @@ Affected submodules:
 
 **Risk:** The Sphinx build will fail because `conf.py` references `problem-sets/src`.
 
-~~**Additional Issue:** 5 of 6 submodules use SSH URLs (`git@github.com:`)~~ **Resolved** - All submodule URLs converted to HTTPS.
+~~**Additional Issue:** 5 of 6 submodules use SSH URLs (`git@github.com:`)~~ **Resolved** - All submodule URLs
+converted to HTTPS.
 
 **Remaining action:** Run `git submodule update --init --recursive` to populate content.
 
@@ -112,12 +115,12 @@ web_homeworks.md, before_postgres.md, pr_explanation*.md (4+ files)
 
 ### 2.4 Medium: Configuration Inconsistencies
 
-| Location                             | Issue                                                                | Status                              |
-|--------------------------------------|----------------------------------------------------------------------|-------------------------------------|
-| `pyproject.toml:15`                  | `repository` URL points to `edu-python-course` not `OpenRoost`       | Open                                |
-| `.ai/rulesets/03-documentation.md:8` | Says "Project README" is `/README.md` but file is `README.rst`       | Open                                |
-| ~~`.github/`~~                       | ~~Duplicate `.md` + `.rst` files~~                                   | **Resolved** - `.rst` files removed |
-| ~~`README.rst:103`~~                 | ~~Links to `CONTRIBUTING.rst`~~                                      | **Resolved** - updated to `.md`     |
+| Location                             | Issue                                                          | Status                              |
+|--------------------------------------|----------------------------------------------------------------|-------------------------------------|
+| `pyproject.toml:15`                  | `repository` URL points to `edu-python-course` not `OpenRoost` | Open                                |
+| `.ai/rulesets/03-documentation.md:8` | Says "Project README" is `/README.md` but file is `README.rst` | Open                                |
+| ~~`.github/`~~                       | ~~Duplicate `.md` + `.rst` files~~                             | **Resolved** - `.rst` files removed |
+| ~~`README.rst:103`~~                 | ~~Links to `CONTRIBUTING.rst`~~                                | **Resolved** - updated to `.md`     |
 
 ### ~~2.5 Medium: Incomplete CODEOWNERS~~ (Resolved)
 

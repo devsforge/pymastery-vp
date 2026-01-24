@@ -1,3 +1,5 @@
+[//]: # (docs/ADR-0001-ai-guidelines-structure.md)
+
 # ADR-0001: AI Guidelines Structure
 
 [//]: # (@formatter:off)

@@ -1,3 +1,5 @@
+[//]: # (docs/ROLES.md)
+
 # Project Roles
 
 [//]: # (@formatter:off)

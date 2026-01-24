@@ -1,3 +1,5 @@
+[//]: # (AGENTS.md)
+
 # AI Agent Entry Point
 
 This repository uses AI agents for infrastructure, tooling, and documentation tasks.

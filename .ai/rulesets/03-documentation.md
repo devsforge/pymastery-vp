@@ -1,3 +1,5 @@
+[//]: # (.ai/rulesets/03-documentation.md)
+
 # Documentation
 
 ## Documentation types
@@ -45,12 +47,14 @@ Located at: `templates/ADR.md`
 ## AI Rules Documentation
 
 ### Update Triggers
+
 - New tool integration
 - Process change
 - Role modification
 - Scope adjustment
 
 ### Review Cycle
+
 - Monthly review for accuracy
 - Update after significant changes
 - Version in CHANGELOG
@@ -58,12 +62,14 @@ Located at: `templates/ADR.md`
 ## Maintenance Responsibilities
 
 ### AI Agent Tasks
+
 - Keep technical docs accurate
 - Update setup instructions
 - Maintain ADR index
 - Fix broken internal links
 
 ### Human Tasks
+
 - Approve content-related docs
 - Review ADR decisions
 - Validate accuracy of guides

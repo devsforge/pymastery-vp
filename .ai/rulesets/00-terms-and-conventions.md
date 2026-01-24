@@ -1,3 +1,5 @@
+[//]: # (.ai/rulesets/00-terms-and-conventions.md)
+
 # Terms and Conventions
 
 ## Project Identity
