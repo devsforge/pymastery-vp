@@ -379,12 +379,13 @@ sequenceDiagram
     participant copilot as GitHub Copilot
     owner ->> manager: strategic direction
     manager ->> operator: work packages
-    operator --> executor: context delivery
-    executor --) owner: clarification
+    operator ->> executor: context delivery
+    executor --> owner: clarification
+    owner --> executor: iteration
     executor ->> git: execution & commits
     git ->> copilot: review trigger
     git ->> owner: review
-    owner --) executor: iteration
+    owner --> git: approve and merge
 ```
 
 ### Work Package Template
