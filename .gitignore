@@ -31,3 +31,6 @@ build/
 # translation object files
 *.pot
 *.mo
+
+# local prompts library
+_prompts
