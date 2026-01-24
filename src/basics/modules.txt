@@ -1,0 +1,20 @@
+.. meta::
+    :description: Modules and imports in Python
+    :author: Serhii Horodilov
+    :keywords: python, basics, modules, import
+
+.. attention:: Page is under construction
+
+    .. figure:: /../assets/img/construction.svg
+        :figwidth: 250
+        :align: center
+
+*******************************************************************************
+                          Pythons Modules and Imports
+*******************************************************************************
+
+.. todo: module definition
+
+.. todo: imports
+
+.. todo: if __name__ == "__main__"

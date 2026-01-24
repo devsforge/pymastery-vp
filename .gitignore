@@ -1,2 +1,33 @@
+# virtual environemt
+/.venv/
+/.env/
+/venv/
+/env/
+
+# python byte-compiled
+__pycache__
+
+# node packages
+/node_modules/
+
+# ide configs
+/.vscode/
 /.idea/
-.vscode
+
+# emacs cache and backup files
+\#*
+*~
+
+# temporary files storage
+/temp/
+/tmp/
+
+# documentation builds
+_builds/
+_build/
+builds/
+build/
+
+# translation object files
+*.pot
+*.mo

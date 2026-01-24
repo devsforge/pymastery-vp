@@ -1,0 +1,23 @@
+.. meta::
+    :description: Python course - Basics
+    :author: Serhii Horodilov
+    :keywords: python, basics, index
+
+###############################################################################
+                                 Python Basics
+###############################################################################
+
+.. toctree::
+    :name: basics
+
+    variables
+    syntax
+    stdtypes
+    bool_logic
+    controlflow
+    functions
+    modules
+    exceptions
+    decorators
+    pep8
+    testing

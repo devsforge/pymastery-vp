@@ -1,0 +1,16 @@
+.. meta::
+    :description: PEP-8 style guide
+    :author: Serhii Horodilov
+    :keywords: python, style, guide
+
+.. todo
+
+.. attention:: Page is under construction
+
+    .. figure:: /../assets/img/construction.svg
+        :figwidth: 250
+        :align: center
+
+*******************************************************************************
+                              Style Guides: PEP8
+*******************************************************************************

@@ -1,0 +1,7 @@
+{{!
+  Each non-key attribute must depend on the entire primary key.
+
+  *primary key*: `(name, item_type)`
+  `level` attribute depends on `(name)` key only, which violates 2NF.
+}}
+<div>{{>tbl-2nf-nka}}</div>

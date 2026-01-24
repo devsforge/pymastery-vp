@@ -1,0 +1,305 @@
+# Copyright (C) 2023, Python training course authors and contributors
+# This file is distributed under the same license as the Python Training
+# Course package.
+# SERHII HORODILOV <sgorodil@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: Python Training Course 2024.03.dev\n"
+"Report-Msgid-Bugs-To: https://github.com/edu-python-course/edu-python-course."
+"github.io/issues\n"
+"POT-Creation-Date: 2023-12-16 13:55+0000\n"
+"PO-Revision-Date: 2024-03-05 16:13+0200\n"
+"Last-Translator: Serhii Horodilov <sgorodil@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../src/rdbms/relations.txt:-1
+msgid "This document describes the database relationships"
+msgstr "Цей документ описує відносини в базах даних"
+
+#: ../../src/rdbms/relations.txt:-1
+msgid "Serhii Horodilov"
+msgstr "Serhii Horodilov"
+
+#: ../../src/rdbms/relations.txt:-1
+msgid ""
+"sql, db, database, relationship, primary key, foreign key, pk, fk, one-to-"
+"one, one-to-many, many-to-many, 1-1, 1-n, n-m"
+msgstr ""
+"sql, db, база даних, відношення, первинний ключ, зовнішній ключ, pk, fk, "
+"один-до-одного, один-до-багатьох, багато-до-багатьох, 1-1, 1-n, n-m"
+
+#: ../../src/rdbms/relations.txt:9
+msgid "Data Relationships"
+msgstr "Зв'язки даних"
+
+#: ../../src/rdbms/relations.txt:11
+msgid ""
+"Before dive into relationships, there is a need explain core concepts on how "
+"data are referenced between different tables."
+msgstr ""
+"Перш ніж зануритися у взаємозв'язки, необхідно пояснити основні поняття про "
+"те, як дані посилаються між різними таблицями."
+
+#: ../../src/rdbms/relations.txt:15
+msgid "Primary key"
+msgstr "Первинний ключ (Primary key)"
+
+#: ../../src/rdbms/relations.txt:17
+msgid ""
+"A primary key constraint indicates that a column, or group of columns, can "
+"be used as a unique identifier for rows in the table. This requires that "
+"values be both unique and not null. So, the following two table definitions "
+"accept the same data:"
+msgstr ""
+"Первинний ключ вказує на те, що стовпець або група стовпців може "
+"використовуватися як унікальний ідентифікатор для рядків у таблиці. Це "
+"вимагає, щоб значення були і унікальними, і не нульовими. Отже, наступні два "
+"визначення таблиці приймають однакові дані:"
+
+#: ../../src/rdbms/relations.txt:36
+msgid ""
+"Primary keys can span more than one column; the syntax is similar to unique "
+"constraint:"
+msgstr ""
+"Первинні ключі можуть охоплювати більше одного стовпця; синтаксис подібний "
+"до унікального обмеження:"
+
+#: ../../src/rdbms/relations.txt:49
+msgid ""
+"Adding a primary key will automatically create a unique B-tree index on the "
+"column or group of columns listed in the primary key, and will force the "
+"column(s) to be marked ``NOT NULL``."
+msgstr ""
+"Додавання первинного ключа автоматично створить унікальний індекс B-дерева "
+"для стовпця або групи стовпців, перелічених у первинному ключі, і примусить "
+"стовпець(и) позначити ``NOT NULL``."
+
+#: ../../src/rdbms/relations.txt:53
+msgid "A table can have at most one primary key."
+msgstr "Таблиця може мати не більше одного первинного ключа."
+
+#: ../../src/rdbms/relations.txt:57
+msgid ""
+"There can be any number of unique and not-null constraints, which are "
+"functionally almost the same thing, but only one can be identified as the "
+"primary key."
+msgstr ""
+"Обмежень може бути будь-яка кількість унікальних і не нульових, які "
+"функціонально майже однакові, але тільки одне з них може бути ідентифіковане "
+"як первинний ключ."
+
+#: ../../src/rdbms/relations.txt:62
+msgid "Foreign key (FK)"
+msgstr "Зовнішній ключ (FK)"
+
+#: ../../src/rdbms/relations.txt:64
+msgid ""
+"A foreign key constraint specifies that the value in a column (or a group of "
+"columns) must match the values appearing in some row of another table. We "
+"say this maintains the *referential integrity* between two tables."
+msgstr ""
+"Зовнішній ключ визначає, що значення у стовпчику (або групі стовпчиків) має "
+"збігатися зі значеннями, що з'являються у деякому рядку іншої таблиці. Ми "
+"говоримо, що це підтримує *посилальну цілісність* між двома таблицями."
+
+#: ../../src/rdbms/relations.txt:68
+msgid ""
+"A table can have more than one foreign key constraint. Foreign key can also "
+"overlaps with the primary key."
+msgstr ""
+"Таблиця може мати більше одного обмеження зовнішнього ключа. Зовнішній ключ "
+"також може перекриватися з первинним ключем."
+
+#: ../../src/rdbms/relations.txt:71
+msgid "To define a FK constraint:"
+msgstr "Щоб визначити FK:"
+
+#: ../../src/rdbms/relations.txt:94
+msgid ""
+"In this situation the ``book`` table is the *referencing* table, and the "
+"``publisher`` table is the *referenced* table. Similarly there are "
+"referencing and referenced columns."
+msgstr ""
+"У цій ситуації таблиця ``book`` є таблицею *посилання*, а таблиця "
+"``publisher`` є таблицею *посилання*. Аналогічно існують стовпці, на які є "
+"посилання, і стовпці, на які є посилання."
+
+#: ../../src/rdbms/relations.txt:98
+msgid ""
+"In case the referenced column is not explicitly defined, the primary key of "
+"the referenced table will be used as the referenced column."
+msgstr ""
+"Якщо стовпець, на який є посилання, не визначено явно, буде використано "
+"первинний ключ таблиці, на яку посилаються."
+
+#: ../../src/rdbms/relations.txt:101
+msgid ""
+"It is not possible to create a row with non-null foreign key, that does not "
+"appear in the referenced table."
+msgstr ""
+"Неможливо створити рядок з ненульовим зовнішнім ключем, який не з'являється "
+"в таблиці, на яку посилається."
+
+#: ../../src/rdbms/relations.txt:105
+msgid "Self-referential foreign key"
+msgstr "Самореферентний зовнішній ключ"
+
+#: ../../src/rdbms/relations.txt:107
+msgid ""
+"Sometimes it is useful to the referenced table to be the same table as "
+"referencing. This makes possible to create a tree-structures with nodes, "
+"there a top-level node would have ``NULL`` ``parent_id``."
+msgstr ""
+"Іноді корисно, щоб таблиця, на яку посилаються, збігалася з таблицею, на яку "
+"посилаються. Це дозволяє створювати деревоподібні структури з вузлами, де "
+"вузол верхнього рівня матиме ``NULL`` ``parent_id``."
+
+#: ../../src/rdbms/relations.txt:120
+msgid "Deleting referenced rows"
+msgstr "Видалення рядків з посиланнями"
+
+#: ../../src/rdbms/relations.txt:122
+msgid ""
+"So far we know that the foreign keys disallows creation of rows that do not "
+"relate to any row inside the referenced table. But what if a referenced row "
+"needs to be removed? Intuitively, there are few options:"
+msgstr ""
+"Досі ми знали, що зовнішні ключі не дозволяють створювати рядки, які не "
+"пов'язані з жодним рядком всередині таблиці, на яку посилаються. Але що "
+"робити, якщо рядок, на який є посилання, потрібно видалити? Інтуїтивно "
+"зрозуміло, що варіантів небагато:"
+
+#: ../../src/rdbms/relations.txt:126
+msgid "disallow deletion"
+msgstr "заборонити видалення"
+
+#: ../../src/rdbms/relations.txt:127
+msgid "delete referencing rows as well"
+msgstr "також видалити рядки посилань"
+
+#: ../../src/rdbms/relations.txt:128
+msgid "something else..."
+msgstr "щось інше..."
+
+#: ../../src/rdbms/relations.txt:130
+msgid ""
+"Restricting and cascading deletes are the two most common options. "
+"``RESTRICT`` prevents deletion of a referenced row. ``CASCADE`` will also "
+"delete all referencing rows as well as the referenced one."
+msgstr ""
+"Обмеження та каскадне видалення є двома найпоширенішими варіантами. "
+"``ОБМЕЖЕННЯ`` запобігає видаленню рядка, на який є посилання. ``CASCADE`` "
+"також видаляє всі рядки, на які є посилання, а також рядок, на який є "
+"посилання."
+
+#: ../../src/rdbms/relations.txt:148
+msgid "There are others options."
+msgstr "Є й інші варіанти."
+
+#: ../../src/rdbms/relations.txt:150
+msgid ""
+"``NO ACTION`` means that if any referencing rows still exist when the "
+"constraint is checked, an error is raised; this is the default behavior."
+msgstr ""
+"``NO ACTION`` означає, що якщо будь-які рядки посилань все ще існують, коли "
+"перевіряється обмеження, буде видано помилку; це поведінка за замовчуванням."
+
+#: ../../src/rdbms/relations.txt:153
+msgid ""
+"``SET NULL`` will replace all referencing rows foreign key values with "
+"``NULL`` values."
+msgstr ""
+"``SET NULL`` замінить значення зовнішнього ключа у всіх рядках, що "
+"посилаються, на значення ``NULL``."
+
+#: ../../src/rdbms/relations.txt:156
+msgid ""
+"``SET DEFAULT`` will replace all referencing rows foreign key values with "
+"default values."
+msgstr ""
+"``SET DEFAULT`` замінить значення зовнішніх ключів усіх посилальних рядків "
+"значеннями за замовчуванням."
+
+#: ../../src/rdbms/relations.txt:160
+msgid "Relationships"
+msgstr "Відносини"
+
+#: ../../src/rdbms/relations.txt:162
+msgid ""
+"From the point of view of the RDBMS there are no other relationships between "
+"two tables except the **foreign key**. But the way the foreign keys are "
+"designed brings us three concepts of the data relations."
+msgstr ""
+"З точки зору СУБД, між двома таблицями не існує інших зв'язків, окрім "
+"**зовнішнього ключа**. Але те, як спроектовані зовнішні ключі, надає три "
+"концепції зв'язків між даними."
+
+#: ../../src/rdbms/relations.txt:168
+msgid "One-to-many"
+msgstr ""
+"``article`` та ``comment`` мають відношення *один-до-багатьох*. Стаття може "
+"бути контейнером для багатьох коментарів, але коментар пов'язаний лише з "
+"однією статтею."
+
+#: ../../src/rdbms/relations.txt:169
+msgid ""
+"In a relational database, two tables have a one-to-many relationship if each "
+"row in one table references multiple rows of the other table. For example "
+"``publisher`` can publish many books, but a single ``book`` is published by "
+"some specific publisher."
+msgstr ""
+"У реляційній базі даних дві таблиці мають зв'язок \"один до багатьох\", якщо "
+"кожен рядок однієї таблиці посилається на декілька рядків іншої таблиці. "
+"Наприклад, ``видавець`` може видавати багато книжок, але кожна окрема "
+"``книжка`` видається певним видавництвом."
+
+#: ../../src/rdbms/relations.txt:180
+msgid "One-to-one"
+msgstr "Один-до-одного"
+
+#: ../../src/rdbms/relations.txt:183
+msgid ""
+"You can think of one-to-one relationship as a limited version of *one-to-"
+"many*."
+msgstr ""
+"Ви можете думати про відносини один-на-один як про обмежену версію \"один-до-"
+"багатьох\"."
+
+#: ../../src/rdbms/relations.txt:186
+msgid ""
+"In a relational database, two tables have a one-to-one relationship if each "
+"row in one table links to exactly one row in the other table, and vice "
+"versa. For example a table of ``members`` and a table of ``contacts`` might "
+"have a one-to-one relationship."
+msgstr ""
+"У реляційній базі даних дві таблиці мають зв'язок \"один до одного\", якщо "
+"кожен рядок в одній таблиці посилається на точно такий самий рядок в іншій "
+"таблиці, і навпаки. Наприклад, таблиця ``members`` і таблиця ``contacts`` "
+"можуть мати зв'язок \"один до одного\"."
+
+#: ../../src/rdbms/relations.txt:197
+msgid "Many-to-many"
+msgstr "Багато до багатьох"
+
+#: ../../src/rdbms/relations.txt:198
+msgid ""
+"In relational database, two table have many-to-many relationship if each row "
+"in one table can reference multiple rows in another table, and vice versa. "
+"For example table ``book`` may contain records for books authored by many "
+"``authors``. On the other hand author can write multiple books. Implementing "
+"a many-to-many relationship requires creation of an intermediate table, that "
+"applies one-to-many relationship with both original tables."
+msgstr ""
+"У реляційній базі даних дві таблиці мають зв'язок \"багато до багатьох\", "
+"якщо кожен рядок в одній таблиці може посилатися на декілька рядків в іншій "
+"таблиці, і навпаки. Наприклад, таблиця ``book`` може містити записи про "
+"книги, написані багатьма ``authors``. З іншого боку, автор може написати "
+"декілька книг. Реалізація зв'язку \"багато-до-багатьох\" вимагає створення "
+"проміжної таблиці, яка застосовує зв'язок \"один-до-багатьох\" до обох "
+"вихідних таблиць."

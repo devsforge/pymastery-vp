@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Database normalization presentation -- Python course">
+    <title>Database Normalization</title>
+    <link rel="icon" href="../../../assets/favicon.ico">
+    <link href="../../../assets/impress.js/css/impress-common.css" rel="stylesheet">
+  </head>
+
+  <body class="impress-not-supported">
+
+    <div class="fallback-message">
+      <p>
+        Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with
+        a&nbsp;simplified
+        version of this presentation.
+      </p>
+      <p>
+        For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.
+      </p>
+    </div>
+
+    <main id="normalization" aria-labelledby="presentation-title">
+      <div id="impress" data-transition-duration="1000" data-perspective="1000" data-width="1920" data-height="1080"
+        data-min-scale="0" data-max-scale="3">
+
+        <div class="step" id="title">
+          <h1 class="text-center" id="presentation-title">Database Normalization</h1>
+        </div>
+        <div class="step" id="definition" data-rel-position="relative" data-rel-y="1000">
+          <p class="text-end">
+            <em>
+              Normalization is a process of organizing data in a database so that it is free from redundancy and
+              dependency.
+              It helps to eliminate data inconsistencies and anomalies, thereby improving data integrity.<br>
+              Normalization is a set of rules or guidelines to design a database schema in such a way that it avoids
+              data
+              duplication, data redundancy, and data inconsistency.
+            </em>
+          </p>
+        </div>
+        <div class="step" id="example-data" data-rel-position="relative" data-rel-y="-2000">
+          <div>
+            <table class="db-table" aria-label="data">
+              <caption>Player Info</caption>
+              <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col">inventory</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">7.75</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">1&nbsp;sword, 4&nbsp;rings</td>
+                </tr>
+                <tr>
+                  <td>wheed1997</td>
+                  <td class="text-center">Almost 7</td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end">18&nbsp;copper&nbsp;coins</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="step" id="anomalies-insert" data-rel-position="absolute" data-x="-1800" data-y="-2000">
+          <h2 class="text-center">Insertion anomalies</h2>
+          <p class="description text-center">
+            <em>
+              There are circumstances in which certain facts cannot be recorded at all.
+            </em>
+          </p>
+          <hr>
+          <div>
+            <table class="db-table" aria-label="data">
+              <caption>Player Info</caption>
+              <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col">inventory</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">7.75</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">1&nbsp;sword, 4&nbsp;rings</td>
+                </tr>
+                <tr>
+                  <td>wheed1997</td>
+                  <td class="text-center">Almost 7</td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end">18&nbsp;copper&nbsp;coins</td>
+                </tr>
+                <tr class="fly-in">
+                  <td class="anomaly">acen1997</td>
+                  <td class="text-center anomaly">1</td>
+                  <td class="text-center anomaly">Beginner</td>
+                  <td class="invalid-data"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="notes">
+            When a new player <code>acen1999</code> join the game, they have nothing in their <code>inventory</code>.
+            Therefore, the details of any player who have at least one item can be recorded, but a newly game member
+            who has no items cannot be recorded, except by setting the <code>inventory</code> to <code>null</code>.
+          </div>
+        </div>
+        <div class="step" id="anomalies-update" data-x="0" data-y="-2000" data-rotate-z="0">
+          <h2 class="text-center">Update anomalies</h2>
+          <p class="description text-center">
+            <em>
+              The same information can be expressed on multiple rows;<br>
+              therefore updates to the relation may result in logical inconsistencies.
+            </em>
+          </p>
+          <hr>
+          <div>
+            <table class="db-table" aria-label="data">
+              <caption>Player Info</caption>
+              <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col">inventory</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">7.75</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">1&nbsp;sword, 4&nbsp;rings</td>
+                </tr>
+                <tr>
+                  <td>acen1997</td>
+                  <td class="text-center anomaly">
+                    <span class="updated-data fade-out">1</span>
+                    <span class="updated-data fade-in">1</span>
+                  </td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end">1&nbsp;robe, 1&nbsp;wizard&nbsp;hat</td>
+                </tr>
+                <tr>
+                  <td>wheed1997</td>
+                  <td class="text-center">Almost 7</td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end">18&nbsp;copper&nbsp;coins</td>
+                </tr>
+                <tr>
+                  <td>acen1997</td>
+                  <td class="text-center anomaly">
+                    <span class="updated-data fade-in">2</span>
+                    <span class="updated-data fade-out">1</span>
+                  </td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end">1&nbsp;robe, 1&nbsp;wizard&nbsp;hat</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="notes">
+            The same information can be expressed on multiple rows, therefore updates to the relation may result in
+            logical inconsistencies. If the <code>wheed1997</code> increase their <code>level</code>, when the
+            <code>rank</code> should be updated as well. But if the update is only partial successful, then the
+            relation is left in an inconsistent state. Specifically. the relation provides conflicting information
+            on "level -- rank" for "wheed1997" player, and on "inventory" and "level" for "acen1999".
+          </div>
+        </div>
+        <div class="step" id="anomalies-delete" data-x="1800" data-y="-2000">
+          <h2 class="text-center">Deletion anomalies</h2>
+          <p class="description text-center">
+            <em>
+              Under certain circumstances, the deletion of data representing certain facts
+              necessitates the deletion of data representing completely different facts.
+            </em>
+          </p>
+          <hr>
+          <div>
+            <table class="db-table" aria-label="data">
+              <caption>Player Info</caption>
+              <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col">inventory</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">7.75</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">1&nbsp;sword, 4&nbsp;rings</td>
+                </tr>
+                <tr>
+                  <td class="anomaly">wheed1997</td>
+                  <td class="text-center anomaly">Almost 7</td>
+                  <td class="text-center anomaly">Intermediate</td>
+                  <td class="text-end fade-out"><span class="fade-out">18&nbsp;copper&nbsp;coins</span></td>
+                </tr>
+                <tr>
+                  <td>acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end">1&nbsp;robe, 1&nbsp;wizard&nbsp;hat</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="notes">
+            If a player looses their items completely, the record must be deleted, unless the <code>inventory</code>
+            field is set to <code>null</code>. This leads to the loosing all other information about a player.
+          </div>
+        </div>
+        <div class="step" id="req-1nf" data-x="-1800" data-y="2000">
+          <h2 class="text-center">
+            First<br>
+            normal&nbsp;form
+          </h2>
+          <div class="requirements fly-in">
+            <h3>Requirements</h3>
+            <ul>
+              <li>
+                Row order should not be used to convey information.
+              </li>
+              <li>
+                Data types should not be mixed within the same column.<br>
+                <small>(and the RDBMS won't let you do it anyway)</small>
+              </li>
+              <li>
+                Tables should have their primary keys.
+              </li>
+              <li>
+                Repeating groups should be eliminated.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="step" id="problem-1nf" data-rel-position="relative" data-rel-y="2000">
+          <div>
+            <table class="db-table" aria-label="data">
+              <caption>Player Info</caption>
+              <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col">inventory</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">
+                    <span class="fly-out">7.75</span>
+                    <span class="fly-in">7</span>
+                  </td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">1&nbsp;sword, 4&nbsp;rings</td>
+                </tr>
+                <tr>
+                  <td>wheed1997</td>
+                  <td class="text-center">
+                    <span class="fly-out"></span>
+                    <span class="fly-in">6</span>
+                  </td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end">18&nbsp;copper&nbsp;coins</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <table class="db-table" aria-label="data">
+              <caption>Player Info</caption>
+              <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col">inventory</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">
+                    <span class="fade-out">1&nbsp;sword, 4&nbsp;rings</span>
+                    <span class="fade-in">1&nbsp;sword</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>wheed1997</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end">18&nbsp;copper&nbsp;coins</td>
+                </tr>
+                <tr>
+                  <td>prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end">4&nbsp;rings</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="step" id="example-1nf" data-rel-position="relative" data-rel-y="-1000">
+          <div class="grid-wrapper">
+            <table class="db-table" id="tbl-1nf-itm" aria-label="first normal form table">
+              <caption>Player Inventory</caption>
+              <thead>
+                <tr id="tbl-1nf-itm__name_item-type">
+                  <th scope="col" class="primary-key">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col" class="primary-key">item_type</th>
+                  <th scope="col">item_quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-1nf-itm__prombery87_sword">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end primary-key">sword</td>
+                  <td class="text-end">1</td>
+                </tr>
+                <tr id="tbl-1nf-itm__prombery87_ring">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end primary-key">ring</td>
+                  <td class="text-end">4</td>
+                </tr>
+                <tr id="tbl-1nf-itm__wheed1997_copper-coin">
+                  <td class="primary-key">wheed1997</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end primary-key">copper&nbsp;coin</td>
+                  <td class="text-end">18</td>
+                </tr>
+                <tr id="tbl-1nf-itm__acen1997_robe">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end primary-key">robe</td>
+                  <td class="text-end">1</td>
+                </tr>
+                <tr id="tbl-1nf-itm__acen1997_wizard-hat">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end primary-key">wizard&nbsp;hat</td>
+                  <td class="text-end">1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="requirements">
+            <ul>
+              <li class="fly-in">
+                <img src="../../../assets/icons/check-mark-svgrepo-com.svg" alt="icon-pass" class="icon-req icon-pass">
+                Row order should not be used to convey information.
+              </li>
+              <li class="fly-in">
+                <img src="../../../assets/icons/check-mark-svgrepo-com.svg" alt="icon-pass" class="icon-req icon-pass">
+                Data types should not be mixed within the same column.
+              </li>
+              <li class="fly-in">
+                <img src="../../../assets/icons/check-mark-svgrepo-com.svg" alt="icon-pass" class="icon-req icon-pass">
+                Tables should have their primary keys.
+              </li>
+              <li class="fly-in">
+                <img src="../../../assets/icons/check-mark-svgrepo-com.svg" alt="icon-pass" class="icon-req icon-pass">
+                Repeating groups should be eliminated.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="step" id="req-2nf" data-x="0" data-y="2000">
+          <h2 class="text-center">
+            Second<br>
+            normal&nbsp;form
+          </h2>
+          <div class="requirements fly-in">
+            <h3>Requirements</h3>
+            <ul>
+              <li>
+                Each non-key attribute must depend on the entire primary key.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="step" id="problem-2nf" data-rel-position="relative" data-rel-y="2000">
+          <div>
+            <table class="db-table" id="tbl-2nf-nka" aria-label="first normal form table">
+              <caption>Player Inventory</caption>
+              <thead>
+                <tr id="tbl-2nf-nka__name_item-type">
+                  <th scope="col" class="primary-key">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                  <th scope="col" class="primary-key">item_type</th>
+                  <th scope="col">item_quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-2nf-nka__prombery87_sword">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end primary-key">sword</td>
+                  <td class="text-end">1</td>
+                </tr>
+                <tr id="tbl-2nf-nka__prombery87_ring">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                  <td class="text-end primary-key">ring</td>
+                  <td class="text-end">4</td>
+                </tr>
+                <tr id="tbl-2nf-nka__wheed1997_copper-coin">
+                  <td class="primary-key">wheed1997</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center">Intermediate</td>
+                  <td class="text-end primary-key">copper&nbsp;coin</td>
+                  <td class="text-end">18</td>
+                </tr>
+                <tr id="tbl-2nf-nka__acen1997_robe">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end primary-key">robe</td>
+                  <td class="text-end">1</td>
+                </tr>
+                <tr id="tbl-2nf-nka__acen1997_wizard-hat">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                  <td class="text-end primary-key">wizard&nbsp;hat</td>
+                  <td class="text-end">1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="step" id="example-2nf" data-rel-position="relative" data-rel-y="-1000">
+          <div class="grid-wrapper">
+            <table class="db-table" id="tbl-2nf-itm" aria-label="second normal form table">
+              <caption>Player Inventory</caption>
+              <thead>
+                <tr id="tbl-2nf-itm__name_item-type">
+                  <th scope="col" class="primary-key">name</th>
+                  <th scope="col" class="primary-key">item_type</th>
+                  <th scope="col">item_quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-2nf-itm__prombery87_sword">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-end primary-key">sword</td>
+                  <td class="text-end">1</td>
+                </tr>
+                <tr id="tbl-2nf-itm__prombery87_ring">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-end primary-key">ring</td>
+                  <td class="text-end">4</td>
+                </tr>
+                <tr id="tbl-2nf-itm__wheed1997_copper-coin">
+                  <td class="primary-key">wheed1997</td>
+                  <td class="text-end primary-key">copper&nbsp;coin</td>
+                  <td class="text-end">18</td>
+                </tr>
+                <tr id="tbl-2nf-itm__acen1997_robe">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-end primary-key">robe</td>
+                  <td class="text-end">1</td>
+                </tr>
+                <tr id="tbl-2nf-itm__acen1997_wizard-hat">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-end primary-key">wizard&nbsp;hat</td>
+                  <td class="text-end">1</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="db-table" id="tbl-2nf-lvl" aria-label="second normal form table">
+              <caption>Player Level</caption>
+              <thead>
+                <tr id="tbl-2nf-lvl__level">
+                  <th scope="col" class="primary-key">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-2nf-lvl__prombery87">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                </tr>
+                <tr id="tbl-2nf-lvl__wheed1997">
+                  <td class="primary-key">wheed1997</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center">Intermediate</td>
+                </tr>
+                <tr id="tbl-2nf-lvl__acen1997">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="requirements">
+            <ul>
+              <li class="fly-in">
+                <img src="../../../assets/icons/check-mark-svgrepo-com.svg" alt="icon-pass" class="icon-req icon-pass">
+                Each non-key attribute must depend on the entire primary key.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="step" id="req-3nf" data-x="1800" data-y="2000">
+          <h2 class="text-center">
+            Third<br>
+            normal&nbsp;form
+          </h2>
+          <div class="requirements fly-in">
+            <h3>Requirements</h3>
+            <ul>
+              <li>
+                Every non-key attribute in a table should depend on the key, the whole key, and nothing but the key.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="step" id="problem-3nf" data-rel-position="relative" data-rel-y="2000">
+          <div>
+            <table class="db-table" id="tbl-3nf-tdp" aria-label="second normal form table">
+              <caption>Player Level</caption>
+              <thead>
+                <tr id="tbl-3nf-tdp__level">
+                  <th scope="col" class="primary-key">name</th>
+                  <th scope="col">level</th>
+                  <th scope="col">rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-3nf-tdp__prombery87">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">Advanced</td>
+                </tr>
+                <tr id="tbl-3nf-tdp__wheed1997">
+                  <td class="primary-key">wheed1997</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center">Intermediate</td>
+                </tr>
+                <tr id="tbl-3nf-tdp__acen1997">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">Beginner</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="step" id="example-3nf" data-rel-position="relative" data-rel-y="-1000">
+          <div class="grid-wrapper">
+            <table class="db-table" id="tbl-3nf-lvl" aria-label="third normal form table">
+              <caption>Player Level</caption>
+              <thead>
+                <tr id="tbl-3nf-lvl__name">
+                  <th scope="col" class="primary-key">name</th>
+                  <th scope="col">level</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-3nf-lvl__prombery87">
+                  <td class="primary-key">prombery87</td>
+                  <td class="text-center">7</td>
+                </tr>
+                <tr id="tbl-3nf-lvl__wheed1997">
+                  <td class="primary-key">wheed1997</td>
+                  <td class="text-center">6</td>
+                </tr>
+                <tr id="tbl-3nf-lvl__acen1997">
+                  <td class="primary-key">acen1997</td>
+                  <td class="text-center">1</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="db-table" id="tbl-3nf-rtg" aria-label="third normal form table">
+              <caption>Level Ranking</caption>
+              <thead>
+                <tr id="tbl-3nf-rtg__level">
+                  <th scope="col" class="primary-key">level</th>
+                  <th scope="col">rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tbl-3nf-rtg__1">
+                  <td class="primary-key">1</td>
+                  <td>Beginner</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__2">
+                  <td class="primary-key">2</td>
+                  <td>Beginner</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__3">
+                  <td class="primary-key">3</td>
+                  <td>Beginner</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__4">
+                  <td class="primary-key">4</td>
+                  <td>Intermediate</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__5">
+                  <td class="primary-key">5</td>
+                  <td>Intermediate</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__6">
+                  <td class="primary-key">6</td>
+                  <td>Intermediate</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__7">
+                  <td class="primary-key">7</td>
+                  <td>Advanced</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__8">
+                  <td class="primary-key">8</td>
+                  <td>Advanced</td>
+                </tr>
+                <tr id="tbl-3nf-rtg__9">
+                  <td class="primary-key">9</td>
+                  <td>Advanced</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="requirements">
+            <ul>
+              <li class="fly-in">
+                <img src="../../../assets/icons/check-mark-svgrepo-com.svg" alt="icon-pass" class="icon-req icon-pass">
+                Every non-key attribute in a table should depend on the key, the whole key, and nothing but the key.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="step overview" id="overview" data-x="0" data-y="0" data-scale="5"></div>
+
+      </div>
+    </main>
+
+    <script type="text/javascript" src="../../../assets/impress.js/js/impress.js"></script>
+    <script type="text/javascript">
+      impress().init()
+    </script>
+  </body>
+
+</html>

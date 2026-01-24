@@ -1,0 +1,15 @@
+%%{init: {'gitGraph': {'mainBranchName': 'master'}} }%%
+gitGraph
+    commit id: "Initial commit"
+    branch feature/GH-53
+    branch feature/GH-54
+    checkout feature/GH-53
+    commit
+    commit
+    checkout master
+    merge feature/GH-53
+    checkout feature/GH-54
+    commit
+    checkout master
+    commit
+    merge feature/GH-54 type:NORMAL id: "merge commit"

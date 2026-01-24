@@ -1,0 +1,15 @@
+<h2 class="text-center">Insertion anomalies</h2>
+<p class="description text-center">
+  <em>
+    There are circumstances in which certain facts cannot be recorded at all.
+  </em>
+</p>
+<hr>
+<div>
+  {{>tbl-anomalies-insert}}
+</div>
+<div class="notes">
+  When a new player <code>acen1999</code> join the game, they have nothing in their <code>inventory</code>.
+  Therefore, the details of any player who have at least one item can be recorded, but a newly game member
+  who has no items cannot be recorded, except by setting the <code>inventory</code> to <code>null</code>.
+</div>

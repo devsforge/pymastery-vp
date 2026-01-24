@@ -1,0 +1,751 @@
+# Copyright (C) 2023, Python training course authors and contributors
+# This file is distributed under the same license as the Python Training
+# Course package.
+# OLEKSANDR YEROMIN <unicorn.in.pants@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: Python Training Course 2023.10.dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-24 02:19+0300\n"
+"PO-Revision-Date: 2023-10-24 02:21+0300\n"
+"Last-Translator: Serhii Horodilov <sgorodil@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Generated-By: Babel 2.13.0\n"
+"X-Generator: Poedit 3.4\n"
+
+#: ../../src/basics/functions.txt:-1
+msgid "Python functions"
+msgstr "Функції в Python"
+
+#: ../../src/basics/functions.txt:-1
+msgid "Serhii Horodilov"
+msgstr "Serhii Horodilov"
+
+#: ../../src/basics/functions.txt:-1
+msgid "python, basics, functions"
+msgstr "python, basics, functions"
+
+#: ../../src/basics/functions.txt:8
+msgid "Functions"
+msgstr "Функції"
+
+#: ../../src/basics/functions.txt:10
+msgid ""
+"You may be familiar with the mathematical concept of a **function**. It is a "
+"relationship or mapping between one or more inputs and a set of outputs."
+msgstr ""
+"Можливо, ви знайомі з математичним поняттям **функція**. Це відношення між "
+"одним або декількома вхідними параметрами та набором результатів."
+
+#: ../../src/basics/functions.txt:13
+msgid "z = f(x, y)"
+msgstr "z = f(x, y)"
+
+#: ../../src/basics/functions.txt:17
+msgid ""
+"Here ``f`` is a function that operates on the inputs ``x`` and ``y``, and "
+"its output is bind to ``z``."
+msgstr ""
+"Тут ``f`` - це функція, яка оперує параметрами ``x`` та ``y``, а її "
+"результат прив'язаний до ``z``."
+
+#: ../../src/basics/functions.txt:20
+msgid ""
+"In programming a **function** is a self-contained block of code that "
+"encapsulate a specific task or related group of tasks."
+msgstr ""
+"У програмуванні **функція** - це автономний блок коду, який інкапсулює певну "
+"задачу або пов'язану групу задач."
+
+#: ../../src/basics/functions.txt:23
+msgid ""
+"You may be familiar with some built-in functions like ``max``, ``min``, "
+"``len`` etc."
+msgstr ""
+"Ви можете бути знайомі з деякими вбудованими функціями, такими як ``max``, "
+"``min``, ``len`` тощо."
+
+#: ../../src/basics/functions.txt:28
+msgid "The usual syntax for defining a Python function is as follows:"
+msgstr "Звичайний синтаксис для визначення функції Python наступний:"
+
+#: ../../src/basics/functions.txt:36 ../../src/basics/functions.txt:483
+msgid "Component"
+msgstr "Компонент"
+
+#: ../../src/basics/functions.txt:36 ../../src/basics/functions.txt:483
+msgid "Meaning"
+msgstr "Значення"
+
+#: ../../src/basics/functions.txt:38
+msgid "``def``"
+msgstr "``def``"
+
+#: ../../src/basics/functions.txt:38 ../../src/basics/functions.txt:485
+msgid "The keyword that informs Python that a function is being defined"
+msgstr "Ключове слово, яке інформує Python про те, що визначається функція"
+
+#: ../../src/basics/functions.txt:41
+msgid "``<function_name>``"
+msgstr "``<function_name>``"
+
+#: ../../src/basics/functions.txt:41
+msgid "A valid Python identifier that names the function"
+msgstr "Валідний ідентифікатор Python, який називає функцію"
+
+#: ../../src/basics/functions.txt:43 ../../src/basics/functions.txt:488
+msgid "``<parameters>``"
+msgstr "``<parameters>``"
+
+#: ../../src/basics/functions.txt:43 ../../src/basics/functions.txt:488
+msgid ""
+"An optional, comma-separated list of parameters that may be passed to the "
+"function"
+msgstr ""
+"Необов'язковий список параметрів через кому, які можуть бути передані у "
+"функцію"
+
+#: ../../src/basics/functions.txt:46
+msgid "``<statement(s)>``"
+msgstr "``<statement(s)>``"
+
+#: ../../src/basics/functions.txt:46
+msgid "A block of valid Python statements; **body** of the function"
+msgstr "Блок допустимих операторів Python; **тіло** функції"
+
+#: ../../src/basics/functions.txt:50
+msgid "The syntax for calling a Python function is as follows:"
+msgstr "Синтаксис виклику функції Python наступний:"
+
+#: ../../src/basics/functions.txt:56
+msgid ""
+"The ``<arguments>`` are the values passed into the function. They correspond "
+"to the ``<parameters>`` in the function definition. You can define a "
+"function that doesn't take any arguments, but the parentheses are still "
+"required. Both a function definition and a function call must always include "
+"parentheses, even if they're empty."
+msgstr ""
+"Значення ``<arguments>`` - це значення, що передаються у функцію. Вони "
+"відповідають ``<parameters>`` у визначенні функції. Ви можете визначити "
+"функцію, яка не приймає жодних аргументів, але дужки все одно є "
+"обов'язковими. І визначення функції, і її виклик завжди повинні містити "
+"дужки, навіть якщо вони порожні."
+
+#: ../../src/basics/functions.txt:63
+msgid "Argument passing"
+msgstr "Передача аргументів"
+
+#: ../../src/basics/functions.txt:66
+msgid "More often, you want to **pass data into a function**."
+msgstr "Найчастіше вам потрібно **передати дані у функцію**."
+
+#: ../../src/basics/functions.txt:69
+msgid "Positional arguments"
+msgstr "Позиційні аргументи"
+
+#: ../../src/basics/functions.txt:73
+msgid ""
+"Because of the way they're defined and used, positional arguments are also "
+"called *required arguments*."
+msgstr ""
+"Через те, як вони визначаються і використовуються, позиційні аргументи також "
+"називають *обов'язковими аргументами*."
+
+#: ../../src/basics/functions.txt:76
+msgid ""
+"The most straightforward way to pass arguments to a function is with "
+"**positional arguments**. In the function definition, you specify a comma-"
+"separated list of parameters inside the parentheses. When the function is "
+"called, you specify a corresponding list of arguments."
+msgstr ""
+"Найпростіший спосіб передачі аргументів у функцію - за допомогою "
+"**позиційних аргументів**. У визначенні функції ви вказуєте список "
+"параметрів, розділених комами, всередині круглих дужок. Коли функція "
+"викликається, ви вказуєте відповідний список аргументів."
+
+#: ../../src/basics/functions.txt:82
+msgid ""
+"The parameters behave like **variables** that are defined locally to the "
+"function."
+msgstr "Параметри поводяться як **змінні**, визначені локально у функції."
+
+#: ../../src/basics/functions.txt:85
+msgid ""
+"Although positional arguments are the most straightforward way to pass data "
+"to a function, they also afford the least flexibility. For starters, the "
+"**order** of the arguments in the call must match the order of the "
+"parameters in the definition."
+msgstr ""
+"Хоча позиційні аргументи є найпростішим способом передачі даних у функцію, "
+"вони також забезпечують найменшу гнучкість. Для початку, **порядок** "
+"аргументів у виклику повинен відповідати порядку параметрів у визначенні."
+
+#: ../../src/basics/functions.txt:90
+msgid ""
+"There's nothing to stop you from specifying positional arguments out of "
+"order. The function even may still run, but it's very unlikely to produce "
+"the correct results."
+msgstr ""
+"Ніщо не заважає вам вказати позиційні аргументи в неправильному порядку. "
+"Функція навіть може запуститися, але навряд чи видасть правильні результати."
+
+#: ../../src/basics/functions.txt:96
+msgid ""
+"It's responsibility of the programmer who defines the function to document "
+"what the appropriate arguments should be, and it's the responsibility of the "
+"user of the function to be aware of that information and abide by it."
+msgstr ""
+"Програміст, який визначає функцію, зобов'язаний задокументувати, якими мають "
+"бути відповідні аргументи, а користувач функції зобов'язаний знати цю "
+"інформацію і дотримуватися її."
+
+#: ../../src/basics/functions.txt:100
+msgid ""
+"With positional arguments, the arguments in the call and the parameters in "
+"the definition must agree not only in order, but in number as well."
+msgstr ""
+"З позиційними аргументами аргументи у виклику та параметри у визначенні "
+"повинні узгоджуватися не тільки за порядком, але й за кількістю."
+
+#: ../../src/basics/functions.txt:104
+msgid "Keyword arguments"
+msgstr "Аргументи за ключовими словами"
+
+#: ../../src/basics/functions.txt:106
+msgid ""
+"When calling a function, you can specify arguments in the form "
+"``<keyword>=<value>``. In that case, each ``<keyword>`` must match a "
+"parameter in the function definition. Referencing a keyword that doesn't "
+"match any of these declared parameters generates an exception."
+msgstr ""
+"При виклику функції можна вказувати аргументи у вигляді "
+"``<keyword>=<value>``. У цьому випадку кожен ``<keyword>`` повинен "
+"відповідати параметру у визначенні функції. Звернення до ключового слова, "
+"яке не відповідає жодному з цих оголошених параметрів, генерує виключення."
+
+#: ../../src/basics/functions.txt:111
+msgid ""
+"Using keyword arguments lifts the restriction on arguments order. Each "
+"keyword argument explicitly designates a specific parameter by name, so you "
+"can specify them in any order and Python will still know which argument goes "
+"with which parameter."
+msgstr ""
+"Використання аргументів з ключовими словами знімає обмеження на порядок "
+"аргументів. Кожне ключове слово-аргумент явно вказує на конкретний параметр "
+"за назвою, тому ви можете вказати їх у довільному порядку, і Python все одно "
+"знатиме, який аргумент йде з яким параметром."
+
+#: ../../src/basics/functions.txt:116
+msgid ""
+"Like with positional arguments, though, the number of arguments and "
+"parameters must still match."
+msgstr ""
+"Як і у випадку з позиційними аргументами, кількість аргументів і параметрів "
+"має збігатися."
+
+#: ../../src/basics/functions.txt:119
+msgid ""
+"You can call a function using both positional and keyword arguments. Once "
+"you've specified a keyword argument, there can't be any positional arguments "
+"to the right of it."
+msgstr ""
+"Ви можете викликати функцію, використовуючи як позиційні, так і ключові "
+"аргументи. Після того, як ви вказали ключове слово, праворуч від нього не "
+"може бути жодних позиційних аргументів."
+
+#: ../../src/basics/functions.txt:124
+msgid "Default values"
+msgstr "Значення за замовчуванням"
+
+#: ../../src/basics/functions.txt:126
+msgid ""
+"If a parameter specified in the function definition has the form of "
+"``<name>==<value>``, then ``<value>`` becomes a default value for that "
+"parameter. Parameters defined this way are referred to as **default or "
+"optional parameters**."
+msgstr ""
+"Якщо параметр, вказаний у визначенні функції, має вигляд "
+"``<name>==<value>``, то значенням за замовчуванням для цього параметра стає "
+"``<value>``. Параметри, визначені таким чином, називаються **параметрами за "
+"замовчуванням або необов'язковими параметрами**."
+
+#: ../../src/basics/functions.txt:132
+msgid "Mutable default parameter values"
+msgstr "Змінювані значення параметрів за замовчуванням"
+
+#: ../../src/basics/functions.txt:133
+msgid ""
+"Things can get weird if you specify a default parameter value that is a "
+"mutable object."
+msgstr ""
+"Ситуація може ускладнитися, якщо ви вкажете значення параметра за "
+"замовчуванням, який є змінюваним об'єктом."
+
+#: ../../src/basics/functions.txt:151
+msgid ""
+"In Python default parameter values are **defined only once** when the "
+"function is defined. The default value isn't re-defined each time the "
+"function is called. For the example above, each time the "
+"``add_to_container`` function is called without passing ``container`` "
+"argument, the ``.append`` statement is performed on the same list."
+msgstr ""
+"У Python значення параметрів за замовчуванням **визначаються лише один раз** "
+"під час визначення функції. Значення за замовчуванням не перевизначається "
+"при кожному виклику функції. У наведеному вище прикладі кожного разу, коли "
+"функція ``add_to_container`` викликається без передачі аргументу "
+"``container``, оператор ``.append`` виконується над тим самим списком."
+
+#: ../../src/basics/functions.txt:158
+msgid "Mutable and immutable arguments"
+msgstr "Змінні та незмінні аргументи"
+
+#: ../../src/basics/functions.txt:162
+msgid ""
+"Roughly, you may consider immutable object as passed-by-value, and mutable "
+"objects as passed-by-reference. However, that's not actual true."
+msgstr ""
+"Грубо кажучи, ви можете вважати незмінний об'єкт переданим значенням, а "
+"змінювані об'єкти - переданим посиланням. Однак, це не зовсім так."
+
+#: ../../src/basics/functions.txt:166
+msgid ""
+"In programming language design, there are two common paradigms for passing "
+"an argument to a function:"
+msgstr ""
+"У мові програмування існує дві поширені парадигми передачі аргументу у "
+"функцію:"
+
+#: ../../src/basics/functions.txt:169
+msgid ""
+"**pass-by-value** means a copy of the argument is passed to the function."
+msgstr ""
+"**передати-за-значенням** означає, що у функцію передається копія аргументу."
+
+#: ../../src/basics/functions.txt:170
+msgid ""
+"**pass-by-reference** means a reference to the argument is passed to the "
+"function."
+msgstr ""
+"**передати-за-посиланням** означає, що у функцію передається посилання на "
+"аргумент."
+
+#: ../../src/basics/functions.txt:173
+msgid ""
+"Are parameters in Python pass-by-value or pass-by-reference? They're "
+"neither, exactly. That's because a reference doesn't mean quite the same "
+"thing in Python as it does in C-like languages."
+msgstr ""
+"Чи є параметри в Python переданими за значенням або за посиланням? Вони не є "
+"ні тими, ні іншими. Це тому, що посилання в Python означає не зовсім те "
+"саме, що в C-подібних мовах."
+
+#: ../../src/basics/functions.txt:177
+msgid ""
+"Recall that in Python, every piece of data is an **object**. A reference "
+"points to an object, not a specific memory location."
+msgstr ""
+"Нагадаємо, що у Python кожен фрагмент даних є **об'єктом**. Посилання вказує "
+"на об'єкт, а не на конкретну ділянку пам'яті."
+
+#: ../../src/basics/functions.txt:180
+msgid "Take a look on the code below:"
+msgstr "Погляньте на код нижче:"
+
+#: ../../src/basics/functions.txt:188
+msgid "These assignment statements have the following meaning:"
+msgstr "Ці оператори присвоювання мають наступне значення:"
+
+#: ../../src/basics/functions.txt:190
+msgid "**Line 1** cause ``value`` to point to an object whose value is ``24``."
+msgstr ""
+"**Рядок 1** призводить до того, що ``value`` вказує на об'єкт, значенням "
+"якого є ``24``."
+
+#: ../../src/basics/functions.txt:191
+msgid ""
+"**Line 2** reassign ``value`` as a new reference to a different object whose "
+"value is ``42``."
+msgstr ""
+"**Рядок 2** перепризначає ``value`` як нове посилання на інший об'єкт, "
+"значенням якого є ``42``."
+
+#: ../../src/basics/functions.txt:194
+msgid ""
+"In Python, when you pass an argument to a function, a similar *rebinding* "
+"occurs."
+msgstr ""
+"У Python, коли ви передаєте аргумент у функцію, відбувається аналогічне "
+"*переприв'язування*."
+
+#: ../../src/basics/functions.txt:207
+msgid ""
+"In the main program, the statement ``x = 5`` on line 5 creates a reference "
+"named ``x`` bound to an object whose value is ``5``. ``reassign`` is then "
+"called on line 6 with ``x`` as its argument. When a function first starts, a "
+"new reference called ``fx`` is created, which initially points to the same "
+"``5`` object. However, when the statement ``fx = 10`` on line 2 is executed, "
+"``reassign`` rebinds ``fx`` to a new object whose value is ``10``. From now, "
+"the two references ``x`` and ``fx`` are uncoupled one from another. Nothing "
+"else that function does will affect ``x``, and when function terminates, "
+"``x`` will still point to the object ``5``, as it did prior to the function "
+"call."
+msgstr ""
+"В основній програмі оператор ``x = 5`` у рядку 5 створює посилання з іменем "
+"``x``, пов'язане з об'єктом, значенням якого є ``5``. потім у рядку 6 "
+"викликається функція ``reassign`` з ``x`` як аргументом. При першому запуску "
+"функції створюється нове посилання ``fx``, яке спочатку вказує на той самий "
+"об'єкт ``5``. Однак, коли виконується оператор ``fx = 10`` у рядку 2, "
+"``reassign`` перепризначає ``fx`` на новий об'єкт, значенням якого є ``10``. "
+"Відтепер два посилання ``x`` і ``fx`` від'єднано одне від одного. Ніякі інші "
+"дії функції не вплинуть на ``x``, і коли функція завершиться, ``x`` все ще "
+"вказуватиме на об'єкт ``5``, як це було до виклику функції."
+
+#: ../../src/basics/functions.txt:218
+msgid ""
+"You can confirm all this using ``id()``. Here's a slightly augmented version "
+"of the code above:"
+msgstr ""
+"Ви можете підтвердити все це за допомогою ``id()``. Ось дещо доповнена "
+"версія коду вище:"
+
+#: ../../src/basics/functions.txt:235
+msgid "The outputs will look like:"
+msgstr "Результати будуть виглядати так:"
+
+#: ../../src/basics/functions.txt:246
+msgid ""
+"Python's argument-passing mechanism has been called **pass-by-assignment**. "
+"You may also see terms pass-by-object, pass-by-object-reference, or pass-by-"
+"sharing. This is because parameter names are bound to objects on function "
+"entry in Python, and assignment is also the process of binding a name to an "
+"object."
+msgstr ""
+"Механізм передачі аргументів у Python називається **передача-за-"
+"присвоєнням** (**pass-by-assignment**). Ви також можете зустріти терміни "
+"pass-by-object, pass-by-object-reference або pass-by-sharing. Це пов'язано з "
+"тим, що імена параметрів прив'язуються до об'єктів під час виклику функції у "
+"Python, а присвоювання - це також процес прив'язки імені до об'єкта."
+
+#: ../../src/basics/functions.txt:252
+msgid ""
+"The key takeaway here is that Python function can't change the value of an "
+"argument by reassigning the corresponding parameter to something else."
+msgstr ""
+"Ключовим моментом тут є те, що функція Python не може змінити значення "
+"аргументу, перепризначивши відповідний параметр на щось інше."
+
+#: ../../src/basics/functions.txt:255
+msgid ""
+"However, functions can use references to make modifications inside of a "
+"mutable objects."
+msgstr ""
+"Однак, функції можуть використовувати посилання для модифікацій всередині "
+"змінюваних об'єктів."
+
+#: ../../src/basics/functions.txt:271
+msgid "The return statement"
+msgstr "Оператор повернення"
+
+#: ../../src/basics/functions.txt:273
+msgid "It serves two purposes:"
+msgstr "Він служить двом цілям:"
+
+#: ../../src/basics/functions.txt:275
+msgid ""
+"It immediately terminates the function and passes execution control back to "
+"the caller."
+msgstr ""
+"Він негайно завершує функцію і передає керування виконанням назад тому, хто "
+"її викликав."
+
+#: ../../src/basics/functions.txt:277
+msgid ""
+"It provides a mechanism by which the function can pass data back to the "
+"caller."
+msgstr ""
+"Він надає механізм, за допомогою якого функція може передавати дані назад "
+"тому, хто її викликає."
+
+#: ../../src/basics/functions.txt:280
+msgid ""
+"The return statement can be used inside of a function or a method to send "
+"the result back to the caller. It consists of the ``return`` Python keyword "
+"and an optional return value."
+msgstr ""
+"Оператор return можна використовувати всередині функції або методу, щоб "
+"відправити результат назад тому, хто його викликає. Він складається з "
+"ключового слова ``return`` та необов'язкового значення, що повертається."
+
+#: ../../src/basics/functions.txt:284
+msgid ""
+"The return value of a Python function can be any Python object (and you "
+"should remember - everything in Python is an object)."
+msgstr ""
+"Значенням, що повертається функцією, може бути будь-який об'єкт Python (і ви "
+"повинні пам'ятати - все в Python є об'єктом)."
+
+#: ../../src/basics/functions.txt:287
+msgid ""
+"You can omit the return value and use bare ``return`` without a return "
+"value. You can also omit the entire ``return`` statement. In both cases, the "
+"return value will be ``None``. So, Python functions always have the return "
+"value; in case it hasn't been specified - it's ``None``."
+msgstr ""
+"Ви можете опустити значення, що повертається, і використовувати просто "
+"``return`` без значення, що повертається. Ви також можете опустити всю "
+"інструкцію ``return``. В обох випадках значенням, що повертається, буде "
+"``None``. Отже, функції Python завжди мають значення, що повертається, а "
+"якщо його не вказано - це ``None``."
+
+#: ../../src/basics/functions.txt:292
+msgid "**Returning vs Printing**"
+msgstr "**return проти print**"
+
+#: ../../src/basics/functions.txt:294
+msgid ""
+"If you're working in an interactive session, then you might think that "
+"printing a value and returning a value are equivalent. Consider the "
+"following two functions:"
+msgstr ""
+"Якщо ви працюєте в інтерактивному сеансі, ви можете подумати, що виведення "
+"значення і повернення значення еквівалентні. Розглянемо дві наступні функції:"
+
+#: ../../src/basics/functions.txt:310
+msgid "And their output:"
+msgstr "Та результати їх викликів:"
+
+#: ../../src/basics/functions.txt:319
+msgid ""
+"Both functions seems to do the same thing. But only the second one function "
+"actually returns a value, when the first one returns nothing (or **NoneType "
+"object**)."
+msgstr ""
+"Здається, що обидві функції роблять одне й те саме. Але тільки друга функція "
+"насправді повертає значення, тоді як перша не повертає нічого (або "
+"**NoneType об'єкт**)."
+
+#: ../../src/basics/functions.txt:324
+msgid "Return multiple values"
+msgstr "Повернення декількох значень"
+
+#: ../../src/basics/functions.txt:326
+msgid ""
+"You can use a return statement to return multiple values from a function. To "
+"do that, you just need to supply several return values separated by commas. "
+"The function will return a tuple of values."
+msgstr ""
+"Ви можете використовувати інструкцію return для повернення декількох значень "
+"з функції. Для цього вам просто потрібно вказати декілька значень, що "
+"повертаються, розділених комами. Функція поверне їх як кортеж."
+
+#: ../../src/basics/functions.txt:342
+msgid ""
+"The built-in ``divmod`` function is also an example of a function that "
+"returns multiple values. The function takes two (non-complex) numbers as "
+"arguments and returns two numbers, the quotient of the two input values and "
+"the remainder of the division."
+msgstr ""
+"Вбудована функція ``divmod`` також є прикладом функції, яка повертає "
+"декілька значень. Функція отримує два (нескладних) числа як аргументи і "
+"повертає два числа - частку від ділення двох вхідних значень і залишок від "
+"ділення."
+
+#: ../../src/basics/functions.txt:348
+msgid "Variable-length argument list"
+msgstr "Список аргументів змінної довжини"
+
+#: ../../src/basics/functions.txt:350
+msgid ""
+"In some cases, when you're defining a function, you may not know beforehand "
+"how many arguments you'll want it to take."
+msgstr ""
+"У деяких випадках, коли ви визначаєте функцію, ви можете не знати "
+"заздалегідь, скільки аргументів ви хочете, щоб вона приймала."
+
+#: ../../src/basics/functions.txt:353
+msgid ""
+"For example, a function that computes an average of several values may look "
+"something like this:"
+msgstr ""
+"Наприклад, функція, яка обчислює середнє арифметичне декількох значень, може "
+"виглядати приблизно так:"
+
+#: ../../src/basics/functions.txt:361
+msgid ""
+"However, as you're already seen, when positional arguments are used, the "
+"number of arguments passed must match the number of parameters declared."
+msgstr ""
+"Однак, як ви вже бачили, коли використовуються позиційні аргументи, "
+"кількість переданих аргументів повинна відповідати кількості оголошених "
+"параметрів."
+
+#: ../../src/basics/functions.txt:365
+msgid "Argument tuple packing"
+msgstr "Пакування аргументів до кортежа"
+
+#: ../../src/basics/functions.txt:367
+msgid ""
+"When a parameter name in a function definition is preceded by an asterisk "
+"(\\*), it indicates **argument tuple packing**. Any corresponding arguments "
+"in a function call are packed into a tuple that the function can refer to by "
+"the given parameter name."
+msgstr ""
+"Коли імені параметра у визначенні функції передує зірочка (\\*), це означає "
+"**упакування кортежу аргументів**. Будь-які відповідні аргументи у виклику "
+"функції упаковуються у кортеж, на який функція може посилатися за вказаним "
+"іменем параметра."
+
+#: ../../src/basics/functions.txt:377
+msgid ""
+"Any name can be used, but *args* is so commonly chosen that it's practically "
+"a standard."
+msgstr ""
+"Можна використовувати будь-яке ім'я, але *args* є настільки поширеним, що "
+"стало практично стандартом."
+
+#: ../../src/basics/functions.txt:381
+msgid "Argument tuple unpacking"
+msgstr "Розпакування кортежу аргументів"
+
+#: ../../src/basics/functions.txt:383
+msgid ""
+"An analogous operation is available on the other side of the equation in a "
+"function call. When an argument in a function call is preceded by an "
+"asterisk, it indicates that the argument is a tuple that should be "
+"**unpacked** and passed to the function as separate values."
+msgstr ""
+"Аналогічна операція доступна з іншого боку рівняння у виклику функції. Якщо "
+"перед аргументом у виклику функції стоїть зірочка, це означає, що аргумент є "
+"кортежем, який слід **розпакувати** і передати у функцію як окремі значення."
+
+#: ../../src/basics/functions.txt:399
+msgid ""
+"Although this type of unpacking is called **tuple** unpacking, it doesn't "
+"only work with tuples. The asterisk can be applied to any iterable in a "
+"function call."
+msgstr ""
+"Хоча цей тип розпакування називається **розпакуванням кортежів**, він працює "
+"не лише з кортежами. Зірочка може бути застосована до будь-якого ітеруємого "
+"об'єкта у виклику функції."
+
+#: ../../src/basics/functions.txt:414
+msgid "You can even do tuple packing and unpacking at the same time."
+msgstr "Ви навіть можете одночасно пакувати та розпаковувати кортежі."
+
+#: ../../src/basics/functions.txt:426
+msgid "Argument dictionary packing"
+msgstr "Пакування аргументів до словника"
+
+#: ../../src/basics/functions.txt:428
+msgid ""
+"Python has a similar operator, the double asterisk (\\*\\*), which can be "
+"used with function parameters to specify **dictionary packing**. Preceding "
+"parameter in a function definition be a double asterisk indicates that the "
+"corresponding arguments, which are expected to be keyword arguments "
+"(``key=value`` pairs), should be packed into a dictionary."
+msgstr ""
+"У мові Python є подібний оператор, подвійна зірочка (\\*\\*), який можна "
+"використовувати з параметрами функції для вказівки **пакування словників**. "
+"Передування параметру у визначенні функції подвійною зірочкою вказує на те, "
+"що відповідні аргументи, які, як очікується, є аргументами ключових слів "
+"(пари ``ключ=значення``), мають бути упаковані у словник."
+
+#: ../../src/basics/functions.txt:444
+msgid ""
+"Again, any name can be used, but the peculiar *kwargs* (which is short for "
+"*keyword args*) is nearly standard."
+msgstr ""
+"Знову ж таки, можна використовувати будь-яке ім'я, але особливе *kwargs* (що "
+"є скороченням від *keyword args*) є майже стандартним."
+
+#: ../../src/basics/functions.txt:448
+msgid "Argument dictionary unpacking"
+msgstr "Розапакування аргументів зі словника"
+
+#: ../../src/basics/functions.txt:450
+msgid ""
+"This is analogous to argument tuple unpacking. When the double asterisk "
+"precedes an argument in a function call, it specifies that the argument is a "
+"dictionary that should be unpacked, with the resulting items passed to the "
+"function as keyword arguments."
+msgstr ""
+"Це аналогічно розпакуванню кортежу аргументів. Коли подвійна зірочка стоїть "
+"перед аргументом у виклику функції, вона вказує на те, що аргумент є "
+"словником, який слід розпакувати, а отримані елементи передати у функцію як "
+"аргументи ключових слів."
+
+#: ../../src/basics/functions.txt:468
+msgid "Lambda functions"
+msgstr "Лямбда функції"
+
+#: ../../src/basics/functions.txt:470
+msgid ""
+"Lambda expressions in Python and other programming languages have their "
+"roots in lambda calculus, a model of computation invented by Alonzo Church. "
+"Python is not inherently a functional language, but it adopted some "
+"functional concepts early on. In January 1994, ``map()``, ``filter()``, "
+"``reduce()``, and the lambda operator were added to the language."
+msgstr ""
+"Лямбда-вирази в Python та інших мовах програмування беруть свій початок у "
+"лямбда-обчисленні - моделі обчислень, винайденій Алонзо Черчем. За своєю "
+"суттю Python не є функціональною мовою, але вона рано перейняла деякі "
+"функціональні концепції. У січні 1994 року до мови було додано ``map()``, "
+"``filter()``, ``reduce()`` та лямбда-оператор."
+
+#: ../../src/basics/functions.txt:476
+msgid "General lambda function syntax is:"
+msgstr "Загальний синтаксис лямбда-функції такий:"
+
+#: ../../src/basics/functions.txt:485
+msgid "``lambda``"
+msgstr "``lambda``"
+
+#: ../../src/basics/functions.txt:491
+msgid "``<expression>``"
+msgstr "``<expression>``"
+
+#: ../../src/basics/functions.txt:491
+msgid "A valid Python expression; return statement"
+msgstr "Валідний вираз Python; оператор повернення"
+
+#: ../../src/basics/functions.txt:502
+msgid ""
+"The code sample above demonstrates the ``get_fullname`` Python function and "
+"its lambda version. A lambda form presents syntactic distinctions from a "
+"normal function. In particular, a lambda function has the following "
+"characteristics:"
+msgstr ""
+"Наведений вище приклад коду демонструє функцію Python ``get_fullname`` та її "
+"лямбда-версію. Лямбда-форма має синтаксичні відмінності від звичайної "
+"функції. Зокрема, лямбда-функція має наступні характеристики:"
+
+#: ../../src/basics/functions.txt:506
+msgid ""
+"It can only contain expressions and can’t include statements in its body."
+msgstr "Він може містити лише вирази і не може включати в себе оператори."
+
+#: ../../src/basics/functions.txt:507
+msgid "It is written as a single line of execution."
+msgstr "Він написаний у вигляді одного рядка виконання."
+
+#: ../../src/basics/functions.txt:508
+msgid "It does not support type annotations."
+msgstr "Він не підтримує анотації типів."
+
+#: ../../src/basics/functions.txt:509
+msgid ""
+"It can be immediately invoked (:abbr:`IIFE (Immediately Invoked Function "
+"Execution)`)."
+msgstr ""
+"Її можна негайно викликати (:abbr:`IIFE (Immediately Invoked Function "
+"Execution)`)."
+
+#: ../../src/basics/functions.txt:517
+msgid "Classic functional constructs"
+msgstr "Класичні функціональні конструкції"

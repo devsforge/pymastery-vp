@@ -1,0 +1,29 @@
+---
+Database relationships
+---
+
+mindmap
+    root(Relationships)
+        ::{{Constraints}}
+            pk[Primary key]
+            ::icon(fas fa-key)
+            fk[Foreigh key]
+        ::(1-to-1)
+            ::{{unique foreign key}}
+                ::[table]
+                ::icon(fas fa-a)
+                ::[table]
+                ::icon(fas fa-b)
+        ::(1-to-N)
+            ::{{foreign key}}
+                ::[table]
+                ::icon(fas fa-a)
+                ::[table]
+                ::icon(fas fa-b)
+        m2m(Many-to-many)
+            ::[relation table]
+            ::icon(fas fa-table)
+                ::[table]
+                ::icon(fas fa-a)
+                ::[table]
+                ::icon(fas fa-b)

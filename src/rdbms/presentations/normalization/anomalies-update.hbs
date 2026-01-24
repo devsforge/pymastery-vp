@@ -1,0 +1,18 @@
+<h2 class="text-center">Update anomalies</h2>
+<p class="description text-center">
+  <em>
+    The same information can be expressed on multiple rows;<br>
+    therefore updates to the relation may result in logical inconsistencies.
+  </em>
+</p>
+<hr>
+<div>
+  {{>tbl-anomalies-update}}
+</div>
+<div class="notes">
+  The same information can be expressed on multiple rows, therefore updates to the relation may result in
+  logical inconsistencies. If the <code>wheed1997</code> increase their <code>level</code>, when the
+  <code>rank</code> should be updated as well. But if the update is only partial successful, then the
+  relation is left in an inconsistent state. Specifically. the relation provides conflicting information
+  on "level -- rank" for "wheed1997" player, and on "inventory" and "level" for "acen1999".
+</div>

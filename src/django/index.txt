@@ -1,0 +1,19 @@
+.. meta::
+    :description: Django web-framework
+    :author: Serhii Horodilov
+    :keywords: python, web, django, index
+
+.. todo
+
+.. attention:: Page is under construction
+
+    .. figure:: /../assets/img/construction.svg
+        :figwidth: 250
+        :align: center
+
+###############################################################################
+                               Django Framework
+###############################################################################
+
+.. toctree::
+    :name: django
