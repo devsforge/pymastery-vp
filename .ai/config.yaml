@@ -25,7 +25,6 @@ project_context:
     primary: "en-US"
     translations:
       - "uk-UA"
-  content_location: "content/"  # directory containing course materials
   history: |
     Derivative work of a Russian-language course (upstream). The origin
     repository contains significantly updated and expanded content,

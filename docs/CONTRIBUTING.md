@@ -76,7 +76,7 @@ Make sure submodules are pulled from the `devel` branch.
 The documentation build system supports:
 
 - [reStructuredText](https://docutils.sourceforge.io/rst.html)
-- [MarkDown](https://daringfireball.net/projects/markdown/)
+- [Markdown](https://daringfireball.net/projects/markdown/)
 - [mermaid](https://mermaid.js.org/)
 
 The main documentation syntax is \"reST\", since it provides more
