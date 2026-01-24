@@ -3,13 +3,14 @@
 **Repository:** pymastery-vp
 **Date:** 2026-01-24
 **Author:** Claude Opus 4.5 (Course Administrator)
-**Status:** Decisions Received - Actions Completed
+**Status:** Decisions Received – Actions Completed
 
 ---
 
 ## Executive Summary
 
-The repository has a **solid foundation** with well-documented AI guidelines, clear role definitions, and functional build tooling. However, several administrative gaps need attention:
+The repository has a **solid foundation** with well-documented AI guidelines, clear role definitions, and functional
+build tooling. However, several administrative gaps need attention:
 
 - **CI/CD is effectively disabled** (manual dispatch only)
 - **Git submodules are not initialized** (builds will fail)
@@ -24,30 +25,30 @@ The repository has a **solid foundation** with well-documented AI guidelines, cl
 
 ### What's Working
 
-| Area | Status | Notes |
-|------|--------|-------|
-| AI Guidelines | Good | Well-structured `.ai/` directory with clear rulesets |
-| Documentation Structure | Good | ADR template exists, conventions documented |
-| Build System | Functional | Makefile, Sphinx, webpack configured correctly |
-| Localization | Good | English/Ukrainian support via sphinx-intl |
-| Editor Config | Good | Consistent formatting rules defined |
-| Git Identity | Good | Claude agent identities properly configured |
+| Area                    | Status     | Notes                                                |
+|-------------------------|------------|------------------------------------------------------|
+| AI Guidelines           | Good       | Well-structured `.ai/` directory with clear rulesets |
+| Documentation Structure | Good       | ADR template exists, conventions documented          |
+| Build System            | Functional | Makefile, Sphinx, webpack configured correctly       |
+| Localization            | Good       | English/Ukrainian support via sphinx-intl            |
+| Editor Config           | Good       | Consistent formatting rules defined                  |
+| Git Identity            | Good       | Claude agent identities properly configured          |
 
 ### What's Not Working
 
-| Area | Status | Impact |
-|------|--------|--------|
-| CI/CD Workflows | Disabled | No automated testing or deployment |
-| Git Submodules | Empty | **Build will fail** - missing content |
-| Dependency Installation | Not verified | Sphinx not in current environment |
+| Area                    | Status       | Impact                                |
+|-------------------------|--------------|---------------------------------------|
+| CI/CD Workflows         | Disabled     | No automated testing or deployment    |
+| Git Submodules          | Empty        | **Build will fail** - missing content |
+| Dependency Installation | Not verified | Sphinx not in current environment     |
 
 ### Partial/Needs Attention
 
-| Area | Status | Issue |
-|------|--------|-------|
-| CODEOWNERS | Incomplete | Missing coverage for `linux/`, `intro/`, `appx/` |
-| Documentation | Inconsistent | Docs say `README.md`, repo has `README.rst` |
-| GitHub Actions | Outdated | Using deprecated action versions |
+| Area           | Status       | Issue                                            |
+|----------------|--------------|--------------------------------------------------|
+| CODEOWNERS     | Incomplete   | Missing coverage for `linux/`, `intro/`, `appx/` |
+| Documentation  | Inconsistent | Docs say `README.md`, repo has `README.rst`      |
+| GitHub Actions | Outdated     | Using deprecated action versions                 |
 
 ---
 
@@ -70,6 +71,7 @@ Affected submodules:
 **Risk:** The Sphinx build will fail because `conf.py` references `problem-sets/src`.
 
 **Additional Issue:** 5 of 6 submodules use SSH URLs (`git@github.com:`), which:
+
 - Require SSH key authentication
 - Will fail in CI/CD environments without SSH key setup
 - Prevent contributors from cloning without SSH configured
@@ -88,6 +90,7 @@ Affected submodules:
 **Current state:** Workflows only run via manual `workflow_dispatch`.
 
 **Additional Issues:**
+
 - `deploy_pages.yml` uploads entire repository (`.`) instead of `_build/`
 - `deploy_pages.yml` uses deprecated action versions (v1, v2)
 - `test_build.yml` uses `LANGUAGE=en` syntax incompatible with Windows
@@ -104,6 +107,7 @@ web_homeworks.md, before_postgres.md, pr_explanation*.md (4+ files)
 ```
 
 **Evidence these are legacy:**
+
 - Written in Russian (Cyrillic text)
 - Not referenced by Sphinx configuration
 - Not in `src/` where course content lives
@@ -112,16 +116,17 @@ web_homeworks.md, before_postgres.md, pr_explanation*.md (4+ files)
 
 ### 2.4 Medium: Configuration Inconsistencies
 
-| Location | Issue |
-|----------|-------|
-| `pyproject.toml:15` | `repository` URL points to `edu-python-course` not `OpenRoost` |
-| `.ai/rulesets/03-documentation.md:8` | Says "Project README" is `/README.md` but file is `README.rst` |
-| `.github/` | Duplicate files: `CONTRIBUTING.md` + `CONTRIBUTING.rst`, `CODE_OF_CONDUCT.md` + `CODE_OF_CONDUCT.rst` |
-| `README.rst:103` | Links to `./.github/CONTRIBUTING.rst` - path may not resolve on GitHub |
+| Location                             | Issue                                                                                                 |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------|
+| `pyproject.toml:15`                  | `repository` URL points to `edu-python-course` not `OpenRoost`                                        |
+| `.ai/rulesets/03-documentation.md:8` | Says "Project README" is `/README.md` but file is `README.rst`                                        |
+| `.github/`                           | Duplicate files: `CONTRIBUTING.md` + `CONTRIBUTING.rst`, `CODE_OF_CONDUCT.md` + `CODE_OF_CONDUCT.rst` |
+| `README.rst:103`                     | Links to `./.github/CONTRIBUTING.rst` - path may not resolve on GitHub                                |
 
 ### 2.5 Medium: Incomplete CODEOWNERS
 
 **Current coverage:**
+
 ```
 /src/basics/  - @shorodilov @Bandydan @Jules57
 /src/vcs/     - @shorodilov @Bandydan
@@ -132,6 +137,7 @@ web_homeworks.md, before_postgres.md, pr_explanation*.md (4+ files)
 ```
 
 **Missing coverage:**
+
 - `/src/linux/`
 - `/src/intro/`
 - `/src/appx/`
@@ -151,45 +157,45 @@ web_homeworks.md, before_postgres.md, pr_explanation*.md (4+ files)
 
 ### Priority 1: Build-Breaking (Immediate)
 
-| Task | Effort | Requires PM Decision |
-|------|--------|---------------------|
-| Initialize git submodules | 5 min | No |
+| Task                                     | Effort | Requires PM Decision                       |
+|------------------------------------------|--------|--------------------------------------------|
+| Initialize git submodules                | 5 min  | No                                         |
 | Convert submodule URLs from SSH to HTTPS | 15 min | **Yes** - may affect contributor workflows |
 
 ### Priority 2: CI/CD Restoration (This Week)
 
-| Task | Effort | Requires PM Decision |
-|------|--------|---------------------|
-| Re-enable PR test workflow triggers | 10 min | **Yes** - confirm desired trigger events |
-| Fix Windows compatibility in test_build.yml | 30 min | No |
-| Update deprecated GitHub Action versions | 20 min | No |
-| Fix deploy artifact path (`.` → `_build/`) | 10 min | No |
+| Task                                        | Effort | Requires PM Decision                     |
+|---------------------------------------------|--------|------------------------------------------|
+| Re-enable PR test workflow triggers         | 10 min | **Yes** - confirm desired trigger events |
+| Fix Windows compatibility in test_build.yml | 30 min | No                                       |
+| Update deprecated GitHub Action versions    | 20 min | No                                       |
+| Fix deploy artifact path (`.` → `_build/`)  | 10 min | No                                       |
 
 ### Priority 3: Cleanup (Near-Term)
 
-| Task | Effort | Requires PM Decision |
-|------|--------|---------------------|
-| Archive or remove legacy Russian lesson files | 1 hr | **Yes** - preserve, archive, or delete? |
-| Remove duplicate .md/.rst community files | 20 min | **Yes** - which format to keep? |
-| Update pyproject.toml repository URL | 5 min | No |
-| Update CODEOWNERS for missing sections | 15 min | **Yes** - who owns linux/intro/appx? |
+| Task                                          | Effort | Requires PM Decision                    |
+|-----------------------------------------------|--------|-----------------------------------------|
+| Archive or remove legacy Russian lesson files | 1 hr   | **Yes** - preserve, archive, or delete? |
+| Remove duplicate .md/.rst community files     | 20 min | **Yes** - which format to keep?         |
+| Update pyproject.toml repository URL          | 5 min  | No                                      |
+| Update CODEOWNERS for missing sections        | 15 min | **Yes** - who owns linux/intro/appx?    |
 
 ### Priority 4: Documentation (Ongoing)
 
-| Task | Effort | Requires PM Decision |
-|------|--------|---------------------|
-| Create ADR for SSG replacement evaluation | 1 hr | **Yes** - if evaluation is ongoing |
-| Document upstream sync process | 30 min | No |
-| Align README documentation with actual file format | 15 min | No |
+| Task                                               | Effort | Requires PM Decision               |
+|----------------------------------------------------|--------|------------------------------------|
+| Create ADR for SSG replacement evaluation          | 1 hr   | **Yes** - if evaluation is ongoing |
+| Document upstream sync process                     | 30 min | No                                 |
+| Align README documentation with actual file format | 15 min | No                                 |
 
 ### Priority 5: Automation Opportunities
 
-| Task | Effort | Requires PM Decision |
-|------|--------|---------------------|
-| Add link checker to CI | 1 hr | No |
-| Add spelling/grammar check to CI | 2 hr | No |
-| Create dependabot configuration | 30 min | No |
-| Add PR template | 30 min | No |
+| Task                             | Effort | Requires PM Decision |
+|----------------------------------|--------|----------------------|
+| Add link checker to CI           | 1 hr   | No                   |
+| Add spelling/grammar check to CI | 2 hr   | No                   |
+| Create dependabot configuration  | 30 min | No                   |
+| Add PR template                  | 30 min | No                   |
 
 ---
 
@@ -198,23 +204,23 @@ web_homeworks.md, before_postgres.md, pr_explanation*.md (4+ files)
 ### Decisions Required from PM
 
 1. **Submodule URLs:** Convert SSH to HTTPS?
-   - SSH requires key setup for all contributors
-   - HTTPS works universally but may affect existing workflows
+    - SSH requires key setup for all contributors
+    - HTTPS works universally but may affect existing workflows
 
 2. **Legacy Russian content:** What to do with 45+ lesson files in root?
-   - Option A: Delete (they're in upstream anyway)
-   - Option B: Move to `_legacy/` directory
-   - Option C: Keep as-is (not recommended)
+    - Option A: Delete (they're in upstream anyway)
+    - Option B: Move to `_legacy/` directory
+    - Option C: Keep as-is (not recommended)
 
 3. **CI/CD triggers:** Which events should trigger workflows?
-   - `test_build.yml`: PRs to which branches? All paths or just src/?
-   - `deploy_pages.yml`: Push to main/devel? Only manual?
+    - `test_build.yml`: PRs to which branches? All paths or just src/?
+    - `deploy_pages.yml`: Push to main/devel? Only manual?
 
 4. **CODEOWNERS expansion:** Who owns uncovered sections?
-   - `linux/`, `intro/`, `appx/` need owners assigned
+    - `linux/`, `intro/`, `appx/` need owners assigned
 
 5. **Documentation format:** Keep `.md` or `.rst` for community files?
-   - Currently have both; should consolidate
+    - Currently have both; should consolidate
 
 ### Information Needed
 
@@ -287,8 +293,8 @@ uses: actions/deploy-pages@v1  # Current: v4
 ```yaml
 # Line 39-40: Windows incompatible
 run: |
-  LANGUAGE=en make html  # Won't work on Windows
-  LANGUAGE=uk make html
+    LANGUAGE=en make html  # Won't work on Windows
+    LANGUAGE=uk make html
 
 # Should use cross-platform approach:
 # - shell: bash (force bash on all platforms)
@@ -301,38 +307,38 @@ run: |
 
 ### Decisions Received
 
-| Item | Decision |
-|------|----------|
-| Submodule URLs | Convert SSH to HTTPS |
-| Legacy lesson files | Keep as-is |
-| CI/CD triggers | No changes for now (address later) |
-| CODEOWNERS gaps | Assign `@shorodilov` as default owner |
-| Duplicate docs | Keep `.md` only |
+| Item                | Decision                              |
+|---------------------|---------------------------------------|
+| Submodule URLs      | Convert SSH to HTTPS                  |
+| Legacy lesson files | Keep as-is                            |
+| CI/CD triggers      | No changes for now (address later)    |
+| CODEOWNERS gaps     | Assign `@shorodilov` as default owner |
+| Duplicate docs      | Keep `.md` only                       |
 
 ### Actions Completed
 
 1. **Converted submodule URLs to HTTPS** (`.gitmodules`)
-   - `problem-sets`, `blog-spec`, `libms-db`, `libms-spec`, `giver-spec` converted from SSH to HTTPS
-   - Added `.git` suffix for consistency
+    - `problem-sets`, `blog-spec`, `libms-db`, `libms-spec`, `giver-spec` converted from SSH to HTTPS
+    - Added `.git` suffix for consistency
 
 2. **Updated CODEOWNERS** (`.github/CODEOWNERS`)
-   - Added `* @shorodilov` as default rule for all contents
-   - Existing section-specific rules preserved (override default where applicable)
+    - Added `* @shorodilov` as default rule for all contents
+    - Existing section-specific rules preserved (override default where applicable)
 
 3. **Removed duplicate .rst files** (`.github/`)
-   - Deleted `CODE_OF_CONDUCT.rst` (keeping `.md`)
-   - Deleted `CONTRIBUTING.rst` (keeping `.md`)
+    - Deleted `CODE_OF_CONDUCT.rst` (keeping `.md`)
+    - Deleted `CONTRIBUTING.rst` (keeping `.md`)
 
 4. **Updated README.rst**
-   - Fixed contributing guide link to point to `CONTRIBUTING.md`
+    - Fixed contributing guide link to point to `CONTRIBUTING.md`
 
 ### Remaining Items
 
-| Item | Status | Notes |
-|------|--------|-------|
-| CI/CD restoration | Deferred | PM decision: address later |
-| Legacy lesson files | No action | PM decision: keep as-is |
-| Submodule initialization | Pending | Run `git submodule update --init --recursive` to populate |
+| Item                     | Status    | Notes                                                     |
+|--------------------------|-----------|-----------------------------------------------------------|
+| CI/CD restoration        | Deferred  | PM decision: address later                                |
+| Legacy lesson files      | No action | PM decision: keep as-is                                   |
+| Submodule initialization | Pending   | Run `git submodule update --init --recursive` to populate |
 
 ---
 
