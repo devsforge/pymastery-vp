@@ -15,7 +15,7 @@ import "../assets/icons/moon-svgrepo-com.svg"
 import "../assets/icons/sun-svgrepo-com.svg"
 
 // import and initialize impress.js presentation framework
-import "../assets/impress.js/js/impress"
-import "../assets/impress.js/css/impress-common.css"
+import "impress.js/js/impress"
+import "impress.js/css/impress-common.css"
 
 impress().init()
