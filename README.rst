@@ -7,6 +7,22 @@ includes the very basics programming topics like data types, variables and
 object-oriented programming and advanced topics like multithreading and
 web-frameworks for Python.
 
+Repository Structure
+====================
+
+This repository is organized with locale-based content structure (see ADR-003):
+
+-   ``content/en/`` — Active English course content (reStructuredText format)
+-   ``content/ru/`` — Legacy Russian course content (preserved for historical reference)
+-   ``content/_locales/`` — Temporary Sphinx localization files (Ukrainian translations)
+-   ``assets/`` — Global project assets
+-   ``docs/`` — Architecture Decision Records and project documentation
+-   ``.ai/`` — AI agent guidelines and configurations
+
+The English content in ``content/en/`` is the actively maintained course material.
+Legacy Russian content is preserved to honor the project's origins. The upstream
+repository is https://github.com/PonomaryovVladyslav/PythonCourses.git
+
 Getting started
 ===============
 
@@ -93,8 +109,8 @@ installed, you can run builds manually:
 
 .. code-block:: shell
 
-    sphinx-build -b html -D language=en src _build/html/en
-    sphinx-build -b html -D language=uk src _build/html/uk
+    sphinx-build -b html -D language=en content/en _build/html/en
+    sphinx-build -b html -D language=uk content/en _build/html/uk
 
 Contributing to the project
 ===========================

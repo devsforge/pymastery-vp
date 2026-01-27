@@ -7,7 +7,7 @@ from pathlib import Path
 import toml
 
 # set up paths
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(BASE_DIR / "problem-sets" / "src"))
 
 # read project data from toml file
@@ -62,7 +62,7 @@ redirects = {
 # options for internationalization
 gettext_compact = False
 language = "en"
-locale_dirs = ["_locales"]
+locale_dirs = ["../_locales"]
 
 # options for HTML output
 html_theme = "sphinx_rtd_theme"
