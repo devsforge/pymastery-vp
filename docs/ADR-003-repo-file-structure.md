@@ -8,372 +8,448 @@
 [rejected]: https://img.shields.io/badge/document_status-rejected-red.svg
 [final]: https://img.shields.io/badge/document_status-final-blue.svg
 [//]: # (@formatter:on)
-![status][draft]
+![status][final]
 
 <details>
 <summary>Document Changelog</summary>
 
 [//]: # (order by version number descending)
 
-| ver. | Date       | Author                                    | Changes description                       |
-|------|------------|-------------------------------------------|-------------------------------------------|
-| 0.8  | 2026-01-26 | Serhii Horodilov                          | Fix typos                                 |
-| 0.7  | 2026-01-26 | Claude Sonnet 4.5 <noreply@anthropic.com> | Complete final draft with decision        |
-| 0.6  | 2026-01-26 | Serhii Horodilov                          | Replace `locales/**` with `content/**`    |
-| 0.5  | 2026-01-26 | Serhii Horodilov                          | Add `upstream` repository link            |
-| 0.4  | 2026-01-25 | Serhii Horodilov                          | Fix typos                                 |
-| 0.3  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Reframe as ru localization, add pictures/ |
-| 0.2  | 2026-01-25 | Serhii Horodilov                          | Fix typos                                 |
-| 0.1  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Initial draft                             |
+| ver. | Date       | Author                                    | Changes description                               |
+|------|------------|-------------------------------------------|---------------------------------------------------|
+| 0.10 | 2026-01-27 | Serhii Horodilov                          | Fix typos, final draft                            |
+| 0.9  | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Expand scope to comprehensive repo reorganization |
+| 0.8  | 2026-01-26 | Serhii Horodilov                          | Fix typos                                         |
+| 0.7  | 2026-01-26 | Claude Sonnet 4.5 <noreply@anthropic.com> | Complete final draft with decision                |
+| 0.6  | 2026-01-26 | Serhii Horodilov                          | Replace `locales/**` with `content/**`            |
+| 0.5  | 2026-01-26 | Serhii Horodilov                          | Add `upstream` repository link                    |
+| 0.4  | 2026-01-25 | Serhii Horodilov                          | Fix typos                                         |
+| 0.3  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Reframe as ru localization, add pictures/         |
+| 0.2  | 2026-01-25 | Serhii Horodilov                          | Fix typos                                         |
+| 0.1  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Initial draft                                     |
 
 </details>
 
 ## Context
 
-The repository currently contains legacy Russian-language content scattered across multiple locations alongside modern
-project infrastructure. This creates organizational and discoverability issues:
+The repository currently has an inconsistent structure with content scattered across multiple locations, lacking clear
+locale-based organization for a multilingual project. This creates organizational, discoverability, and maintainability
+issues.
 
 **Current State:**
 
-- **Legacy content at root**: All `*.md` files in root directory (except `AGENTS.md` and `CLAUDE.md`) are legacy
-  Russian-language lesson files
-- **Legacy assets scattered**: `/pictures/lesson01/`, `/pictures/lesson02/`, `/pictures/lesson08/` contain images tied
-  to legacy Russian lessons
-- **Modern content**: Structured English/Ukrainian content in `/src/` directory
-- **Active assets**: All files in `/assets/` directory are actively used by current course content
+- **Active content location**: `/src/` directory contains English course content (`.rst` format)
+- **Active content format**: reStructuredText (`.rst`) - no format changes in this ADR
+- **Sphinx artifacts**: `/src/_locales/` (gettext Ukrainian translations), `/src/_static/` (Sphinx JS files)
+- **Legacy content at root**: All `*.md` files in root (except `AGENTS.md`, `CLAUDE.md`) are legacy Russian lesson
+  files
+- **Legacy assets scattered**: `/pictures/lesson01/`, `/pictures/lesson02/`, `/pictures/lesson08/` tied to legacy
+  lessons
+- **Active global assets**: `/assets/` directory contains assets used by current course
 - **Infrastructure files**: `.ai/`, `docs/`, `templates/`, `mindmaps/` at root
-- **Configuration files**: Various dotfiles, and active files `AGENTS.md`, `CLAUDE.md` at root
-- **Build artifacts location**: Undefined (Sphinx typically uses `_build/` but this may change with SSG)
+- **Configuration files**: Various dotfiles; active files `AGENTS.md`, `CLAUDE.md` at root
+- **Build artifacts location**: Undefined (Sphinx uses `_build/` but may change with SSG)
 
 **Problems:**
 
-1. **Contributor confusion**: New contributors face unclear directory purpose — where should new content go?
-2. **Repository clutter**: Root directory contains many legacy content files mixed with infrastructure
-3. **Discoverability issues**: Hard to distinguish current vs. legacy content at a glance (only exceptions are
-   `AGENTS.md` and `CLAUDE.md`)
-4. **Scattered legacy content**: Russian lesson files at root, related images in `/pictures/lessonXX/` subdirectories —
-   content and assets not colocated
-5. **Incomplete localization structure**: No clear locale organization (`en-US`, `uk-UA`, `ru`) for multilingual
-   project
-6. **Maintenance overhead**: Legacy files require consideration during restructuring or tooling changes
-7. **Onboarding friction**: New contributors must understand historical context to navigate repository
-8. **Historical preservation**: Legacy Russian content lacks a clear "archived but preserved" status
+1. **No locale-based organization**: Content lacks clear `en`/`uk`/`ru` structure for a multilingual project
+2. **Inconsistent content location**: Active content in `/src/`, legacy at root — no unified approach
+3. **Repository clutter**: Root directory contains 45+ legacy lesson files mixed with infrastructure
+4. **Contributor confusion**: Where should new content go? Where is active English content?
+5. **Scattered legacy content**: Russian files at root, images in `/pictures/lessonXX/` — not colocated
+6. **Sphinx artifacts mixed with content**: `_locales/` and `_static/` in content directory
+7. **Unclear content root**: `/src/` doesn't signal "this is the content directory"
+8. **Historical preservation**: Legacy Russian content lacks a clear "preserved but not maintained" status
+9. **Onboarding friction**: New contributors must understand historical context to navigate
 
 **Historical Context:**
 
-The legacy Russian-language files are from the original course version (the upstream source). The project has since
-been translated to English with Ukrainian support, and content has been reorganized into `/src/`. The legacy files were
-kept in place during initial translation work but have not been organized as a complete, preserved historical artifact
-representing the original `ru` localization.
+The legacy Russian-language files are from the original course (upstream source). The project was translated to English
+with Ukrainian support, and content moved to `/src/`. Legacy files remained at root during translation, never organized
+as a complete historical artifact.
 
 > [!IMPORTANT]
-> This decision is interdependent with ADR-002 (SSG Replacement). The chosen SSG may have expectations about content
-> location (e.g., `docs/`, `content/`, `src/`), and conversely, the structure decision affects SSG migration effort.
+> This decision is interdependent with ADR-002 (SSG Replacement). This ADR addresses **structure only** (where files
+> live, directory organization). ADR-002 addresses **format** (reST → Markdown conversion).
+> The two MUST BE coordinated but are distinct concerns.
 
 ## Decision Drivers
 
-- **Contributor clarity**: Make it obvious where current content lives and where new files should be added
+- **Contributor clarity**: Make it obvious where all content lives (active and legacy)
+- **Locale-based organization**: Establish clear structure for multilingual content (`en`, `uk`, `ru`)
 - **Historical preservation**: Maintain complete legacy Russian content as historical artifact
-- **Localization clarity**: Establish clear locale-based organization (`en-US`, `uk-UA`, `ru`)
-- **Maintainability**: Reduce a cognitive load when navigating repository structure
-- **Discoverability**: Clear separation between current and historical content
-- **Content-asset colocation**: Keep related lesson content and images together
-- **Build system compatibility**: Structure should support current and future SSG expectations
+- **Content root naming**: Clear directory name signaling "this contains course content"
+- **Maintainability**: Reduce a cognitive load when navigating repository
+- **Discoverability**: Clear separation between active and legacy content
+- **Content-asset colocation**: Keep related content and assets together within locales
+- **Build system compatibility**: Structure should support current and future SSG expectations (MkDocs)
 - **Git history preservation**: Maintain git history through move operations
-- **Respectful treatment**: Honor the original Russian course as the foundation of the project
+- **Clean separation of concerns**: Sphinx artifacts separate from content
+- **Respectful treatment**: Honor original Russian course as project foundation
 
 ## Considered Options
 
-### Option 1: Organize as `content/ru/` (Legacy Localization)
+### Option 1: Comprehensive Locale-Based Structure with `content/` Root
 
-**Description**: Create a `content/ru/` directory structure that preserves all legacy Russian content (root `*.md`
-files and `/pictures/lessonXX/` assets) as complete, self-contained localization. This treats the original Russian
-course respectfully as a preserved historical artifact while clearly separating it from active English/Ukrainian
-content.
+**Description**: Reorganize the entire repository to establish `content/` as the content root with locale-based
+subdirectories (`en/`, `ru/`). Move active content from `/src/` to `content/en/`, organize legacy content into
+`content/ru/`, handle Sphinx artifacts appropriately, and keep global assets at repository root.
 
-**Pros**:
-
-- **Respectful preservation**: Honors original Russian course as project foundation
-- **Complete artifact**: Colocates lesson files with their images in a single locale directory
-- **Clear localization model**: Establishes a pattern for future locale organization
-- **Git history maintained**: Uses `git mv` to preserve full history
-- **Historical reference**: Easy-to-browse complete original course structure
-- **No data loss**: Everything preserved in an organized, discoverable location
-- **Future-compatible**: If `ru` support is ever revived, content is ready
-- **Clean separation**: Root becomes infrastructure-only, locales contain all content variations
-
-**Cons**:
-
-- **Repository size unchanged**: All legacy content remains (though organized)
-- **Implementation effort**: Requires careful restructuring of both files and assets
-- **Migration complexity**: Need to ensure paths and references are updated if any cross-references exist
-
-**Structure Example**:
+**Target Structure:**
 
 ```
-content/
-  ru/              # Legacy Russian (preserved, not maintained)
-    lessons/
+content/                # Content root (renamed from src/)
+  _locales/            # Temporary - Sphinx gettext Ukrainian .po files
+                       # (Kept until ADR-002 migration replaces with MkDocs i18n)
+  en/                  # Active English content
+    *.rst              # Content in reST format (unchanged - conversion in ADR-002)
+    subdirs/           # Lesson structure preserved
+  ru/                  # Legacy Russian content (preserved, not maintained)
+    lessons/           # Root lesson*.md, module*.md → here
       lesson*.md
       module*.md
-    pictures/      # All pictures/lessonXX/ directories
+    pictures/          # /pictures/lessonXX/ → here
       lesson01/
       lesson02/
       lesson08/
-    README.md      # Explains this is legacy/historical
-  (Future: en/, uk/ if locale-based organization adopted)
+    README.md          # Explains legacy status
+
+assets/                # Global project assets (stays at root)
+  ...                  # Active assets used by course
+
+(Root level remains: .ai/, docs/, templates/, mindmaps/, config files, AGENTS.md, CLAUDE.md)
 ```
 
-### Option 2: Organize as `_archive/ru/` (Archived Localization)
+**Note on `_static/`**: The `/src/_static/` directory (containing Sphinx-specific JS files) will be **removed** as it
+is unnecessary for MkDocs (per ADR-002). Preserved in git history if needed.
 
-**Description**: Similar to Option 1, but uses `_archive/` prefix to more explicitly signal "not for active use."
-Creates `_archive/ru/` containing all legacy Russian content.
+**Note on `uk/`**: No `content/uk/` placeholder created now. Ukrainian content structure will be established during
+ADR-002 when setting up MkDocs file-based i18n.
 
 **Pros**:
 
-- **Explicit "archived" status**: Underscore prefix convention clearly signals historical content
-- **Complete preservation**: All benefits of Option 1 regarding colocation and history
-- **Prevents accidental modification**: Clear visual signal this content is frozen
-- **Git history maintained**: Uses `git mv` operations
+- **Clear content root**: `content/` clearly signals "this is where course content lives"
+- **Locale-based organization**: Establishes proper multilingual structure (`en`, `ru`, future `uk`)
+- **Consistent pattern**: All locales use same organizational approach
+- **Respectful preservation**: Legacy Russian course honored as a complete historical artifact
+- **Clean root directory**: Infrastructure-only (no content files scattered)
+- **Content-asset colocation**: Related content and images together within locales
+- **Git history maintained**: Uses `git mv` for all operations
+- **Future-compatible**: If `ru` support revived, content ready
+- **SSG alignment**: MkDocs expects content root (configurable via `docs_dir: content`)
+- **Scalable**: Easy to add future locales
+- **Sphinx artifacts handled**: `_locales/` kept temporarily, `_static/` removed (not needed)
 
 **Cons**:
 
-- **Less elegant than `content/`**: Archive structure doesn't map to standard i18n patterns
-- **Harder to revive**: If `ru` support returns, content is in "archive" not "locales"
-- **Repository size unchanged**: All legacy content remains
+- **Largest implementation effort**: Affects both active and legacy content
+- **Repository size unchanged**: All content remains (though organized)
+- **Temporary Sphinx artifacts**: `_locales/` kept until ADR-002 completes
+- **Learning curve**: Contributors familiar with `/src/` must adapt to `content/en/`
 
-**Structure Example**:
+### Option 2: Minimal Change, Only Organize Legacy Content
+
+**Description**: Move only legacy Russian content to `content/ru/`, leave active content in `/src/` unchanged.
+
+**Target Structure:**
 
 ```
-_archive/
-  ru/
+src/                   # Active content (unchanged)
+  *.rst
+  _locales/
+  _static/
+content/
+  ru/                  # Legacy Russian only
     lessons/
     pictures/
     README.md
 ```
 
-### Option 3: Delete Legacy Content with Documentation
-
-**Description**: Remove all legacy Russian content (root `*.md` files and `/pictures/lessonXX/` directories) from the
-repository. Create `docs/LEGACY.md` documenting where original content can be found (upstream repo, git history).
-
 **Pros**:
 
-- **Cleanest repository**: Smallest repo size, zero legacy content
-- **Reduced complexity**: No need to navigate historical content
-- **Simplest long-term maintenance**: Only active content in the repository
+- **Minimal disruption**: Active content location unchanged
+- **Smaller implementation effort**: Only legacy content moved
+- **Partial cleanup**: Root directory cleaner (legacy files removed)
 
 **Cons**:
 
-- **Loss of easy reference**: Content only accessible via git history or upstream
+- **Incomplete solution**: Doesn't address lack of locale structure for active content
+- **Inconsistent naming**: Active in `/src/`, legacy in `content/` — confusing pattern
+- **No content root**: `/src/` doesn't establish clear locale-based organization
+- **Missed opportunity**: Doesn't position a project for proper multilingual structure
+- **Sphinx artifacts remain**: `_locales/` and `_static/` still mixed with content
+
+### Option 3: Archive Legacy Content Separately
+
+**Description**: Create `_archive/ru/` for legacy content, keep active content in `/src/`.
+
+**Target Structure:**
+
+```
+src/                   # Active content
+  *.rst
+_archive/
+  ru/                  # Archived legacy
+    lessons/
+    pictures/
+```
+
+**Pros**:
+
+- **Explicit archived status**: Underscore prefix signals "not for active use"
+- **Active content unchanged**: No disruption to the current location
+
+**Cons**:
+
+- **No locale structure**: Doesn't establish multilingual organization
+- **Archive vs. locale confusion**: Less elegant than proper locale structure
+- **Incomplete solution**: Doesn't address core organizational issues
+
+### Option 4: Delete Legacy Content
+
+**Description**: Remove all legacy Russian content, document location (upstream repo, git history).
+
+**Pros**:
+
+- **Cleanest repository**: Smallest size, no legacy files
+- **Simplest maintenance**: Only active content
+
+**Cons**:
+
 - **Historical context lost**: Harder to understand project evolution
-- **Requires external navigation**: Must go to upstream or git history to see original
-- **Less respectful**: Treats original course as disposable rather than foundational
-- **Irreversible without effort**: Recovery requires git revert or upstream reference
+- **Less respectful**: Treats original course as disposable
+- **Doesn't address active content structure**: `/src/` still lacks locale organization
 
-### Option 4: Keep As-Is with README Clarification
+### Option 5: Keep As-Is with Documentation
 
-**Description**: Maintain current structure but add clear documentation in README.md explaining legacy files and
-directing contributors to `/src/` for active content.
+**Description**: Maintain current structure, add README clarification.
 
 **Pros**:
 
-- **Zero implementation effort**: No file moves or restructuring
-- **Git history intact**: No risk from file operations
-- **Preserves everything in place**: All content immediately accessible
+- **Zero implementation effort**: No changes required
 
 **Cons**:
 
-- **Does not solve the core problem**: Repository remains cluttered
-- **Ongoing confusion**: Visual clutter persists regardless of documentation
-- **Scattered content**: Lesson files at root, images in subdirectories
-- **Maintenance burden continues**: Legacy files remain consideration during changes
-- **No localization structure**: Misses an opportunity to establish i18n patterns
-
-### Option 5: Comprehensive Locale Reorganization
-
-**Description**: Beyond handling legacy content, reorganize ALL content (including active `/src/`) into locale-based
-structure: `content/en/`, `content/uk/`, `content/ru/`. This is the most comprehensive approach.
-
-**Pros**:
-
-- **Complete i18n structure**: Establishes proper multilingual organization
-- **Consistent pattern**: All localizations use same structure
-- **Scalable**: Easy to add future locales
-- **Best long-term structure**: Industry-standard i18n organization
-
-**Cons**:
-
-- **Largest scope**: Affects ALL content, not just legacy
-- **Breaking changes**: Major updates to a build system, references, documentation
-- **SSG dependency**: Should coordinate with ADR-002 decision
-- **High implementation risk**: Complex migration affecting active content
-- **Timing concern**: Premature before SSG decision
-- **May conflict with SSG expectations**: Some SSGs have their own locale conventions
+- **Solves nothing**: All current problems persist
+- **Missed opportunity**: Doesn't prepare for a proper multilingual structure
 
 ## Decision
 
-**Adopt Option 1: Organize as `content/ru/` (Legacy Localization)**
+**Adopt Option 1: Comprehensive Locale-Based Structure with `content/` Root**
 
 **Rationale:**
 
-Option 1 provides the best balance of respectful historical preservation, clear organization, and future flexibility.
-This decision is driven by the following factors:
+Option 1 provides a complete, future-proof solution that addresses all organizational issues while establishing
+a proper multilingual structure. This decision is driven by:
 
-1. **Respectful Treatment of Origins**: The original Russian course is the foundation of this project.
-   Organizing it as complete, preserved localization honors that history while clearly marking it as legacy content.
+1. **Proper Multilingual Foundation**: Establishing `content/en/` and `content/ru/` creates the right pattern for a
+   multilingual project. When Ukrainian content is adopted from `*.po` files (ADR-002),
+   it naturally fits as `content/uk/`.
 
-2. **Complete Historical Artifact**: Colocating all Russian lesson files with their related images creates a
-   self-contained, browsable historical reference. Contributors can understand project evolution without navigating
-   git history or external repositories.
+2. **Clear Content Root**: Renaming `/src/` → `content/` with locale subdirectories makes it immediately obvious where
+   all content lives and how it's organized.
 
-3. **Clear Separation**: Moving legacy content out of root eliminates contributor confusion. Root becomes
-   infrastructure-only (`.ai/`, `docs/`, `templates/`, config files), making it obvious where to add new content.
+3. **Complete Solution**: Addresses both active and legacy content organization in one coherent restructuring rather
+   than piecemeal changes.
 
-4. **Git History Preservation**: Using `git mv` operations maintains full commit history for all files, preserving
-   attribution and evolution tracking.
+4. **Respectful Historical Preservation**: Legacy Russian course preserved as a complete, colocated artifact honoring
+   project origins.
 
-5. **Localization Foundation**: `content/ru/` establishes a pattern for potential future locale organization. While
-   comprehensive locale reorganization (Option 5) is deferred pending ADR-002, this creates a foundation without
-   premature commitment.
+5. **Clean Repository Root**: All content files moved into `content/` structure, leaving root for infrastructure only.
 
-6. **Content-Asset Colocation**: Keeping lesson files together with their images in `content/ru/lessons/` and
-   `content/ru/pictures/` improves discoverability and reduces maintenance burden.
+6. **SSG Alignment**: MkDocs (per ADR-002) works perfectly with `content/` as content root via `docs_dir: content`
+   configuration. Locale structure aligns with `mkdocs-static-i18n` plugin expectations.
 
-7. **No Data Loss**: All legacy content is preserved and easily accessible, avoiding the irreversibility concerns of
-   Option 3 (deletion).
+7. **Git History Preserved**: All moves use `git mv`, maintaining full commit history and attribution.
 
-8. **Flexibility for Revival**: If Russian localization support is revived in the future, content is already organized
-   in a locale structure rather than buried in an "archive."
+8. **Proper Sphinx Artifact Handling**:
+    - `_locales/` kept temporarily (needed for current Sphinx setup, will be replaced in ADR-002)
+    - `_static/` removed immediately (Sphinx-specific JS, not needed for MkDocs, preserved in git history)
+
+9. **Global Assets Properly Located**: `/assets/` stays at root (project-wide resources, not locale-specific).
+
+10. **Scalability**: Structure easily accommodates future locales or content types.
 
 **Why Not Other Options:**
 
-- **Option 2 (_archive/ru/)**: While explicit, the "archive" framing is less elegant and doesn't align with potential
-  future i18n structure. `content/ru/` is more respectful and flexible.
-- **Option 3 (Delete)**: Too aggressive. Loses easy reference to the original course and treats foundational work as
-  disposable. Historical context is valuable.
-- **Option 4 (Keep As-Is)**: Does not solve any problem. Documentation alone won't eliminate visual clutter or
-  contributor confusion.
-- **Option 5 (Comprehensive Reorganization)**: Premature and high risk. Should wait for ADR-002 decision on SSG, which
-  will inform the optimal active content structure.
+- **Option 2 (Minimal)**: Incomplete, doesn't establish locale structure, misses opportunity
+- **Option 3 (Archive)**: Less elegant, doesn't create a multilingual foundation
+- **Option 4 (Delete)**: Too aggressive, loses historical context
+- **Option 5 (Keep As-Is)**: Solves no problems
 
 **Coordination with ADR-002:**
 
-This decision is compatible with the MkDocs adoption in ADR-002. MkDocs uses configurable `docs_dir` setting and
-doesn't impose rigid directory requirements. The legacy `content/ru/` structure won't interfere with active content
-organization for MkDocs migration.
+This ADR establishes the structure; ADR-002 handles format conversion. The sequence:
+
+1. **ADR-003 first**: Reorganize structure (this ADR) — content still in `.rst` format
+2. **ADR-002 second**: Convert `.rst` → `.md`, set up MkDocs, create `content/uk/` for Ukrainian
+
+This separation is cleaner than combining structure and format changes.
 
 **Scope Boundaries:**
 
-This decision addresses **only** legacy Russian content organization. Active English/Ukrainian content in `/src/`
-remains unchanged pending ADR-002 finalization. Comprehensive locale reorganization (moving `/src/` to `content/en/`
-and `content/uk/`) is explicitly deferred until SSG migration is complete.
+- **In Scope**: Directory structure, file organization, git moves, Sphinx artifact handling
+- **Out of Scope**: File format conversion (reST → Markdown), SSG migration, MkDocs setup
+- **Deferred to ADR-002**: Ukrainian `content/uk/` creation, `_locales/` deprecation, MkDocs i18n setup
 
 ## Consequences
 
 ### Positive
 
-- **Clean Repository Root**: Root directory contains only infrastructure (`.ai/`, `docs/`, `templates/`, `mindmaps/`)
-  and configuration files, eliminating 45+ scattered lesson files.
-- **Clear Contributor Onboarding**: New contributors immediately understand where to add content (active content in
-  `/src/`, legacy in `content/ru/`).
-- **Historical Preservation**: Complete Russian course preserved as a self-contained artifact, easily browsable without
-  git history navigation.
-- **Respectful Treatment**: Original course honored as project foundation rather than discarded or hidden.
-- **Git History Maintained**: Full commit history preserved for all moved files, maintaining attribution.
-- **Content-Asset Colocation**: Related lesson files and images kept together, reducing maintenance burden.
-- **Localization Foundation**: Establishes a pattern for potential future locale organization without premature
-  commitment.
-- **Reduced Cognitive Load**: Clear separation between active and legacy content simplifies mental model.
-- **Easy Revival Path**: If Russian support returns, content is already in the locale structure.
-- **No Data Loss**: All legacy content preserved and accessible.
+- **Clear Multilingual Organization**: Proper locale-based structure (`content/en/`, `content/ru/`, future
+  `content/uk/`)
+- **Clean Repository Root**: All content files in `content/`, root contains only infrastructure
+- **Improved Contributor Onboarding**: Obvious where content lives and how it's organized
+- **Historical Preservation**: Complete Russian course preserved as a self-contained artifact
+- **Content-Asset Colocation**: Lesson files and images together within locales
+- **Git History Maintained**: Full commit history preserved for all moved files
+- **SSG-Ready Structure**: Aligns perfectly with MkDocs expectations (per ADR-002)
+- **Respectful Treatment**: Original Russian course honored as project foundation
+- **Future-Proof**: Easy to add locales, content types, or reorganize within an established pattern
+- **Reduced Cognitive Load**: Clear, intuitive organization reduces mental effort
+- **Proper Artifact Handling**: Sphinx-specific files appropriately managed
 
 ### Negative
 
-- **One-Time Migration Effort**: Requires careful file moves and README creation.
-  Estimated 2--3 hours for execution and verification.
-- **Repository Size Unchanged**: All legacy content remains in the repository (though organized). Repository size isn’t
-  reduced.
-- **Git History Shows Moves**: Git log shows move operations, though full history is preserved via `git log --follow`.
-- **Potential Reference Updates**: If any cross-references exist between legacy and active content, they may need
-  updating (though unlikely given content separation).
-- **Learning Curve for Existing Contributors**: Contributors familiar with root-level legacy files need to update
-  mental model.
+- **Implementation Effort**: Comprehensive reorganization requires careful execution (estimated 4--6 hours)
+- **Repository Size Unchanged**: All content preserved (though organized)
+- **Temporary Sphinx Artifacts**: `_locales/` remains until ADR-002 completes (technical debt)
+- **Learning Curve**: Contributors familiar with `/src/` must adapt to `content/en/`
+- **Git Log Shows Moves**: History shows reorganization (though full history via `git log --follow`)
+- **Coordination Required**: Must coordinate with ADR-002 to avoid conflicting changes
 
 ### Neutral
 
-- **Directory Structure Change**: Repository layout changes but functionality unaffected.
-- **Active Content Unchanged**: `/src/` directory and all active content remain as-is (pending ADR-002).
-- **Build System Unaffected**: Current Sphinx build process unaffected by legacy content relocation.
-- **Future Flexibility**: Doesn't commit to or prevent comprehensive locale reorganization in the future.
+- **Directory Naming Change**: `/src/` → `content/en/` (neither better nor worse, just different convention)
+- **Build System Unaffected**: Current Sphinx build still works (content location configurable)
+- **Documentation Updates Needed**: README, contributor guides, `.ai/config.yaml` require updates
+- **Active Content Path Changes**: Internal references to `/src/` become `content/en/` (mechanical update)
 
 ## Implementation
 
-### Phase 1: Preparation (30 minutes)
+### Phase 1: Preparation and Validation (1 hour)
 
-**Objective**: Validate approach and prepare for migration.
+**Objective**: Establish foundation and validate approach.
 
 **Tasks**:
 
 1. **Create Feature Branch**:
-    - Create branch: `feature/organize-legacy-content`
-    - Ensures `main` branch remains stable during reorganization
+    - Branch: `feature/repo-structure-reorganization`
+    - Protects `main` branch during reorganization
 
-2. **Audit Legacy Content**:
-    - List all root `*.md` files (excluding `AGENTS.md`, `CLAUDE.md`)
-    - Verify `/pictures/lesson01/`, `/pictures/lesson02/`, `/pictures/lesson08/` contain only legacy images
-    - Confirm no active content depends on legacy files
+2. **Audit Current Content**:
+    - Inventory all files in `/src/` directory
+    - List all root `*.md` files (except `AGENTS.md`, `CLAUDE.md`)
+    - Verify `/pictures/lesson01/`, `/pictures/lesson02/`, `/pictures/lesson08/`
+    - Identify contents of `/src/_locales/` and `/src/_static/`
+    - Confirm `/assets/` contains only active assets
 
-3. **Verify No Cross-References**:
-    - Search for references to legacy files in `/src/` directory
-    - Confirm no build process dependencies on root-level lesson files
-    - Identify any documentation that references root-level content
+3. **Verify No Cross-Dependencies**:
+    - Search for absolute path references to `/src/` in documentation
+    - Check for references to root-level legacy files
+    - Identify any Sphinx configuration dependencies on current paths
+    - Verify build process paths (if any hardcoded)
+
+4. **Plan Git Move Operations**:
+    - Document all `git mv` operations needed
+    - Identify potential conflicts or issues
+    - Plan the order of operations to avoid conflicts
 
 **Deliverables**:
 
 - Feature branch created
-- Legacy content inventory
-- Cross-reference verification report
+- Complete content inventory
+- Cross-dependency verification report
+- Git move operation plan
 
-### Phase 2: Directory Structure Creation (15 minutes)
+### Phase 2: Create Target Structure (30 minutes)
 
-**Objective**: Create a target directory structure.
+**Objective**: Establish target directory hierarchy.
 
 **Tasks**:
 
-1. **Create Directory Structure**:
+1. **Create Content Root Structure**:
    ```bash
+   mkdir -p content/en
    mkdir -p content/ru/lessons
    mkdir -p content/ru/pictures
    ```
 
-2. **Create README**:
+2. **Create Legacy README**:
     - Create `content/ru/README.md` explaining:
         - This is the original Russian course (legacy, preserved for historical reference)
         - Not actively maintained
         - Represents project foundation and historical artifact
-        - Active course is in `/src/` (English/Ukrainian)
+        - Active English course is in `content/en/`
         - Link to upstream repository for context
 
 **Deliverables**:
 
-- `content/ru/` directory structure
+- `content/` directory structure created
 - `content/ru/README.md` with clear explanation
 
-### Phase 3: Content Migration (45 minutes)
+### Phase 3: Move Active Content (1.5 hours)
 
-**Objective**: Move legacy content to a new structure.
+**Objective**: Reorganize active English content from `/src/` to `content/en/`.
 
 **Tasks**:
 
-1. **Move Lesson Files**:
+1. **Move Active Content Files**:
+   ```bash
+   # Move all .rst files and subdirectories from src/ to content/en/
+   git mv src/*.rst content/en/ 2>/dev/null || true
+   git mv src/*/ content/en/ 2>/dev/null || true
+   # Exclude _locales and _static (handled separately)
+   ```
+    - Preserve directory structure
+    - Verify all content files moved
+    - Confirm git history preserved: `git log --follow content/en/somefile.rst`
+
+2. **Handle Sphinx Artifacts**:
+   ```bash
+   # Move _locales (keep temporarily)
+   git mv src/_locales/ content/_locales/
+   
+   # Remove _static (not needed for MkDocs)
+   git rm -r src/_static/
+   ```
+
+3. **Remove Empty `/src/` Directory**:
+   ```bash
+   rmdir src/
+   ```
+    - Verify `/src/` no longer exists
+    - Confirm all intended content moved
+
+4. **Verify Active Content Migration**:
+    - Check `content/en/` contains all expected files
+    - Verify directory structure preserved
+    - Confirm `content/_locales/` present
+    - Confirm `/src/_static/` removed
+    - Test git history: `git log --follow` on sample files
+
+**Deliverables**:
+
+- All active content in `content/en/`
+- `content/_locales/` preserved temporarily
+- `/src/_static/` removed (in git history)
+- `/src/` directory removed
+- Git history preserved
+
+### Phase 4: Move Legacy Content (1 hour)
+
+**Objective**: Organize legacy Russian content into `content/ru/`.
+
+**Tasks**:
+
+1. **Move Legacy Lesson Files**:
    ```bash
    git mv lesson*.md content/ru/lessons/
    git mv module*.md content/ru/lessons/
    # Move any other root-level Russian lesson files
    ```
-    - Verify all legacy `*.md` files moved (excluding `AGENTS.md`, `CLAUDE.md`)
-    - Confirm git history preserved: `git log --follow content/ru/lessons/lesson01.md`
+    - Verify all legacy `*.md` moved (except `AGENTS.md`, `CLAUDE.md`)
+    - Confirm git history preserved
 
 2. **Move Legacy Images**:
    ```bash
@@ -382,45 +458,81 @@ and `content/uk/`) is explicitly deferred until SSG migration is complete.
    git mv pictures/lesson08/ content/ru/pictures/
    ```
     - Verify all legacy picture directories moved
-    - Confirm `/pictures/` is now empty (or remove if empty)
+    - Remove empty `/pictures/` directory if empty: `rmdir pictures/`
 
-3. **Verify Moves**:
-    - Check `git status` shows moves, not deletions/additions
-    - Verify no unintended files moved
-    - Confirm root directory now clean of legacy lesson files
+3. **Verify Legacy Content Migration**:
+    - Check `content/ru/lessons/` contains all lesson files
+    - Check `content/ru/pictures/` contains all image directories
+    - Confirm root directory clean (only `AGENTS.md`, `CLAUDE.md`, infrastructure)
+    - Test git history: `git log --follow` on sample files
 
 **Deliverables**:
 
-- All legacy content moved to `content/ru/`
-- Clean the root directory (only infrastructure and config)
+- All legacy content in `content/ru/`
+- Clean the root directory (infrastructure only)
 - Git history preserved
 
-### Phase 4: Documentation Updates (30 minutes)
+### Phase 5: Update Sphinx Configuration (30 minutes)
 
-**Objective**: Update project documentation to reflect new structure.
+**Objective**: Update Sphinx to reference a new content location.
 
 **Tasks**:
 
-1. **Update Root README.md**:
-    - Add a section explaining repository structure
-    - Clarify where active content lives (`/src/`)
-    - Note legacy Russian content in `content/ru/` for historical reference
-    - Direct contributors to `/src/` for new content
+1. **Update `conf.py` (if exists)**:
+    - Update content source path from `src/` to `content/en/`
+    - Update `_locales/` path to `content/_locales/` if referenced
+    - Update any hardcoded paths
 
-2. **Update Contributor Documentation**:
-    - If `CONTRIBUTING.md` or similar exists, update with new structure
-    - Clarify legacy content policy (preserved but not maintained)
-    - Provide clear guidance on where to add new content
+2. **Update Build Scripts**:
+    - Update any Makefile or build script references to `/src/`
+    - Update documentation build commands
+
+3. **Test Sphinx Build**:
+   ```bash
+   # Test current Sphinx build with new paths
+   sphinx-build content/en/ _build/
+   ```
+    - Verify build successful
+    - Check for missing references or broken links
+    - Confirm gettext localization still works (`content/_locales/`)
+
+**Deliverables**:
+
+- Updated Sphinx configuration
+- Successful test build
+- Build scripts updated
+
+### Phase 6: Documentation Updates (1 hour)
+
+**Objective**: Update all project documentation to reflect the new structure.
+
+**Tasks**:
+
+1. **Update Root `README.md`**:
+    - Add a section explaining the new repository structure
+    - Describe `content/` as content root
+    - Explain locale organization (`content/en/`, `content/ru/`)
+    - Note `content/_locales/` is temporary (will be replaced in ADR-002)
+    - Direct contributors to `content/en/` for active content
+    - Note legacy Russian in `content/ru/` for historical reference
+
+2. **Update Contributor Documentation** (if it exists):
+    - Update `CONTRIBUTING.md` or similar with new structure
+    - Clarify where to add new content (`content/en/`)
+    - Explain legacy content policy (preserved, not maintained)
 
 3. **Update `.ai/config.yaml`**:
+    - Change all references from `src/` to `content/en/`
     - Add `content/ru/` to file index if appropriate
-    - Update any references to legacy file locations
+    - Update `content/_locales/` reference
+    - Remove references to removed `src/_static/`
     - Ensure AI agents understand new structure
 
-4. **Check Other Documentation**:
-    - Review `docs/` directory for any references to root-level legacy files
-    - Update any file location references
-    - Ensure no broken links or outdated information
+4. **Update Other Documentation**:
+    - Review `docs/` directory for path references
+    - Update ADR-002 if it references `/src/` (coordination)
+    - Update any internal documentation with path references
+    - Check for broken links
 
 **Deliverables**:
 
@@ -429,40 +541,59 @@ and `content/uk/`) is explicitly deferred until SSG migration is complete.
 - Updated `.ai/config.yaml`
 - All documentation references current
 
-### Phase 5: Verification and Testing (30 minutes)
+### Phase 7: Verification and Testing (1 hour)
 
-**Objective**: Ensure migration is successful and nothing is broken.
+**Objective**: Comprehensive verification that reorganization is successful.
 
 **Tasks**:
 
-1. **Directory Structure Check**:
+1. **Structure Verification**:
+    - Verify `content/en/` contains all active content (.rst files)
     - Verify `content/ru/lessons/` contains all legacy lesson files
     - Verify `content/ru/pictures/` contains all legacy image directories
-    - Confirm root directory clean (only `AGENTS.md`, `CLAUDE.md`, infrastructure)
-    - Verify `content/ru/README.md` exists and is accurate
+    - Verify `content/_locales/` present (temporary)
+    - Verify `content/ru/README.md` exists and accurate
+    - Confirm root clean (only infrastructure: `.ai/`, `docs/`, `templates/`, etc.)
+    - Confirm `/assets/` unchanged at root
+    - Confirm `/src/` and `/pictures/` removed
 
 2. **Git History Verification**:
-    - Test `git log --follow` on several moved files
+    - Test `git log --follow content/en/somefile.rst` (from old src/somefile.rst)
+    - Test `git log --follow content/ru/lessons/lesson01.md` (from old root)
+    - Verify all moves shown as renames, not deletions
     - Confirm full history accessible
-    - Verify moves shown as renames, not deletions
 
 3. **Build System Check**:
-    - Run the current Sphinx build process
-    - Confirm build successful (legacy content not in builds)
-    - Verify `/src/` content unaffected
+    - Run a full Sphinx build with new paths
+    - Verify HTML output correct
+    - Check for missing references or broken links
+    - Verify gettext localization works
+    - Test deployment process (if applicable)
 
 4. **Cross-Reference Check**:
-    - Search for any broken references in documentation
-    - Verify no unexpected impacts on active content
-    - Check for any orphaned files
+    - Search documentation for broken references
+    - Verify `.ai/config.yaml` paths correct
+    - Check for orphaned files
+    - Verify no unexpected side effects
+
+5. **Comprehensive Git Status**:
+   ```bash
+   git status
+   git diff --cached --stat
+   ```
+    - Review all changes
+    - Confirm only intended modifications
+    - Verify no unintended files are included
 
 **Deliverables**:
 
-- Verification checklist completed
-- Build confirmation
-- No broken references are identified
+- Structure verification checklist completed
+- Git history verification passed
+- Successful build confirmation
+- No broken references
+- Clean git status
 
-### Phase 6: Commit and Review (30 minutes)
+### Phase 8: Commit and Finalize (30 minutes)
 
 **Objective**: Finalize changes and prepare for merge.
 
@@ -471,90 +602,108 @@ and `content/uk/`) is explicitly deferred until SSG migration is complete.
 1. **Create Comprehensive Commit**:
     - Commit message:
       ```
-      docs: organize legacy Russian content into content/ru/
+      refactor: reorganize repository structure with locale-based content/
       
-      Move all legacy Russian lesson files and related images from root
-      directory to content/ru/ structure for clear organization and
-      historical preservation.
+      Establish comprehensive locale-based structure for multilingual content.
+      Move active content from src/ to content/en/, organize legacy Russian
+      content into content/ru/, and handle Sphinx artifacts appropriately.
       
       Changes:
-      - Move lesson*.md and module*.md files to content/ru/lessons/
-      - Move pictures/lessonXX/ directories to content/ru/pictures/
+      - Rename src/ → content/en/ (active English content, .rst format unchanged)
+      - Move content/_locales/ (temporary, for current Sphinx setup)
+      - Remove src/_static/ (Sphinx-specific JS, not needed for MkDocs)
+      - Move root lesson*.md, module*.md → content/ru/lessons/
+      - Move pictures/lessonXX/ → content/ru/pictures/
       - Create content/ru/README.md explaining legacy status
-      - Update root README.md with new structure information
-      - Update contributor documentation
-      - Update .ai/config.yaml references
+      - Update Sphinx configuration for new paths
+      - Update README.md, CONTRIBUTING.md, .ai/config.yaml
+      - Remove empty src/ and pictures/ directories
       
       Implements ADR-003: Repository File Structure (Option 1)
+      
       Git history preserved via git mv operations.
+      Format conversion (reST → Markdown) deferred to ADR-002.
+      
+      Co-authored-by: Serhii Horodilov <serhii.horodilov@example.com>
       ```
 
 2. **Self-Review**:
-    - Review diff to confirm only intended changes
-    - Verify commit message accurate
+    - Review full diff: `git diff --cached`
+    - Verify a commit message is accurate and complete
     - Check no unintended files included
+    - Confirm documentation updates complete
 
-3. **Push and Create PR** (or direct merge depending on workflow):
+3. **Push and Create PR**:
     - Push feature branch
-    - Create a pull request with ADR-003 context
+    - Create a pull request with ADR-003 reference
     - Link to ADR-003 in PR description
-    - Request review if appropriate
+    - Highlight structure-only changes (no format conversion)
+    - Request review from Project Owner
 
 **Deliverables**:
 
-- Committed changes with a descriptive message
-- Pull request created (or ready for direct merge)
+- Committed changes with a comprehensive message
+- Pull request created with context
+- Ready for Project Owner review
 
 ### Success Criteria
 
-Migration is considered successful when:
+Reorganization is considered successful when:
 
-- [ ] All legacy Russian lesson files moved to `content/ru/lessons/`
-- [ ] All legacy picture directories moved to `content/ru/pictures/`
-- [ ] The root directory contains only infrastructure and config files
+- [ ] All active content moved to `content/en/` (format unchanged)
+- [ ] All legacy Russian content organized in `content/ru/`
+- [ ] `content/_locales/` preserved temporarily
+- [ ] `src/_static/` removed (preserved in git history)
+- [ ] `/assets/` unchanged at root
+- [ ] The root directory contains only infrastructure files
 - [ ] `content/ru/README.md` clearly explains legacy status
 - [ ] Root `README.md` updated with structure information
 - [ ] `.ai/config.yaml` updated with new paths
+- [ ] Sphinx configuration updated and built successfully
 - [ ] Git history preserved for all moved files (verified with `git log --follow`)
-- [ ] The current Sphinx build process is unaffected
 - [ ] No broken references in documentation
-- [ ] Changes committed with a clear message
+- [ ] Changes committed with a clear, comprehensive message
 - [ ] Project Owner approves structure
 
 ### Estimated Timeline
 
-**Total: 2--3 hours** (conservative estimate including verification)
+**Total: 4--6 hours** (conservative estimate including verification)
 
-- Phase 1: 30 minutes
-- Phase 2: 15 minutes
-- Phase 3: 45 minutes
-- Phase 4: 30 minutes
-- Phase 5: 30 minutes
-- Phase 6: 30 minutes
+- Phase 1: 1 hour (Preparation)
+- Phase 2: 30 minutes (Create structure)
+- Phase 3: 1.5 hours (Move active content)
+- Phase 4: 1 hour (Move legacy content)
+- Phase 5: 30 minutes (Update Sphinx)
+- Phase 6: 1 hour (Documentation)
+- Phase 7: 1 hour (Verification)
+- Phase 8: 30 minutes (Commit)
 
 ### Risks and Mitigations
 
-| Risk                  | Impact | Mitigation                                                    |
-|-----------------------|--------|---------------------------------------------------------------|
-| Unintended file moves | Medium | Careful verification in Phase 3; feature branch protects main |
-| Git history loss      | High   | Use `git mv` exclusively; verify with `--follow` in Phase 5   |
-| Broken references     | Low    | Cross-reference audit in Phase 1; verification in Phase 5     |
-| Build system breakage | Low    | Build test in Phase 5; legacy content not in build path       |
-| Contributor confusion | Low    | Clear documentation updates in Phase 4                        |
+| Risk                             | Impact | Mitigation                                                     |
+|----------------------------------|--------|----------------------------------------------------------------|
+| Unintended file moves            | High   | Careful verification in Phases 3, 4; feature branch protects   |
+| Git history loss                 | High   | Use `git mv` exclusively; verify with `--follow` in Phase 7    |
+| Broken Sphinx build              | Medium | Update configuration in Phase 5; test build before committing  |
+| Broken documentation references  | Medium | Comprehensive search in Phase 6; verification in Phase 7       |
+| Conflicting changes with ADR-002 | Medium | Coordinate timing; this ADR first, then ADR-002                |
+| Path reference issues            | Medium | Thorough search for hardcoded paths; test all affected systems |
+| Contributor confusion            | Low    | Clear documentation updates; communication about changes       |
 
 ### Rollback Plan
 
 If critical issues emerge:
 
-1. Feature branch (`feature/organize-legacy-content`) keeps `main` branch intact
+1. Feature branch (`feature/repo-structure-reorganization`) keeps `main` intact
 2. Can abandon the branch and revert to the current structure
-3. Git history preserved means the original state is always recoverable
-4. No changes to `main` branch until migration fully validated
+3. Git history preserved — original state always recoverable
+4. No changes to `main` until reorganization fully validated
+5. If issues are found post-merge, can revert commit (history allows reconstruction)
 
 ## Related
 
-- [ADR-002][ADR-002]: Static Site Generator Replacement (interdependent, SSG may have i18n expectations)
-- [ADR-004][ADR-004]: Presentation Framework Handling (may affect assets directory organization)
+- [ADR-002][ADR-002]: Static Site Generator Replacement (interdependent, SSG expects content structure)
+- [ADR-004][ADR-004]: Presentation Framework Handling (may affect assets organization)
 - [ADR-001][ADR-001]: AI Guidelines Structure and Administration Framework
 - [Upstream repository][upstream]: Original work by @PonomaryovVladyslav and contributors
 
