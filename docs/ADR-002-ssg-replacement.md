@@ -15,14 +15,15 @@
 
 [//]: # (order by version number descending)
 
-| ver. | Date       | Author                                    | Changes description                |
-|------|------------|-------------------------------------------|------------------------------------|
-| 0.6  | 2026-01-26 | Serhii Horodilov                          | Fix typos                          |
-| 0.5  | 2026-01-26 | Claude Sonnet 4.5 <noreply@anthropic.com> | Complete final draft with decision |
-| 0.4  | 2026-01-25 | Serhii Horodilov                          | Fix typos                          |
-| 0.3  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Add ADR-004 cross-reference        |
-| 0.2  | 2026-01-25 | Serhii Horodilov                          | Fix typos                          |
-| 0.1  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Initial draft                      |
+| ver. | Date       | Author                                    | Changes description                      |
+|------|------------|-------------------------------------------|------------------------------------------|
+| 0.7  | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Revise Implementation to high-level only |
+| 0.6  | 2026-01-26 | Serhii Horodilov                          | Fix typos                                |
+| 0.5  | 2026-01-26 | Claude Sonnet 4.5 <noreply@anthropic.com> | Complete final draft with decision       |
+| 0.4  | 2026-01-25 | Serhii Horodilov                          | Fix typos                                |
+| 0.3  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Add ADR-004 cross-reference              |
+| 0.2  | 2026-01-25 | Serhii Horodilov                          | Fix typos                                |
+| 0.1  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Initial draft                            |
 
 </details>
 
@@ -292,210 +293,45 @@ is configurable via `docs_dir` setting in `mkdocs.yml`.
 
 ## Implementation
 
-### Phase 1: Preparation and Analysis (Day 1)
+### Objectives
 
-**Objective**: Establish migration foundation and validate approach.
+The migration from Sphinx to MkDocs with a Material theme requires achieving the following primary goals:
 
-**Tasks**:
+1. **Content Format Conversion**: Convert all reStructuredText (`.rst`) files to Markdown (`.md`) format while
+   preserving content structure, code blocks, admonitions, internal links, and asset references
+2. **SSG Replacement**: Replace Sphinx with MkDocs and Material theme, including all build configuration and tooling
+3. **Multilingual Support**: Establish English/Ukrainian localization using `mkdocs-static-i18n` plugin with file-based
+   i18n approach
+4. **Theme Configuration**: Configure Material theme for professional appearance, search functionality, dark mode, and
+   mobile responsiveness
+5. **Deployment Automation**: Set up GitHub Actions for automated builds and GitHub Pages deployment
+6. **Documentation Updates**: Update all project documentation (README, contributor guides) to reflect Markdown
+   authoring and MkDocs workflows
+7. **Cleanup**: Remove Sphinx-specific artifacts (`conf.py`, `_build/`, `_static/`, `_templates/`, etc.) while
+   preserving in git history
 
-1. **Audit Current Content**:
-    - Inventory all `.rst` files in `/src/` and subdirectories
-    - Identify Sphinx-specific directives and extensions used
-    - Document custom Sphinx configurations from `conf.py`
-    - List all images, assets, and cross-references
+### Critical Constraints
 
-2. **Set Up MkDocs Test Environment**:
-    - Create new branch: `feature/mkdocs-migration`
-    - Install MkDocs and Material theme: `pip install mkdocs mkdocs-material`
-    - Install i18n plugin: `pip install mkdocs-static-i18n`
-    - Create initial `mkdocs.yml` configuration
+The executor must respect these non-negotiable requirements:
 
-3. **Validate Conversion Approach**:
-    - Test Pandoc conversion on sample `.rst` files
-    - Identify conversion patterns and edge cases
-    - Document manual adjustments needed post-conversion
-
-4. **Define Content Structure**:
-    - Determine `docs_dir` location (coordinate with ADR-003 decision)
-    - Plan directory structure for English/Ukrainian content
-    - Define navigation structure in `mkdocs.yml`
-
-**Deliverables**:
-
-- Content audit document
-- Test MkDocs environment on branch
-- Pandoc conversion validation report
-- Initial `mkdocs.yml` configuration
-
-### Phase 2: Content Conversion (Days 2--3)
-
-**Objective**: Convert reST content to Markdown format.
-
-**Tasks**:
-
-1. **Automated Conversion**:
-    - Create a Pandoc conversion script for batch processing
-    - Convert all `.rst` files to `.md` format
-    - Preserve directory structure during conversion
-
-2. **Manual Refinement**:
-    - Review converted Markdown for accuracy
-    - Fix Pandoc conversion artifacts (e.g., reference syntax, code blocks)
-    - Adjust admonitions to Material theme syntax (`!!! note`, `!!! warning`)
-    - Update internal links and cross-references
-    - Verify image paths and asset references
-
-3. **Content Quality Check**:
-    - Build site with MkDocs: `mkdocs build`
-    - Review generated HTML in a browser
-    - Test all navigation links
-    - Verify code syntax highlighting
-    - Check responsive design on mobile
-
-**Deliverables**:
-
-- All content converted to Markdown format
-- Pandoc conversion script (for future reference)
-- Quality check report
-
-### Phase 3: Localization Setup (Day 4)
-
-**Objective**: Configure multilingual support for English/Ukrainian content.
-
-**Tasks**:
-
-1. **Configure `mkdocs-static-i18n` Plugin**:
-    - Add plugin to `mkdocs.yml`
-    - Define locales: `en` (default), `uk`
-    - Set up the locale structure according to plugin conventions
-
-2. **Organize Translated Content**:
-    - Structure English content in the default location
-    - Organize Ukrainian translations according to plugin requirements
-    - Verify language switcher functionality
-
-3. **Configure Navigation Per Locale**:
-    - Define navigation structure for each language
-    - Test language switching in built site
-    - Verify all links work in both locales
-
-**Deliverables**:
-
-- Configured i18n plugin
-- Working language switcher
-- Both English and Ukrainian contents are accessible
-
-### Phase 4: Theme Customization and Features (Day 5)
-
-**Objective**: Customize Material theme and configure additional features.
-
-**Tasks**:
-
-1. **Material Theme Configuration**:
-    - Configure theme colors, fonts, and logo
-    - Enable Material theme features (tabs, instant loading, dark mode)
-    - Set up a search plugin configuration
-
-2. **Additional Plugins**:
-    - Evaluate and configure useful plugins (e.g., `mkdocs-minify-plugin`, `mkdocs-git-revision-date-localized-plugin`)
-    - Test plugin compatibility with i18n
-
-3. **Custom Styling** (if needed):
-    - Create `docs/stylesheets/extra.css` for project-specific styles
-    - Add custom JavaScript if needed (`docs/javascripts/extra.js`)
-
-4. **Feature Testing**:
-    - Test search functionality in both languages
-    - Verify dark mode
-    - Test navigation features (tabs, instant loading)
-    - Mobile responsiveness check
-
-**Deliverables**:
-
-- Fully customized Material theme
-- Configured additional plugins
-- Feature validation report
-
-### Phase 5: CI/CD and Deployment (Days 6--7)
-
-**Objective**: Set up automated build and deployment to GitHub Pages.
-
-**Tasks**:
-
-1. **Update Dependencies**:
-    - Create/update `requirements.txt` with MkDocs and plugins
-    - Remove Sphinx dependencies
-    - Document Python version requirements
-
-2. **GitHub Actions Workflow**:
-    - Create `.github/workflows/docs.yml` for automated builds
-    - Configure deployment to GitHub Pages
-    - Set up build triggers (push to main, pull requests)
-
-3. **Deployment Testing**:
-    - Test manual deployment: `mkdocs gh-deploy`
-    - Verify the GitHub Actions workflow
-    - Confirm site accessibility on GitHub Pages URL
-    - Test both languages on the deployed site
-
-4. **Documentation Updates**:
-    - Update `README.md` with new build instructions
-    - Create a contributor guide for Markdown authoring
-    - Document MkDocs workflow and commands
-    - Update any references to Sphinx in project docs
-
-5. **Cleanup**:
-    - Remove Sphinx configuration files (`conf.py`, `Makefile`, etc.)
-    - Remove Sphinx-specific directories (e.g., `_build/`, `_static/`, `_templates/`)
-    - Archive Sphinx configuration for reference if needed
-
-**Deliverables**:
-
-- Updated `requirements.txt`
-- Working GitHub Actions deployment pipeline
-- Deployed site on GitHub Pages
-- Updated contributor documentation
-- Clean repository (Sphinx artifacts removed)
-
-### Phase 6: Validation and Handoff (Day 7)
-
-**Objective**: Final quality assurance and project handoff.
-
-**Tasks**:
-
-1. **Comprehensive Testing**:
-    - Full site navigation check (all pages, all links)
-    - Cross-browser testing (Chrome, Firefox, Safari)
-    - Mobile device testing
-    - Both language versions are validated
-    - Search functionality in both locales
-
-2. **Performance Check**:
-    - Build time measurement
-    - Page load speed verification
-    - Check for broken links
-
-3. **Documentation Review**:
-    - Verify all contributor documentation is complete
-    - Ensure build instructions are accurate
-    - Confirm a deployment process is documented
-
-4. **Handoff**:
-    - Present the final site to Project Owner
-    - Provide a migration summary report
-    - Address any final adjustments needed
-    - Merge migration branch to main upon approval
-
-**Deliverables**:
-
-- Fully functional MkDocs-based documentation site
-- Migration summary report
-- Complete contributor documentation
-- Merged migration branch
+1. **Git History Preservation**: All file operations must preserve git history. Content files should be moved/renamed
+   in ways that maintain commit history (e.g., avoid delete and create patterns)
+2. **Content Integrity**: Content meaning and structure must remain unchanged during format conversion. No content loss
+   or corruption is acceptable
+3. **Working Branch Protection**: All work must be done on a feature branch (`feature/mkdocs-migration` or similar).
+   The `main` branch remains stable and functional throughout migration
+4. **Coordination with ADR-003**: Repository structure established by ADR-003 must be respected. Content location is
+   `content/en/` (post-ADR-003) or `/src/` (pre-ADR-003), configurable via MkDocs `docs_dir`
+5. **Ukrainian Translations**: Current gettext-based Ukrainian translations in `content/_locales/` (or
+   `/src/_locales/`) must be migrated to MkDocs file-based i18n approach with `content/uk/` locale structure
+6. **Build Success**: Site must build successfully with MkDocs and deploy to GitHub Pages without errors
+7. **Feature Parity**: All current documentation features (code highlighting, admonitions, cross-references, search)
+   must work in MkDocs
+8. **No Downtime**: Existing Sphinx site remains functional until MkDocs migration is complete and approved
 
 ### Success Criteria
 
-Migration is considered successful when:
+Migration is considered successful when all the following are met:
 
 - [ ] All course content converted to Markdown and built without errors
 - [ ] English and Ukrainian locales are both functional with working language switcher
@@ -504,28 +340,34 @@ Migration is considered successful when:
 - [ ] Navigation and search work in both languages
 - [ ] Site is responsive and works on mobile devices
 - [ ] Contributor documentation updated with a Markdown authoring guide
-- [ ] Sphinx artifacts removed from the repository
+- [ ] Sphinx artifacts removed from the repository (preserved in git history)
 - [ ] Build time is acceptable (< 1 minute for a full build)
 - [ ] Project Owner approves final site quality
 
-### Risks and Mitigations
+### Known Risks
 
-| Risk                                    | Impact | Mitigation                                                            |
-|-----------------------------------------|--------|-----------------------------------------------------------------------|
-| Pandoc conversion artifacts             | Medium | Manual review phase built into timeline; test conversions early       |
-| i18n plugin limitations                 | Medium | Test plugin thoroughly in Phase 3; have fallback plan                 |
-| Complex Sphinx features not convertible | Low    | Audit identified no advanced Sphinx features in current content       |
-| Timeline overrun                        | Medium | Phased approach allows early detection; prioritize core functionality |
-| Deployment pipeline issues              | Medium | Test deployment early; have manual deployment as fallback             |
+The executor should be aware of and prepare for these risks:
+
+| Risk                                    | Impact | Mitigation Strategy                                   |
+|-----------------------------------------|--------|-------------------------------------------------------|
+| Pandoc conversion artifacts             | Medium | Test conversions early; manual review required        |
+| i18n plugin limitations                 | Medium | Test plugin thoroughly; verify fallback plans         |
+| Complex Sphinx features not convertible | Low    | Current content audit shows minimal advanced features |
+| Timeline overrun                        | Medium | Iterative approach; prioritize core functionality     |
+| Deployment pipeline issues              | Medium | Test early; maintain manual deployment option         |
 
 ### Rollback Plan
 
 If critical issues emerge during migration:
 
-1. Migration branch (`feature/mkdocs-migration`) keeps `main` branch intact
-2. Sphinx environment remains in git history if reversion is needed
-3. Can pause migration and maintain Sphinx in the short term if necessary
-4. No changes to `main` branch until migration fully validated
+1. Migration branch protects `main` — no changes to production until validated
+2. Sphinx environment preserved in git history — reversion possible at any time
+3. Migration can be paused while maintaining Sphinx in the short term
+4. No merge to `main` until full validation complete
+
+### Estimated Effort
+
+Based on scope and complexity: **5--7 working days** for comprehensive migration including testing and documentation.
 
 ## Related
 

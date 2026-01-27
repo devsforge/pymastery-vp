@@ -17,6 +17,7 @@
 
 | ver. | Date       | Author                                    | Changes description                               |
 |------|------------|-------------------------------------------|---------------------------------------------------|
+| 0.11 | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Revise Implementation to high-level only          |
 | 0.10 | 2026-01-27 | Serhii Horodilov                          | Fix typos, final draft                            |
 | 0.9  | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Expand scope to comprehensive repo reorganization |
 | 0.8  | 2026-01-26 | Serhii Horodilov                          | Fix typos                                         |
@@ -327,328 +328,76 @@ This separation is cleaner than combining structure and format changes.
 
 ## Implementation
 
-### Phase 1: Preparation and Validation (1 hour)
-
-**Objective**: Establish foundation and validate approach.
-
-**Tasks**:
-
-1. **Create Feature Branch**:
-    - Branch: `feature/repo-structure-reorganization`
-    - Protects `main` branch during reorganization
-
-2. **Audit Current Content**:
-    - Inventory all files in `/src/` directory
-    - List all root `*.md` files (except `AGENTS.md`, `CLAUDE.md`)
-    - Verify `/pictures/lesson01/`, `/pictures/lesson02/`, `/pictures/lesson08/`
-    - Identify contents of `/src/_locales/` and `/src/_static/`
-    - Confirm `/assets/` contains only active assets
-
-3. **Verify No Cross-Dependencies**:
-    - Search for absolute path references to `/src/` in documentation
-    - Check for references to root-level legacy files
-    - Identify any Sphinx configuration dependencies on current paths
-    - Verify build process paths (if any hardcoded)
-
-4. **Plan Git Move Operations**:
-    - Document all `git mv` operations needed
-    - Identify potential conflicts or issues
-    - Plan the order of operations to avoid conflicts
-
-**Deliverables**:
-
-- Feature branch created
-- Complete content inventory
-- Cross-dependency verification report
-- Git move operation plan
-
-### Phase 2: Create Target Structure (30 minutes)
-
-**Objective**: Establish target directory hierarchy.
-
-**Tasks**:
-
-1. **Create Content Root Structure**:
-   ```bash
-   mkdir -p content/en
-   mkdir -p content/ru/lessons
-   mkdir -p content/ru/pictures
-   ```
-
-2. **Create Legacy README**:
-    - Create `content/ru/README.md` explaining:
-        - This is the original Russian course (legacy, preserved for historical reference)
-        - Not actively maintained
-        - Represents project foundation and historical artifact
-        - Active English course is in `content/en/`
-        - Link to upstream repository for context
-
-**Deliverables**:
-
-- `content/` directory structure created
-- `content/ru/README.md` with clear explanation
-
-### Phase 3: Move Active Content (1.5 hours)
-
-**Objective**: Reorganize active English content from `/src/` to `content/en/`.
-
-**Tasks**:
-
-1. **Move Active Content Files**:
-   ```bash
-   # Move all .rst files and subdirectories from src/ to content/en/
-   git mv src/*.rst content/en/ 2>/dev/null || true
-   git mv src/*/ content/en/ 2>/dev/null || true
-   # Exclude _locales and _static (handled separately)
-   ```
-    - Preserve directory structure
-    - Verify all content files moved
-    - Confirm git history preserved: `git log --follow content/en/somefile.rst`
-
-2. **Handle Sphinx Artifacts**:
-   ```bash
-   # Move _locales (keep temporarily)
-   git mv src/_locales/ content/_locales/
-   
-   # Remove _static (not needed for MkDocs)
-   git rm -r src/_static/
-   ```
-
-3. **Remove Empty `/src/` Directory**:
-   ```bash
-   rmdir src/
-   ```
-    - Verify `/src/` no longer exists
-    - Confirm all intended content moved
-
-4. **Verify Active Content Migration**:
-    - Check `content/en/` contains all expected files
-    - Verify directory structure preserved
-    - Confirm `content/_locales/` present
-    - Confirm `/src/_static/` removed
-    - Test git history: `git log --follow` on sample files
-
-**Deliverables**:
-
-- All active content in `content/en/`
-- `content/_locales/` preserved temporarily
-- `/src/_static/` removed (in git history)
-- `/src/` directory removed
-- Git history preserved
-
-### Phase 4: Move Legacy Content (1 hour)
-
-**Objective**: Organize legacy Russian content into `content/ru/`.
-
-**Tasks**:
-
-1. **Move Legacy Lesson Files**:
-   ```bash
-   git mv lesson*.md content/ru/lessons/
-   git mv module*.md content/ru/lessons/
-   # Move any other root-level Russian lesson files
-   ```
-    - Verify all legacy `*.md` moved (except `AGENTS.md`, `CLAUDE.md`)
-    - Confirm git history preserved
-
-2. **Move Legacy Images**:
-   ```bash
-   git mv pictures/lesson01/ content/ru/pictures/
-   git mv pictures/lesson02/ content/ru/pictures/
-   git mv pictures/lesson08/ content/ru/pictures/
-   ```
-    - Verify all legacy picture directories moved
-    - Remove empty `/pictures/` directory if empty: `rmdir pictures/`
-
-3. **Verify Legacy Content Migration**:
-    - Check `content/ru/lessons/` contains all lesson files
-    - Check `content/ru/pictures/` contains all image directories
-    - Confirm root directory clean (only `AGENTS.md`, `CLAUDE.md`, infrastructure)
-    - Test git history: `git log --follow` on sample files
-
-**Deliverables**:
-
-- All legacy content in `content/ru/`
-- Clean the root directory (infrastructure only)
-- Git history preserved
-
-### Phase 5: Update Sphinx Configuration (30 minutes)
-
-**Objective**: Update Sphinx to reference a new content location.
-
-**Tasks**:
-
-1. **Update `conf.py` (if exists)**:
-    - Update content source path from `src/` to `content/en/`
-    - Update `_locales/` path to `content/_locales/` if referenced
-    - Update any hardcoded paths
-
-2. **Update Build Scripts**:
-    - Update any Makefile or build script references to `/src/`
-    - Update documentation build commands
-
-3. **Test Sphinx Build**:
-   ```bash
-   # Test current Sphinx build with new paths
-   sphinx-build content/en/ _build/
-   ```
-    - Verify build successful
-    - Check for missing references or broken links
-    - Confirm gettext localization still works (`content/_locales/`)
-
-**Deliverables**:
-
-- Updated Sphinx configuration
-- Successful test build
-- Build scripts updated
-
-### Phase 6: Documentation Updates (1 hour)
-
-**Objective**: Update all project documentation to reflect the new structure.
-
-**Tasks**:
-
-1. **Update Root `README.md`**:
-    - Add a section explaining the new repository structure
-    - Describe `content/` as content root
-    - Explain locale organization (`content/en/`, `content/ru/`)
-    - Note `content/_locales/` is temporary (will be replaced in ADR-002)
-    - Direct contributors to `content/en/` for active content
-    - Note legacy Russian in `content/ru/` for historical reference
-
-2. **Update Contributor Documentation** (if it exists):
-    - Update `CONTRIBUTING.md` or similar with new structure
-    - Clarify where to add new content (`content/en/`)
-    - Explain legacy content policy (preserved, not maintained)
-
-3. **Update `.ai/config.yaml`**:
-    - Change all references from `src/` to `content/en/`
-    - Add `content/ru/` to file index if appropriate
-    - Update `content/_locales/` reference
-    - Remove references to removed `src/_static/`
-    - Ensure AI agents understand new structure
-
-4. **Update Other Documentation**:
-    - Review `docs/` directory for path references
-    - Update ADR-002 if it references `/src/` (coordination)
-    - Update any internal documentation with path references
-    - Check for broken links
-
-**Deliverables**:
-
-- Updated root `README.md`
-- Updated contributor documentation
-- Updated `.ai/config.yaml`
-- All documentation references current
-
-### Phase 7: Verification and Testing (1 hour)
-
-**Objective**: Comprehensive verification that reorganization is successful.
-
-**Tasks**:
-
-1. **Structure Verification**:
-    - Verify `content/en/` contains all active content (.rst files)
-    - Verify `content/ru/lessons/` contains all legacy lesson files
-    - Verify `content/ru/pictures/` contains all legacy image directories
-    - Verify `content/_locales/` present (temporary)
-    - Verify `content/ru/README.md` exists and accurate
-    - Confirm root clean (only infrastructure: `.ai/`, `docs/`, `templates/`, etc.)
-    - Confirm `/assets/` unchanged at root
-    - Confirm `/src/` and `/pictures/` removed
-
-2. **Git History Verification**:
-    - Test `git log --follow content/en/somefile.rst` (from old src/somefile.rst)
-    - Test `git log --follow content/ru/lessons/lesson01.md` (from old root)
-    - Verify all moves shown as renames, not deletions
-    - Confirm full history accessible
-
-3. **Build System Check**:
-    - Run a full Sphinx build with new paths
-    - Verify HTML output correct
-    - Check for missing references or broken links
-    - Verify gettext localization works
-    - Test deployment process (if applicable)
-
-4. **Cross-Reference Check**:
-    - Search documentation for broken references
-    - Verify `.ai/config.yaml` paths correct
-    - Check for orphaned files
-    - Verify no unexpected side effects
-
-5. **Comprehensive Git Status**:
-   ```bash
-   git status
-   git diff --cached --stat
-   ```
-    - Review all changes
-    - Confirm only intended modifications
-    - Verify no unintended files are included
-
-**Deliverables**:
-
-- Structure verification checklist completed
-- Git history verification passed
-- Successful build confirmation
-- No broken references
-- Clean git status
-
-### Phase 8: Commit and Finalize (30 minutes)
-
-**Objective**: Finalize changes and prepare for merge.
-
-**Tasks**:
-
-1. **Create Comprehensive Commit**:
-    - Commit message:
-      ```
-      refactor: reorganize repository structure with locale-based content/
-      
-      Establish comprehensive locale-based structure for multilingual content.
-      Move active content from src/ to content/en/, organize legacy Russian
-      content into content/ru/, and handle Sphinx artifacts appropriately.
-      
-      Changes:
-      - Rename src/ → content/en/ (active English content, .rst format unchanged)
-      - Move content/_locales/ (temporary, for current Sphinx setup)
-      - Remove src/_static/ (Sphinx-specific JS, not needed for MkDocs)
-      - Move root lesson*.md, module*.md → content/ru/lessons/
-      - Move pictures/lessonXX/ → content/ru/pictures/
-      - Create content/ru/README.md explaining legacy status
-      - Update Sphinx configuration for new paths
-      - Update README.md, CONTRIBUTING.md, .ai/config.yaml
-      - Remove empty src/ and pictures/ directories
-      
-      Implements ADR-003: Repository File Structure (Option 1)
-      
-      Git history preserved via git mv operations.
-      Format conversion (reST → Markdown) deferred to ADR-002.
-      
-      Co-authored-by: Serhii Horodilov <serhii.horodilov@example.com>
-      ```
-
-2. **Self-Review**:
-    - Review full diff: `git diff --cached`
-    - Verify a commit message is accurate and complete
-    - Check no unintended files included
-    - Confirm documentation updates complete
-
-3. **Push and Create PR**:
-    - Push feature branch
-    - Create a pull request with ADR-003 reference
-    - Link to ADR-003 in PR description
-    - Highlight structure-only changes (no format conversion)
-    - Request review from Project Owner
-
-**Deliverables**:
-
-- Committed changes with a comprehensive message
-- Pull request created with context
-- Ready for Project Owner review
+### Objectives
+
+The comprehensive repository structure reorganization requires achieving the following primary goals:
+
+1. **Establish Content Root**: Create `content/` as the unified content root directory with clear locale-based
+   organization
+2. **Reorganize Active Content**: Move all active English content from `/src/` to `content/en/` while preserving
+   directory structure and file relationships
+3. **Organize Legacy Content**: Move all legacy Russian content (root `*.md` files and `/pictures/lessonXX/`
+   directories) to `content/ru/` with proper colocation
+4. **Handle Sphinx Artifacts**: Move `src/_locales/` to `content/_locales/` temporarily; remove `src/_static/` (
+   Sphinx-specific, not needed for MkDocs)
+5. **Update Build Configuration**: Update Sphinx configuration (`conf.py`, build scripts) to reference new content
+   paths
+6. **Update Documentation**: Revise all project documentation (README, contributor guides, `.ai/config.yaml`) to
+   reflect new structure
+7. **Create Historical Context**: Add `content/ru/README.md` explaining legacy status and providing
+   an upstream repository link
+8. **Clean Repository Root**: Remove empty `/src/` and `/pictures/` directories, leaving root for infrastructure only
+
+### Target Structure
+
+Post-reorganization repository structure:
+
+```
+content/                # Content root (renamed from src/)
+  _locales/            # Temporary - Sphinx gettext (Ukrainian .po)
+  en/                  # Active English content (.rst format)
+    *.rst
+    subdirs/
+  ru/                  # Legacy Russian content
+    lessons/           # lesson*.md, module*.md
+    pictures/          # lesson01/, lesson02/, lesson08/
+    README.md
+
+assets/                # Global project assets (unchanged at root)
+
+(Root: .ai/, docs/, templates/, mindmaps/, config files, AGENTS.md, CLAUDE.md)
+```
+
+### Critical Constraints
+
+The executor must respect these non-negotiable requirements:
+
+1. **Git History Preservation**: ALL file moves MUST use `git mv` to preserve commit history. Verify with
+   `git log --follow` after moves
+2. **No Format Changes**: Content remains in current format (`.rst` for active, `.md` for legacy). Format conversion is
+   ADR-002's scope
+3. **Working Branch Protection**: All work on feature branch. The `main` branch remains stable throughout
+4. **Sphinx Build Continuity**: Sphinx must continue building successfully with new paths. Update `conf.py` and build
+   scripts accordingly
+5. **Content Integrity**: No file loss, corruption, or accidental modifications. Only moves and path updates
+6. **Asset Preservation**: `/assets/` directory stays at root unchanged (global project assets)
+7. **Configuration Updates**: `.ai/config.yaml` and all documentation must reflect new paths
+8. **Coordination with ADR-002**: ADR-002 migration will consume structure established here. `content/en/`
+   becomes MkDocs source
+
+### Excluded From Scope
+
+The following is explicitly NOT part of this reorganization:
+
+- **Format conversion** (`.rst` → `.md`): Handled by ADR-002
+- **Ukrainian content structure** (`content/uk/`): Created during ADR-002 MkDocs migration
+- **Removing `content/_locales/`**: Kept temporarily, deprecated during ADR-002
+- **MkDocs configuration**: Handled by ADR-002
+- **Any content modifications**: Structure only, content unchanged
 
 ### Success Criteria
 
-Reorganization is considered successful when:
+Reorganization is considered successful when all the following are met:
 
 - [ ] All active content moved to `content/en/` (format unchanged)
 - [ ] All legacy Russian content organized in `content/ru/`
@@ -665,40 +414,34 @@ Reorganization is considered successful when:
 - [ ] Changes committed with a clear, comprehensive message
 - [ ] Project Owner approves structure
 
-### Estimated Timeline
+### Known Risks
 
-**Total: 4--6 hours** (conservative estimate including verification)
+The executor should be aware of and prepare for these risks:
 
-- Phase 1: 1 hour (Preparation)
-- Phase 2: 30 minutes (Create structure)
-- Phase 3: 1.5 hours (Move active content)
-- Phase 4: 1 hour (Move legacy content)
-- Phase 5: 30 minutes (Update Sphinx)
-- Phase 6: 1 hour (Documentation)
-- Phase 7: 1 hour (Verification)
-- Phase 8: 30 minutes (Commit)
-
-### Risks and Mitigations
-
-| Risk                             | Impact | Mitigation                                                     |
-|----------------------------------|--------|----------------------------------------------------------------|
-| Unintended file moves            | High   | Careful verification in Phases 3, 4; feature branch protects   |
-| Git history loss                 | High   | Use `git mv` exclusively; verify with `--follow` in Phase 7    |
-| Broken Sphinx build              | Medium | Update configuration in Phase 5; test build before committing  |
-| Broken documentation references  | Medium | Comprehensive search in Phase 6; verification in Phase 7       |
-| Conflicting changes with ADR-002 | Medium | Coordinate timing; this ADR first, then ADR-002                |
-| Path reference issues            | Medium | Thorough search for hardcoded paths; test all affected systems |
-| Contributor confusion            | Low    | Clear documentation updates; communication about changes       |
+| Risk                             | Impact | Mitigation Strategy                            |
+|----------------------------------|--------|------------------------------------------------|
+| Unintended file moves            | High   | Careful inventory and verification at each step |
+| Git history loss                 | High   | Exclusive use of `git mv`; verify with `--follow` |
+| Broken Sphinx build              | Medium | Test build after path updates; iterate if needed |
+| Broken documentation references  | Medium | Comprehensive search for hardcoded paths        |
+| Conflicting changes with ADR-002 | Medium | ADR-003 executes first; ADR-002 follows         |
+| Path reference issues            | Medium | Test all build and deployment processes         |
+| Contributor confusion            | Low    | Clear documentation and communication           |
 
 ### Rollback Plan
 
 If critical issues emerge:
 
-1. Feature branch (`feature/repo-structure-reorganization`) keeps `main` intact
-2. Can abandon the branch and revert to the current structure
+1. Feature branch protects `main` — no production impact until validated
+2. Can abandon the branch and revert to the current structure at any time
 3. Git history preserved — original state always recoverable
-4. No changes to `main` until reorganization fully validated
-5. If issues are found post-merge, can revert commit (history allows reconstruction)
+4. No merge to `main` until full validation complete
+5. Post-merge issues can be reverted (history allows reconstruction)
+
+### Estimated Effort
+
+Based on scope and complexity: **4--6 hours** for comprehensive reorganization including testing and documentation
+updates.
 
 ## Related
 
