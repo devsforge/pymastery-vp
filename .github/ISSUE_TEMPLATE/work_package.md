@@ -3,7 +3,7 @@ name: Work Package
 about: Template for creating structured work packages for AI agents with clear objectives and deliverables
 title: '[WP] '
 labels: ["work-package", "ai"]
-assignees: 'copilot'
+assignees: ['copilot']
 ---
 
 # Work Package: [Title]
