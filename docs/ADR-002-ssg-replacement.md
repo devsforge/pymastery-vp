@@ -279,7 +279,6 @@ is configurable via `docs_dir` setting in `mkdocs.yml`.
 ### Negative
 
 - **Migration Effort**: One-time cost to convert existing Sphinx/reST content to MkDocs/Markdown format.
-  Estimated 5--7 days for comprehensive migration including testing and refinement.
 - **Feature Gaps**: Some advanced Sphinx features (sphinx-autodoc for Python API documentation, complex
   cross-referencing) have no direct equivalent. However, course content does not currently use these features.
 - **Plugin Dependency for i18n**: Localization is plugin-based rather than a core feature.

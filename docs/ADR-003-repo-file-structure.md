@@ -91,7 +91,7 @@ as a complete historical artifact.
 - **Locale-based organization**: Establish clear structure for multilingual content (`en`, `uk`, `ru`)
 - **Historical preservation**: Maintain complete legacy Russian content as historical artifact
 - **Content root naming**: Clear directory name signaling "this contains course content"
-- **Maintainability**: Reduce cognitive load when navigating the repository
+- **Maintainability**: Reduce a cognitive load when navigating the repository
 - **Discoverability**: Clear separation between active and legacy content
 - **Content-asset colocation**: Keep related content and assets together within locales
 - **Build system compatibility**: Structure should support current and future SSG expectations (MkDocs)
@@ -323,7 +323,7 @@ This separation is cleaner than combining structure and format changes.
 
 ### Negative
 
-- **Implementation Effort**: Comprehensive reorganization requires careful execution (estimated 4--6 hours)
+- **Implementation Effort**: Comprehensive reorganization requires careful execution
 - **Repository Size Unchanged**: All content preserved (though organized)
 - **Temporary Sphinx Artifacts**: `_locales/` remains until ADR-002 completes (technical debt)
 - **Learning Curve**: Contributors familiar with `/src/` must adapt to `content/en/`

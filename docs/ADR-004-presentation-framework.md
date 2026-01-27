@@ -242,8 +242,6 @@ with impress.js imported via `src/conf.js` webpack entry point.
 4. Verify webpack bundles impress.js correctly (npm run build)
 5. Test presentation functionality with bundled output
 
-**Estimated Implementation Time:** 5--10 minutes
-
 **Dependencies Resolved:**
 
 This decision removes the blocker for ADR-002 (SSG Replacement), as presentation requirements are now clarified and
@@ -267,7 +265,7 @@ asset organization is simplified.
 
 ### Negative
 
-- **One-time migration effort**: ~5--10 minutes to update presentation imports and remove submodule
+- **One-time migration effort**: update presentation imports and remove submodule
 - **Dependency added**: Project now has one additional npm dependency (minimal impact)
 - **Build process required**: Presentation now requires `npm install` and webpack build (already required for mermaid
   and other assets)
@@ -323,10 +321,12 @@ import 'impress.js';
 ```
 
 > [!IMPORTANT]
-> **Technical Detail:** The presentation HTML files reference webpack's **bundled output**
-> (e.g., `dist/presentation.js`), not npm package names directly.
+> **Technical Detail:** Presentation HTML files that are part of the webpack build reference webpack's **bundled
+> output** (currently `_build/webpack/js/main.bundle.js`, per `webpack.config.js`), not npm package names directly.
 > Changes are made to JavaScript import statements in webpack entry points, which webpack then bundles for browser
-> consumption.
+> consumption. Legacy standalone presentations (for example
+> `src/rdbms/presentations/normalization.html`) may still reference `assets/impress.js/...` directly; they are not
+> wired through the webpack bundle and should be updated or deprecated separately if needed.
 
 > [!NOTE]
 > **CSS Dependencies:** If the presentation uses impress.js CSS files, update those import paths as well following the
