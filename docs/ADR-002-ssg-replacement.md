@@ -104,7 +104,7 @@ via plugin.
 - Simple configuration (single `mkdocs.yml` file)
 - Good GitHub Pages integration
 - Fast build times
-- Lower the learning curve for contributors
+- Lowers the learning curve for contributors
 
 **Cons**:
 
