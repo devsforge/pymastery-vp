@@ -119,9 +119,20 @@ content/                # Content root (renamed from src/)
     *.rst              # Content in reST format (unchanged - conversion in ADR-002)
     subdirs/           # Lesson structure preserved
   ru/                  # Legacy Russian content (preserved, not maintained)
-    lessons/           # Root lesson*.md, module*.md → here
+    lessons/           # Root lesson*.md → here (lessons 01-36)
       lesson*.md
-      module*.md
+      before_postgres.md
+    modules/           # Module summaries
+      module3.md
+    tasks/             # Exercise and homework assignments
+      tasks_block1.md
+      tasks_block2.md
+      web_homeworks.md
+    extras/            # Supplementary materials
+      module1.md
+      module2.md
+      pr_explanation.md
+      pr_explanation_django.md
     pictures/          # /pictures/lessonXX/ → here
       lesson01/
       lesson02/
@@ -372,7 +383,10 @@ content/                # Content root (renamed from src/)
     *.rst
     subdirs/
   ru/                  # Legacy Russian content
-    lessons/           # lesson*.md, module*.md
+    lessons/           # lesson*.md (lessons 01-36 and related)
+    modules/           # module3.md (module summaries)
+    tasks/             # Exercise and homework assignments
+    extras/            # Supplementary materials (module1, module2, explanations)
     pictures/          # lesson01/, lesson02/, lesson08/
     README.md
 
