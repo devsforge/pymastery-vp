@@ -8,7 +8,7 @@
 [rejected]: https://img.shields.io/badge/document_status-rejected-red.svg
 [final]: https://img.shields.io/badge/document_status-final-blue.svg
 [//]: # (@formatter:on)
-![status][final]
+![status][accepted]
 
 <details>
 <summary>Document Changelog</summary>
@@ -17,6 +17,7 @@
 
 | ver. | Date       | Author                                    | Changes description                               |
 |------|------------|-------------------------------------------|---------------------------------------------------|
+| 1.0  | 2026-01-27 | Serhii Horodilov                          | Accepted                                          |
 | 0.6  | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Final review improvements and status finalization |
 | 0.5  | 2026-01-27 | Serhii Horodilov                          | Fix typos and formatting                          |
 | 0.4  | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Technical corrections per implementation review   |
