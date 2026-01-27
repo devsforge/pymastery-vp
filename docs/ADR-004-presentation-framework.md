@@ -8,31 +8,34 @@
 [rejected]: https://img.shields.io/badge/document_status-rejected-red.svg
 [final]: https://img.shields.io/badge/document_status-final-blue.svg
 [//]: # (@formatter:on)
-![status][accepted]
+![status][draft]
 
 <details>
 <summary>Document Changelog</summary>
 
 [//]: # (order by version number descending)
 
-| ver. | Date       | Author                                    | Changes description  |
-|------|------------|-------------------------------------------|----------------------|
-| 0.3  | 2026-01-26 | Claude Sonnet 4.5 <noreply@anthropic.com> | Complete final draft |
-| 0.2  | 2026-01-25 | Serhii Horodilov                          | Fix links and typos  |
-| 0.1  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Initial draft        |
+| ver. | Date       | Author                                    | Changes description                             |
+|------|------------|-------------------------------------------|-------------------------------------------------|
+| 0.5  | 2026-01-27 | Serhii Horodilov                          | Fix typos and formatting                        |
+| 0.4  | 2026-01-27 | Claude Sonnet 4.5 <noreply@anthropic.com> | Technical corrections per implementation review |
+| 0.3  | 2026-01-26 | Claude Sonnet 4.5 <noreply@anthropic.com> | Complete final draft                            |
+| 0.2  | 2026-01-25 | Serhii Horodilov                          | Fix links and typos                             |
+| 0.1  | 2026-01-25 | Claude Sonnet 4.5 <noreply@anthropic.com> | Initial draft                                   |
 
 </details>
 
 ## Context
 
-The repository currently contains the complete impress.js presentation framework in `/assets/impress.js/`, representing
-approximately 95%+ of the assets directory size. This creates significant repository bloat and raises questions about
-necessity and maintenance.
+The repository currently includes impress.js as a **git submodule** at `/assets/impress.js/`, which references the
+complete presentation framework library. While git submodules don't directly bloat the main repository, they create
+development friction and maintenance challenges.
 
 **Current State:**
 
+- **Type**: Git submodule (not vendored code)
 - **Location**: `/assets/impress.js/` directory at repository root
-- **Size**: Extremely large (~33,000+ lines in directory tree alone)
+- **Size**: Extremely large (~33,000+ lines when cloned with `--recurse-submodules`)
 - **Contents**: Complete impress.js library including:
     - Source code and build system
     - Package management files (package.json, package-lock.json)
@@ -43,22 +46,28 @@ necessity and maintenance.
     - Documentation
     - Full dependency tree
 - **Active assets**: All other files in `/assets/` directory (icons, images, mermaid diagrams) are actively used
-- **Impact**: Repository size and clone time are significantly affected by this single directory
+- **Impact**:
+    - Contributors cloning with `--recurse-submodules` download the entire library
+    - Submodule updates require manual git commands
+    - Unclear whether local copy is necessary vs. alternative approaches
+    - Development workflow complexity for presentation features
 
-**Current Usage (To Be Determined):**
+**Current Usage (Verified):**
 
-- **Unknown**: Whether impress.js presentations are actively used in course delivery
-- **Unknown**: Whether any course content depends on this local copy vs. CDN version
-- **Unknown**: Whether build process or development workflow requires local copy
+- **Confirmed**: One presentation exists at `src/rdbms/presentations/normalization/`
+- **Confirmed**: impress.js imported in `src/conf.js` webpack entry point
+- **Confirmed**: A build process uses webpack to bundle impress.js with presentation
+- **Unknown**: Whether additional course materials depend on presentations
+- **Unknown**: Whether a presentation feature is actively used in the course delivery workflow
 
 **Problems:**
 
-1. **Repository bloat**: Single directory dominates repository size
-2. **Clone time**: Slower repository cloning for all contributors
+1. **Submodule complexity**: Requires `--recurse-submodules` flag and manual update commands
+2. **Clone time**: Slower repository cloning for contributors who use `--recurse-submodules`
 3. **Maintenance overhead**: Requires keeping a library updated if actively used
-4. **Unclear necessity**: No clear documentation of why local copy is required vs. CDN
-5. **Development friction**: Large directory size slows down file system operations
-6. **Backup inefficiency**: Repository backups are unnecessarily large
+4. **Unclear necessity**: No clear documentation of why git submodule is required vs. npm package
+5. **Development friction**: Submodule workflow adds complexity for presentation features
+6. **Backup inefficiency**: Submodule references to require special handling in backups
 
 **Historical Context:**
 
@@ -71,7 +80,7 @@ legacy Russian version that has since been deprecated.
 
 ## Decision Drivers
 
-- **Repository size**: Impact on clone time, storage, and contributor experience
+- **Repository complexity**: Impact on clone process, submodule management, and contributor experience
 - **Active usage**: Whether presentations are part of the current course delivery
 - **Maintenance burden**: Effort required to keep a library updated vs. benefits
 - **Dependency management**: Best practices for managing third-party libraries
@@ -81,9 +90,9 @@ legacy Russian version that has since been deprecated.
 
 ## Considered Options
 
-### Option 1: Keep As-Is (Full Local Copy)
+### Option 1: Keep As-Is (Git Submodule)
 
-**Description**: Maintain the current `/assets/impress.js/` directory with a complete library in the repository.
+**Description**: Maintain the current `/assets/impress.js/` git submodule in the repository.
 
 **Pros**:
 
@@ -94,21 +103,21 @@ legacy Russian version that has since been deprecated.
 
 **Cons**:
 
-- **Massive repository bloat**: 95%+ of the assets directory is a single library
-- **Slow clones**: Every contributor downloads an entire presentation framework
-- **Maintenance burden**: Must manually update a library for security/features
+- **Submodule complexity**: Requires `--recurse-submodules` flag and manual updates
+- **Slow clones**: Contributors who recurse submodules download an entire presentation framework
+- **Maintenance burden**: Must manually update submodule for security/features
 - **No clear justification**: Benefits unclear if presentations are rarely/never used
 - **Poor dependency management**: Violates modern best practices (use package managers)
 
 ### Option 2: Remove and Use CDN
 
-**Description**: Delete `/assets/impress.js/` directory entirely. If presentations are needed, reference impress.js
+**Description**: Delete `/assets/impress.js/` submodule entirely. If presentations are needed, reference impress.js
 from a CDN (e.g., cdnjs, jsDelivr) in HTML files.
 
 **Pros**:
 
-- **Dramatic size reduction**: Removes 95%+ of the assets directory
-- **Faster clones**: Significantly improved contributor experience
+- **Eliminates submodule complexity**: Standard git workflow, no special commands
+- **Faster clones**: No submodule to recurse
 - **Automatic updates**: CDN provides latest stable version
 - **Best practice**: Standard approach for client-side libraries
 - **No maintenance**: No need to update the library manually
@@ -149,8 +158,8 @@ repo references it as a git submodule or documents how to clone separately if ne
 
 ### Option 4: Archive to `_archive/impress.js/`
 
-**Description**: Move `/assets/impress.js/` to `_archive/impress.js/` to signal it's historically/not actively used,
-but preserve it in repository.
+**Description**: Move `/assets/impress.js/` submodule to `_archive/impress.js/` to signal it's historically/not
+actively used, but preserve it in repository.
 
 **Pros**:
 
@@ -161,13 +170,13 @@ but preserve it in repository.
 
 **Cons**:
 
-- **Doesn't solve bloat**: Repository size unchanged
+- **Doesn't solve complexity**: Submodule management unchanged
 - **Unclear benefit**: If not used, why keep it?
 - **Maintenance still unclear**: Archive status doesn't eliminate update question
 
 ### Option 5: Convert to npm Dependency
 
-**Description**: Remove `/assets/impress.js/` directory. If presentations are actively used, add impress.js as a npm
+**Description**: Remove `/assets/impress.js/` submodule. If presentations are actively used, add impress.js as a npm
 dependency in `package.json` and use build tools to bundle it.
 
 **Pros**:
@@ -191,12 +200,13 @@ dependency in `package.json` and use build tools to bundle it.
 
 **Findings:**
 
-After verification, exactly **one presentation exists** in the repository at `src/rdbms/presentations/`.
+After verification, exactly **one presentation exists** in the repository at `src/rdbms/presentations/normalization/`,
+with impress.js imported via `src/conf.js` webpack entry point.
 
 **Rationale:**
 
 1. **Keep presentation in the main repository**: No need for a separate submodule or repository
-2. **Remove vendored impress.js submodule**: Eliminates 95%+ of assets directory bloat (~33,000+ lines)
+2. **Remove impress.js git submodule**: Eliminates submodule management complexity
 3. **Add impress.js as npm build dependency**: Modern dependency management using existing package.json
 4. **Leverage existing webpack setup**: Zero new tooling required; webpack 5 already configured
 
@@ -206,17 +216,19 @@ After verification, exactly **one presentation exists** in the repository at `sr
 - **Leverages existing infrastructure**: Webpack 5 + html-webpack-plugin already in place
 - **Self-contained development**: Works offline (unlike the CDN approach in Option 2)
 - **Version locked**: package-lock.json ensures consistency across environments
-- **Minimal implementation effort**: Single line addition to package.json + HTML import update
+- **Minimal implementation effort**: Single line addition to package.json + import path update
 - **Future-proof**: If more presentations are added, infrastructure is ready
-- **Dramatic size reduction**: Removes 95%+ of the assets directory
+- **Eliminates submodule complexity**: Standard git workflow, no `--recurse-submodules` needed
 - **Standard workflow**: Contributors already familiar with npm (mermaid pattern)
 
 **Implementation Approach, Lowest Effort:**
 
-1. Add `impress.js` as dependency to package.json (one line)
-2. Update presentation HTML to import from the npm package (simple path change)
-3. Remove git submodule at `/assets/impress.js/` (cleanup)
-4. Existing webpack configuration handles bundling automatically (zero config changes)
+1. Add `impress.js` as dependency to package.json (one line: `npm install impress.js --save`)
+2. Update webpack entry point imports (change `import '../assets/impress.js/...'` to `import 'impress.js'` in
+   `src/conf.js`)
+3. Remove git submodule at `/assets/impress.js/` (`git submodule deinit` and `git rm`)
+4. Verify webpack bundles impress.js correctly (npm run build)
+5. Test presentation functionality with bundled output
 
 **Estimated Implementation Time:** 5--10 minutes
 
@@ -231,8 +243,8 @@ asset organization is simplified.
 
 ### Positive
 
-- **Dramatic repository size reduction**: Removes 95%+ of the assets directory (~33,000+ lines from tree)
-- **Faster clone times**: Significantly improved contributor onboarding experience
+- **Eliminates submodule complexity**: Standard git workflow without special commands
+- **Faster clone times**: No submodule to recurse, improved contributor onboarding experience
 - **Modern dependency management**: Uses npm ecosystem properly, matches an existing mermaid pattern
 - **Clearer project structure**: Assets directory contains only actual course assets
 - **Reduced maintenance burden**: npm handles library updates via standard tooling
@@ -243,7 +255,7 @@ asset organization is simplified.
 
 ### Negative
 
-- **One-time migration effort**: ~5--10 minutes to update presentation HTML and remove submodule
+- **One-time migration effort**: ~5--10 minutes to update presentation imports and remove submodule
 - **Dependency added**: Project now has one additional npm dependency (minimal impact)
 - **Build process required**: Presentation now requires `npm install` and webpack build (already required for mermaid
   and other assets)
@@ -274,42 +286,34 @@ This updates `package.json`:
         "@mermaid-js/mermaid-cli": "^10.8.0",
         "mermaid": "^10.8.0",
         "impress.js": "^2.0.0"
-        // New dependency
     }
 }
 ```
 
-**2. Update presentation HTML** (in `src/rdbms/presentations/`):
+> [!NOTE]
+> The caret range (`^2.0.0`) allows patch and minor updates (2.0.x, 2.x.x) while `package-lock.json` locks the exact
+> installed version. For stricter control, use an exact version without a caret (e.g., `"2.0.0"`).
 
-**Before** (vendored submodule reference):
+**2. Update webpack entry point imports** (in `src/conf.js` or presentation entry point):
 
-```html
-
-<script src="../../../assets/impress.js/js/impress.js"></script>
-```
-
-**After** (npm package reference):
-
-*Option 2a: Direct import in HTML:*
-
-```html
-
-<script src="impress.js"></script>
-```
-
-*Option 2b: Create presentation.js entry point (recommended):*
+**Before** (git submodule reference):
 
 ```javascript
-// src/rdbms/presentations/presentation.js
+// In src/conf.js or presentation entry point
+import '../assets/impress.js/js/impress.js';
+```
+
+**After** (npm package import):
+
+```javascript
+// In src/conf.js or presentation entry point
 import 'impress.js';
 ```
 
-Then reference in HTML:
-
-```html
-
-<script src="presentation.js"></script>
-```
+> [!IMPORTANT]
+> **Technical Detail:** The presentation HTML files reference webpack's **bundled output** (e.g.,
+`dist/presentation.js`), not npm package names directly. Changes are made to JavaScript import statements in webpack
+> entry points, which webpack then bundles for browser consumption.
 
 **3. Remove git submodule:**
 
@@ -343,7 +347,7 @@ Navigate to the presentation location and verify impress.js functionality.
 ### Technical Details:
 
 - **Webpack configuration**: No changes required, existing html-webpack-plugin handles bundling
-- **Version pinning**: Locked to `impress.js@2.0.0` in package-lock.json
+- **Version pinning**: Locked to a specific version in package-lock.json (e.g., `impress.js@2.0.0`)
 - **Build output**: Presentation HTML with bundled impress.js in the output directory
 - **Development workflow**: `npm start` for dev server, `npm run build` for production
 
@@ -362,7 +366,7 @@ If issues arise, the presentation can temporarily reference CDN:
 
 ### Success Criteria:
 
-- ✅ Repository size reduced by ~95% in the assets directory
+- ✅ Git submodule removed, standard git workflow restored
 - ✅ Presentation loads and functions correctly
 - ✅ Build process completes without errors
 - ✅ No git submodule references remain
