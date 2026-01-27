@@ -1,17 +1,15 @@
 ---
 name: Work Package
-about: Template for creating structured work packages with clear objectives and deliverables
+about: Template for creating structured work packages for AI agents with clear objectives and deliverables
 title: '[WP] '
-labels: ['work-package']
-assignees: ''
+labels: ["work-package", "ai"]
+assignees: 'copilot'
 ---
 
 # Work Package: [Title]
 
 **Assigned To:** `role-identifier` (Tool)
 **Assigned By:** `project-manager` (Claude Chat)
-**Priority:** High/Medium/Low
-**Estimated Complexity:** High/Medium/Low
 
 ---
 
