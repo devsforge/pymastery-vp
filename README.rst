@@ -14,7 +14,7 @@ This repository is organized with locale-based content structure (see ADR-003):
 
 -   ``content/en/`` — Active English course content (reStructuredText format)
 -   ``content/ru/`` — Legacy Russian course content (preserved for historical reference)
--   ``content/_locales/`` — Temporary Sphinx localization files (Ukrainian translations)
+-   ``content/_locales/`` — Legacy Sphinx localization files (Ukrainian translations), kept temporarily during the MkDocs migration (ADR-002) and scheduled for removal once that migration is complete
 -   ``assets/`` — Global project assets
 -   ``docs/`` — Architecture Decision Records and project documentation
 -   ``.ai/`` — AI agent guidelines and configurations
