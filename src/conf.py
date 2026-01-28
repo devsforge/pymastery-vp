@@ -18,7 +18,7 @@ with open(BASE_DIR / "pyproject.toml") as io_buff:
 project = "Python Training Course"
 project_copyright = \
     f"{datetime.now().year}, Python training course authors and contributors"
-authors = " \\and".join([author["name"] for author in project_data["authors"]])
+authors = " \\and ".join([author["name"] for author in project_data["authors"]])
 # version = project_data["version"]
 
 # general configuration

@@ -1,9 +1,9 @@
 [project]
 name = "pymastery-vp"
-description = "Python mastery course materials for web developers"
+description = "Python mastery course materials"
 authors = [
     { name = "Vladyslav Ponomaryov" },
-    { name = "Serhii Horodilov" },
+    { name = "Serhii Horodilov", email = "sgorodil@gmail.com" },
 ]
 requires-python = ">=3.9"
 classifiers = [
@@ -31,6 +31,11 @@ keywords = [
     "django-rest-framework",
     "web-development",
 ]
+readme = "README.rst"
+
+[project.urls]
+Homepage = "https://edu-python-course.github.io"
+Repository = "https://github.com/edu-python-course/edu-python-course.github.io"
 dynamic = ["version"]
 dependencies = [
     "Sphinx>=6.1.3",
