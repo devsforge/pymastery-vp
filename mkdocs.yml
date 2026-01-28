@@ -92,7 +92,7 @@ extra:
   generator: false  # Hide "Made with Material for MkDocs" footer
 
 copyright: >
-  Copyright &copy; 2024 OpenRoost. 
+  Copyright &copy; 2024-2026 OpenRoost. 
   Derivative work based on 
   <a href="https://github.com/PonomaryovVladyslav/PythonCourses">original course</a> 
   by Vladyslav Ponomaryov.
