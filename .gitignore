@@ -22,11 +22,12 @@ __pycache__
 /temp/
 /tmp/
 
-# documentation builds
+# documentation and Python package builds
 _builds/
 _build/
 builds/
 build/
+*.egg-info
 
 # translation object files
 *.pot

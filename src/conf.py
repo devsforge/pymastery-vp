@@ -1,25 +1,25 @@
 # Sphinx documentation generator configuration
 
 import sys
+# import tomllib
 from datetime import datetime
 from pathlib import Path
-
-import toml
 
 # set up paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / "problem-sets" / "src"))
 
-# read project data from toml file
-with open(BASE_DIR / "pyproject.toml") as io_buff:
-    project_data = toml.load(io_buff)["tool"]["poetry"]
+# # read project data from the toml file
+# with open(BASE_DIR / "pyproject.toml", "rb") as io_buff:
+#     project_data = tomllib.load(io_buff)["project"]
 
 # project information
 project = "Python Training Course"
 project_copyright = \
     f"{datetime.now().year}, Python training course authors and contributors"
-authors = " \\and ".join(project_data["authors"])
-version = project_data["version"]
+# authors = " \\and ".join([author["name"] for author in project_data["authors"]])
+authors = "Vladyslav Ponomaryov \\and Serhii Horodilov"
+# version = project_data["version"]
 
 # general configuration
 master_doc = root_doc = "index"
@@ -44,6 +44,7 @@ exclude_patterns = [
     "**/_legacy/**",
     "**/legacy/**",
     "**/README.*",
+    "**/*.egg-info",
 ]
 suppress_warnings = []
 
@@ -53,10 +54,10 @@ bibtex_reference_style = "label"
 
 # options for redirects
 redirects = {
-     "appx/blog/spec": "../../spec/blog/index.html",
-     "appx/blog/index": "../../spec/blog/index.html",
-     "appx/libms/spec": "../../spec/libms/index.html",
-     "appx/libms/index": "../../spec/libms/index.html",
+    "appx/blog/spec": "../../spec/blog/index.html",
+    "appx/blog/index": "../../spec/blog/index.html",
+    "appx/libms/spec": "../../spec/libms/index.html",
+    "appx/libms/index": "../../spec/libms/index.html",
 }
 
 # options for internationalization

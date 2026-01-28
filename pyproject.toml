@@ -1,26 +1,13 @@
-[tool.poetry]
-name = "python-course"
-version = "2024.03.dev"
-description = "Python training course materials"
-license = "MIT"
+[project]
+name = "pymastery-vp"
+description = "Python mastery course materials"
+version = "2026.01dev0"
 authors = [
-    "Vladyslav Ponomaryov",
-    "Serhii Horodilov <sgorodil@gmail.com>"
+    { name = "Vladyslav Ponomaryov" },
+    { name = "Serhii Horodilov", email = "sgorodil@gmail.com" },
 ]
-maintainers = [
-    "Serhii Horodilov <sgorodil@gmail.com>"
-]
-readme = "README.rst"
-homepage = "https://edu-python-course.github.io"
-repository = "https://github.com/edu-python-course/edu-python-course.github.io"
-keywords = [
-    "python",
-    "training",
-    "course",
-    "education"
-]
+requires-python = ">=3.9"
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Natural Language :: Ukrainian",
     "Operating System :: OS Independent",
@@ -30,20 +17,33 @@ classifiers = [
     "Topic :: Documentation :: Sphinx",
     "Topic :: Education"
 ]
+keywords = [
+    "python",
+    "training",
+    "education",
+    "course",
+    "materials",
+    "web",
+    "programming",
+    "development",
+    "postgresql",
+    "django",
+    "django-rest-framework",
+    "web-development",
+]
+readme = "README.rst"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-Sphinx = "^6.1.3"
-sphinx-intl = "^2.1.0"
-sphinx-rtd-theme = "^1.2.0"
-myst-parser = "^1.0.0"
-sphinxcontrib-bibtex = "^2.5.0"
-sphinxcontrib-mermaid = "^0.8.1"
-sphinx-copybutton = "^0.5.2"
-toml = "^0.10.2"
-sphinx-reredirects = "^0.1.3"
-sphinxcontrib-svg2pdfconverter = "^1.2.2"
+dependencies = [
+    "Sphinx>=6.1.3",
+    "sphinx-intl>=2.1.0",
+    "sphinx-rtd-theme>=1.2.0",
+    "myst-parser>=1.0.0",
+    "sphinxcontrib-bibtex>=2.5.0",
+    "sphinxcontrib-mermaid>=0.8.1",
+    "sphinx-copybutton>=0.5.2",
+    "sphinx-reredirects>=0.1.3",
+    "sphinxcontrib-svg2pdfconverter>=1.2.2",
+]
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[project.urls]
+Repository = "https://github.com/OpenRoost/pymastery-vp.git"
