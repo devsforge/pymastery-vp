@@ -12,14 +12,14 @@ sys.path.insert(0, str(BASE_DIR / "problem-sets" / "src"))
 
 # read project data from toml file
 with open(BASE_DIR / "pyproject.toml") as io_buff:
-    project_data = toml.load(io_buff)["tool"]["poetry"]
+    project_data = toml.load(io_buff)["project"]
 
 # project information
 project = "Python Training Course"
 project_copyright = \
     f"{datetime.now().year}, Python training course authors and contributors"
-authors = " \\and ".join(project_data["authors"])
-version = project_data["version"]
+authors = " \\and".join([author["name"] for author in project_data["authors"]])
+# version = project_data["version"]
 
 # general configuration
 master_doc = root_doc = "index"
@@ -44,6 +44,7 @@ exclude_patterns = [
     "**/_legacy/**",
     "**/legacy/**",
     "**/README.*",
+    "*.egg-info",
 ]
 suppress_warnings = []
 
